@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   keywords: [
     "podcast",
     "searchcast",
+    "search cast",
+    "Search Cast",
+    "search-cast",
     "cortes de podcasts",
     "cortes de podcast",
     "cortes podcast",
@@ -33,8 +36,6 @@ export const metadata: Metadata = {
     "busca direcionada transcrições podcast",
     "Links diretos para momentos específicos",
     "links diretos momentos específicos podcast",
-    "Ambiente de produção estável",
-    "ambiente produção estável",
     "Descubra e compartilhe trechos de podcasts",
     "descobrir compartilhar trechos podcasts",
     "Inovação em descoberta de conteúdo",
