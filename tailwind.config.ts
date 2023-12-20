@@ -2,11 +2,12 @@ import type { Config } from "tailwindcss";
 import { colorVarsPlugin } from "./plugins";
 
 const colors = {
-  lightGray: "#F5F5F6",
-  gray: "##85888E",
-  darkGray: "#333741",
-  primary: "#0C111D",
-  brand: "#009EA4",
+  lightGray: "#F5F5F6" as const,
+  gray: "#85888E" as const,
+  darkGray: "#333741" as const,
+  darkerGray: "#161B26" as const,
+  primary: "#0C111D" as const,
+  brand: "#009EA4" as const,
 };
 
 const config: Config = {
@@ -29,6 +30,7 @@ const config: Config = {
         border: colors.darkGray, // Functional
         background: colors.primary, //colors.primary, // Semantic
         brand: colors.brand, // Semantic
+        "dark-gray": colors.darkerGray,
       },
     },
   },
