@@ -24,6 +24,10 @@ const config: Config = {
       backgroundImage: {
         pattern: "url('/bg_pattern.svg')",
       },
+      width: {
+        "1190px": "1190px",
+        "985px": "985px",
+      },
       colors: {
         "text-primary": colors.lightGray, //colors.lightGray, // Semantic and functional
         "text-secondary": colors.gray, // Semantic and functional
