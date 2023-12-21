@@ -23,7 +23,7 @@ export default function Home() {
             </Content.Gap>
             <div className="flex items-center justify-center gap-2.5">
               <Button className="px-4 py-4 text-lg">Saiba mais</Button>
-              <Button className="px-4 py-4 bg-brand text-lg">
+              <Button className="px-4 py-4 !bg-brand text-lg">
                 Entre em contato
               </Button>
             </div>
