@@ -51,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} sm:pl-80 sm:pr-80 bg-primary sm:bg-pattern bg-cover bg-no-repeat bg-center bg-none`}
+        className={`${inter.className} bg-primary sm:bg-pattern bg-cover bg-no-repeat bg-none bg-left-top`}
       >
         {children}
       </body>

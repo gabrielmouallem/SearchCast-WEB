@@ -23,7 +23,7 @@ export function Navbar() {
         height={30}
         alt="SearchCast Logo"
       />
-      <div className="ml-auto">
+      <div className="ml-auto mr-9">
         <Button startIcon={<Image {...imageProps} alt="Person Icon" />}>
           Login
         </Button>
