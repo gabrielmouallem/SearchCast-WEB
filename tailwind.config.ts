@@ -24,6 +24,9 @@ const config: Config = {
       backgroundImage: {
         pattern: "url('/bg_pattern.svg')",
       },
+      backgroundPosition: {
+        "top-center": "top center",
+      },
       width: {
         "1190px": "1190px",
         "985px": "985px",
