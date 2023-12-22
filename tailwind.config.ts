@@ -31,6 +31,12 @@ const config: Config = {
         "1190px": "1190px",
         "985px": "985px",
       },
+      outlineWidth: {
+        "24": "6rem",
+      },
+      gradientColorStops: {
+        "black-transparent": "rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.35)",
+      },
       colors: {
         "text-primary": colors.lightGray, //colors.lightGray, // Semantic and functional
         "text-secondary": colors.gray, // Semantic and functional

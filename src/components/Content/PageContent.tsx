@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Content } from ".";
-import { Button, RedirectButton } from "..";
+import { Button, Card, RedirectButton } from "..";
+import { ProfileCard } from "../ProfileCard/ProfileCard";
 
 export function PageContent() {
   return (
@@ -22,9 +23,11 @@ export function PageContent() {
                 </div>
               </Content.Gap>
             </Content.Gap>
-            <div className="flex items-center justify-center gap-2.5">
-              <Button className="px-4 py-4 text-lg">Saiba mais</Button>
-              <Button className="px-4 py-4 !bg-brand text-lg">
+            <div className="flex items-center flex-col md:flex-row justify-center gap-2.5">
+              <Button className="px-4 py-4 text-lg w-full md:w-auto">
+                Saiba mais
+              </Button>
+              <Button className="px-4 py-4 !bg-brand text-lg w-full md:w-auto">
                 Entre em contato
               </Button>
             </div>
@@ -36,6 +39,7 @@ export function PageContent() {
               width={1190}
               height={1190}
               placeholder="empty"
+              priority
               alt="Macbook"
             />
             <Image
@@ -44,6 +48,7 @@ export function PageContent() {
               width={1190}
               height={1190}
               placeholder="empty"
+              priority
               alt="Macbook"
             />
           </div>
@@ -55,9 +60,10 @@ export function PageContent() {
             <div className="text-text-secondary">
               Os principais podcasts do Youtube
             </div>
-            <div className="flex align-center justify-center gap-11">
+            <div className="flex justify-center gap-11">
               <a target="_blank" href="https://www.youtube.com/@FlowPodcast">
                 <Image
+                  priority
                   className="rounded-full"
                   src="/flow_podcast.jpg"
                   width={80}
@@ -72,6 +78,7 @@ export function PageContent() {
                 href="https://www.youtube.com/@inteligencialtda"
               >
                 <Image
+                  priority
                   className="rounded-full"
                   src="/inteligencia_ltda_podcast.jpg"
                   width={80}
@@ -83,6 +90,7 @@ export function PageContent() {
               </a>
               <a target="_blank" href="https://www.youtube.com/@Podpah">
                 <Image
+                  priority
                   className="rounded-full"
                   src="/podpah_podcast.jpg"
                   width={80}
@@ -98,6 +106,7 @@ export function PageContent() {
                 href="https://www.youtube.com/@podpeopleanabeatriz"
               >
                 <Image
+                  priority
                   className="rounded-full"
                   src="/podpeople_podcast.jpg"
                   width={80}
@@ -113,6 +122,7 @@ export function PageContent() {
                 href="https://www.youtube.com/@renatocariani"
               >
                 <Image
+                  priority
                   className="rounded-full"
                   src="/renato_cariani_podcast.jpg"
                   width={80}
@@ -128,6 +138,7 @@ export function PageContent() {
                 href="https://www.youtube.com/@PrimoCast"
               >
                 <Image
+                  priority
                   className="rounded-full"
                   src="/primo_cast_podcast.jpg"
                   width={80}
@@ -143,6 +154,7 @@ export function PageContent() {
                 href="https://www.youtube.com/@JoelJota"
               >
                 <Image
+                  priority
                   className="rounded-full"
                   src="/joel_jota_podcast.jpg"
                   width={80}
@@ -158,6 +170,7 @@ export function PageContent() {
                 href="https://www.youtube.com/@FlowGamesPodcast"
               >
                 <Image
+                  priority
                   className="rounded-full"
                   src="/flow_games_podcast.jpg"
                   width={80}
@@ -173,6 +186,7 @@ export function PageContent() {
                 href="https://www.youtube.com/@ossocios"
               >
                 <Image
+                  priority
                   className="rounded-full"
                   src="/os_socios_podcast.jpg"
                   width={80}
@@ -182,6 +196,117 @@ export function PageContent() {
                   alt="Os Sócios Podcast"
                 />
               </a>
+            </div>
+          </Content.Gap>
+        </div>
+      </Content.Section>
+      <Content.Section>
+        <div className="py-16 md:py-24 border-t border-gray-800 flex text-center justify-center items-center bg-background flex-col gap-4 md:mx-16">
+          <Content.Gap gap="gap-16">
+            <Content.Gap gap="gap-5">
+              <Content.Gap gap="gap-3">
+                <div className="text-gray-300">Diferenciais</div>
+                <div className="text-center font-inter text-4xl font-semibold leading-tight tracking-tight">
+                  Por que SearchCast?
+                </div>
+              </Content.Gap>
+              <div className="text-center text-text-secondary font-inter text-xl font-normal leading-7 max-w-3xl">
+                Nossa tecnologia de busca inovadora vasculha o universo dos
+                podcasts para trazer a você exatamente o que você está
+                procurando.
+              </div>
+            </Content.Gap>
+            <div className="flex gap-6 items-center justify-center flex-wrap">
+              <Card
+                iconSrc="/chat_icon.svg"
+                title="Sugestões Personalizadas"
+                description="Receba recomendações adaptadas às suas preferências e histórico de busca."
+              />
+              <Card
+                iconSrc="/essential_icon.svg"
+                title="Variedade e Qualidade"
+                description="Acesso a uma vasta gama de podcasts de alta qualidade de todas as categorias imagináveis."
+              />
+              <Card
+                iconSrc="/interface_icon.svg"
+                title="Sem Complicações"
+                description="Interface limpa e intuitiva que torna a busca e a audição de podcasts uma brisa."
+              />
+            </div>
+          </Content.Gap>
+        </div>
+      </Content.Section>
+      <Content.Section>
+        <Content.Gap
+          gap="gap-8"
+          className="py-24 bg-dark-gray flex -mx-8 items-center content-center text-center"
+        >
+          <div className="text-5xl max-w-6xl font-normal leading-15 tracking-tight ml-8">
+            “A plataforma me ajudou a encontrar vários podcast sobre os assuntos
+            desejados”
+          </div>
+          <ProfileCard
+            profileSrc="/sample_user_avatar.png"
+            name="Pedro freitas"
+            role="Editor de vídeo"
+          />
+        </Content.Gap>
+      </Content.Section>
+      <Content.Section>
+        <div className="md:my-16 md:py-8 md:px-8 px-4 py-8 rounded-2xl bg-dark-gray flex text-center justify-center items-center flex-col gap-4 md:mx-16">
+          <Content.Gap gap="gap-8">
+            <Image
+              src="/avatar_group_icon.svg"
+              width={120}
+              height={56}
+              placeholder="empty"
+              alt="Avatar Group"
+            />
+            <div>
+              <Content.Gap gap="gap-2">
+                <div className="font-semibold text-xl leading-7">
+                  Ficou com dúvidas?
+                </div>
+                <div className="text-text-secondary text-lg max-w-3xl">
+                  Nossa equipe de suporte está pronta para ajudar. Entre em
+                  contato conosco por e-mail, Instagram ou WhatsApp.
+                </div>
+              </Content.Gap>
+            </div>
+            <Button className="!bg-brand">Entre em contato</Button>
+          </Content.Gap>
+        </div>
+      </Content.Section>
+      <Content.Section>
+        <div className="py-16 md:py-24 border-t border-gray-800 flex text-center justify-center items-center bg-background flex-col gap-4 md:mx-16">
+          <Content.Gap gap="gap-16">
+            <Content.Gap gap="gap-5">
+              <Content.Gap gap="gap-3">
+                <div className="text-gray-300">Entre em contato</div>
+                <div className="text-center font-inter text-4xl font-semibold leading-tight tracking-tight">
+                  Entre em contato conosco
+                </div>
+              </Content.Gap>
+              <div className="text-center text-text-secondary font-inter text-xl font-normal leading-7 max-w-3xl">
+                Nosso time está aqui para atende-lo.
+              </div>
+            </Content.Gap>
+            <div className="flex gap-6 items-center justify-center flex-wrap">
+              <Card
+                iconSrc="/email_icon.svg"
+                title="Email"
+                description="Em breve"
+              />
+              <Card
+                iconSrc="/instagram_icon.svg"
+                title="Instagram"
+                description="Em breve"
+              />
+              <Card
+                iconSrc="/whatsapp_icon.svg"
+                title="Whatsapp"
+                description="+55 (35) 998607515"
+              />
             </div>
           </Content.Gap>
         </div>

@@ -13,7 +13,7 @@ const imageProps: ComponentProps<typeof Image> = {
 export function Navbar() {
   return (
     <nav
-      className="fixed inset-0 w-full h-20 sm:pl-20 sm:pr-20 flex items-center"
+      className="fixed inset-0 w-full h-20 sm:pl-20 sm:pr-20 flex items-center bg-gradient-to-b from-black-transparent to-transparent"
       p-
     >
       <Image

@@ -14,7 +14,7 @@ export function Button({
   return (
     <button
       {...htmlButtonpProps}
-      className={`px-5 py-3 bg-dark-gray text-primary rounded-lg border border-border flex items-center ${className}`}
+      className={`px-5 py-3 bg-dark-gray text-primary text-center rounded-lg border border-border flex items-center justify-center ${className}`}
     >
       {!!startIcon && startIcon}
       {children}
