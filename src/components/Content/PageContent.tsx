@@ -4,6 +4,13 @@ import { Button, Card, RedirectButton } from "..";
 import { ProfileCard } from "../ProfileCard/ProfileCard";
 
 export function PageContent() {
+  const phoneNumber = "+5535998607515";
+  const lernMoreMessage = encodeURIComponent(
+    "Olá, gostaria de saber mais sobre a ferramenta SearchCast."
+  );
+  const questionsMessage = encodeURIComponent(
+    "Olá, gostaria de tirar dúvidas sobre a ferramenta SearchCast."
+  );
   return (
     <Content.Root>
       <Content.Section>
@@ -24,12 +31,23 @@ export function PageContent() {
               </Content.Gap>
             </Content.Gap>
             <div className="flex items-center flex-col md:flex-row justify-center gap-2.5">
-              <Button className="px-4 py-4 text-lg w-full md:w-auto">
-                Saiba mais
-              </Button>
-              <Button className="px-4 py-4 !bg-brand text-lg w-full md:w-auto">
-                Entre em contato
-              </Button>
+              <a
+                href={`https://wa.me/${phoneNumber}?text=${lernMoreMessage}`}
+                target="_blank"
+              >
+                <Button className="px-4 py-4 text-lg w-full md:w-auto">
+                  Saiba mais
+                </Button>
+              </a>
+
+              <a
+                href={`https://wa.me/${phoneNumber}?text=${questionsMessage}`}
+                target="_blank"
+              >
+                <Button className="px-4 py-4 !bg-brand text-lg w-full md:w-auto">
+                  Entre em contato
+                </Button>
+              </a>
             </div>
           </Content.Gap>
           <div className="flex items-center justify-center">
@@ -241,7 +259,7 @@ export function PageContent() {
           gap="gap-8"
           className="py-24 bg-dark-gray flex -mx-8 items-center content-center text-center"
         >
-          <div className="text-5xl max-w-6xl font-normal leading-15 tracking-tight ml-8">
+          <div className="text-5xl max-w-6xl font-normal leading-15 tracking-tight md:ml-8">
             “A plataforma me ajudou a encontrar vários podcast sobre os assuntos
             desejados”
           </div>
@@ -253,7 +271,7 @@ export function PageContent() {
         </Content.Gap>
       </Content.Section>
       <Content.Section>
-        <div className="md:my-16 md:py-8 md:px-8 px-4 py-8 rounded-2xl bg-dark-gray flex text-center justify-center items-center flex-col gap-4 md:mx-16">
+        <div className="my-16 md:py-8 md:px-8 px-4 py-8 rounded-2xl bg-dark-gray flex text-center justify-center items-center flex-col gap-4">
           <Content.Gap gap="gap-8">
             <Image
               src="/avatar_group_icon.svg"
@@ -273,7 +291,12 @@ export function PageContent() {
                 </div>
               </Content.Gap>
             </div>
-            <Button className="!bg-brand">Entre em contato</Button>
+            <a
+              href={`https://wa.me/${phoneNumber}?text=${lernMoreMessage}`}
+              target="_blank"
+            >
+              <Button className="!bg-brand">Entre em contato</Button>
+            </a>
           </Content.Gap>
         </div>
       </Content.Section>
