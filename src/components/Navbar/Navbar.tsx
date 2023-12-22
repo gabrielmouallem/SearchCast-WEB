@@ -20,13 +20,15 @@ export function Navbar({ isAuthenticated }: NavbarProps) {
       className="fixed inset-0 w-full h-20 sm:pl-20 sm:pr-20 flex items-center bg-gradient-to-b from-black-transparent to-transparent"
       p-
     >
-      <Image
-        className="ml-8"
-        src="/logo_w_name.svg"
-        width={211}
-        height={30}
-        alt="SearchCast Logo"
-      />
+      <a href="/">
+        <Image
+          className="ml-8"
+          src="/logo_w_name.svg"
+          width={211}
+          height={30}
+          alt="SearchCast Logo"
+        />
+      </a>
       {!isAuthenticated && (
         <div className="ml-auto mr-9">
           <a href="/login">

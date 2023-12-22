@@ -35,7 +35,7 @@ export function PageContent() {
                 href={`https://wa.me/${phoneNumber}?text=${lernMoreMessage}`}
                 target="_blank"
               >
-                <Button className="px-4 py-4 text-lg w-full md:w-auto">
+                <Button className="md:w-auto w-72 px-4 py-4 text-lg">
                   Saiba mais
                 </Button>
               </a>
@@ -44,7 +44,7 @@ export function PageContent() {
                 href={`https://wa.me/${phoneNumber}?text=${questionsMessage}`}
                 target="_blank"
               >
-                <Button className="px-4 py-4 !bg-brand text-lg w-full md:w-auto">
+                <Button className="md:w-auto w-72 px-4 py-4 !bg-brand text-lg">
                   Entre em contato
                 </Button>
               </a>

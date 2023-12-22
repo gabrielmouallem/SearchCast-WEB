@@ -3,7 +3,7 @@ import { PageContent } from "@/components/Content/PageContent";
 
 export default function Home() {
   return (
-    <main className="md:pt-20 pt-16">
+    <main className="md:pt-20 pt-16 px-8">
       <Navbar />
       <PageContent />
       <Footer />
