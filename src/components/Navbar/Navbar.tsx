@@ -29,7 +29,7 @@ export function Navbar({ isAuthenticated }: NavbarProps) {
       />
       {!isAuthenticated && (
         <div className="ml-auto mr-9">
-          <a href="/login" target="_blank">
+          <a href="/login">
             <Button startIcon={<Image {...imageProps} alt="Person Icon" />}>
               Login
             </Button>

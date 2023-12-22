@@ -34,26 +34,21 @@ const dotImageProps: React.ComponentProps<typeof Image> = {
   alt: "",
 };
 
-interface RedirectButtonProps {
-  onClick?: () => void;
-}
-
-export function RedirectButton({ onClick = () => null }: RedirectButtonProps) {
+export function RedirectButton() {
   return (
-    <button
-      className="bg-background pr-2 p-0.5 rounded-lg border border-border flex gap-2.5 items-center justify-center"
-      onClick={onClick}
-    >
-      <div className="flex items-center justify-center h-6 gap-1 rounded-md border border-border p-1.5 text-gray-300 text-sm font-medium">
-        <motion.div {...dotMotionProps}>
-          <Image {...dotImageProps} alt="Ponto" />
-        </motion.div>
-        Nova função
-      </div>
-      <div className="flex items-center justify-center text-gray-300 text-sm font-medium gap-1">
-        Sugestões de busca
-        <Image {...arrowImageProps} alt="Seta para direita" />
-      </div>
-    </button>
+    <a href="/search">
+      <button className="bg-background pr-2 p-0.5 rounded-lg border border-border flex gap-2.5 items-center justify-center">
+        <div className="flex items-center justify-center h-6 gap-1 rounded-md border border-border p-1.5 text-gray-300 text-sm font-medium">
+          <motion.div {...dotMotionProps}>
+            <Image {...dotImageProps} alt="Ponto" />
+          </motion.div>
+          Nova função
+        </div>
+        <div className="flex items-center justify-center text-gray-300 text-sm font-medium gap-1">
+          Sugestões de busca
+          <Image {...arrowImageProps} alt="Seta para direita" />
+        </div>
+      </button>
+    </a>
   );
 }
