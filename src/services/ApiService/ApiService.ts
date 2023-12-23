@@ -1,3 +1,4 @@
+"use client";
 import { getApiURL } from "@/utils";
 import axios, { AxiosRequestHeaders } from "axios";
 import { CookiesService } from "../CookiesService";

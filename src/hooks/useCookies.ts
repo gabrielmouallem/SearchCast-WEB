@@ -1,7 +1,7 @@
 import { CookiesService } from "@/services/CookiesService";
 import { useState } from "react";
 
-export const useCookie = (key: string, defaultValue: string) => {
+export function useCookies(key: string, defaultValue: string) {
   const getCookie = () => CookiesService.getItem(key) || defaultValue;
   const [cookie, setCookie] = useState(getCookie());
 
@@ -12,4 +12,4 @@ export const useCookie = (key: string, defaultValue: string) => {
   };
 
   return { cookie, updateCookie, getCookie: () => CookiesService.getItem(key) };
-};
+}

@@ -1,3 +1,4 @@
+"use client";
 const getItem = (key: string) =>
   document.cookie.split("; ").reduce((total, currentCookie) => {
     const item = currentCookie.split("=");

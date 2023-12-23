@@ -16,6 +16,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       backgroundColor: {
@@ -30,6 +31,7 @@ const config: Config = {
       width: {
         "1190px": "1190px",
         "985px": "985px",
+        "360px": "360px",
       },
       outlineWidth: {
         "24": "6rem",
