@@ -1,5 +1,6 @@
 "use client";
 const getItem = (key: string) =>
+  document &&
   document.cookie.split("; ").reduce((total, currentCookie) => {
     const item = currentCookie.split("=");
     const storedKey = item[0];
@@ -13,7 +14,8 @@ const setItem = (key: string, value: string, numberOfDays: number) => {
 
   // set the time to be now + numberOfDays
   now.setTime(now.getTime() + numberOfDays * 60 * 60 * 24 * 1000);
-  document.cookie = `${key}=${value}; expires=${now.toUTCString()}; path=/`;
+  if (document)
+    document.cookie = `${key}=${value}; expires=${now.toUTCString()}; path=/`;
 };
 
 export const CookiesService = {
