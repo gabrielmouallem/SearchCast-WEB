@@ -1,14 +1,14 @@
 "use client";
 const getItem = (key: string) =>
-  document &&
-  document.cookie.split("; ").reduce((total, currentCookie) => {
-    const item = currentCookie.split("=");
-    const storedKey = item[0];
-    const storedValue = item[1];
+  typeof document === "undefined"
+    ? ""
+    : document.cookie.split("; ").reduce((total, currentCookie) => {
+        const item = currentCookie.split("=");
+        const storedKey = item[0];
+        const storedValue = item[1];
 
-    return key === storedKey ? decodeURIComponent(storedValue) : total;
-  }, "");
-
+        return key === storedKey ? decodeURIComponent(storedValue) : total;
+      }, "");
 const setItem = (key: string, value: string, numberOfDays: number) => {
   const now = new Date();
 
