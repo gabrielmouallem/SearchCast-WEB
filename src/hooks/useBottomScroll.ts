@@ -1,26 +1,21 @@
-// useBottomScroll.ts
 import { useEffect } from "react";
 
-type ScrollCallback = () => void;
-
-const useBottomScroll = (callback: ScrollCallback) => {
+const usePageBottom = (callback: () => void) => {
   useEffect(() => {
     const handleScroll = () => {
-      const { scrollTop, clientHeight, scrollHeight } =
-        document.documentElement;
+      const offsetHeight = document.documentElement.offsetHeight;
+      const innerHeight = window.innerHeight;
+      const scrollTop = document.documentElement.scrollTop;
 
-      if (scrollTop + clientHeight >= scrollHeight - 10) {
-        // You can adjust the threshold (e.g., -10) based on your preference
-        callback();
-      }
+      const hasReachedBottom = offsetHeight - (innerHeight + scrollTop) <= 50;
+
+      if (hasReachedBottom) callback();
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [callback]);
 };
 
-export default useBottomScroll;
+export default usePageBottom;
