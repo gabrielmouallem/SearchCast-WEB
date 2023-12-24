@@ -1,3 +1,4 @@
+"use client";
 import { TSearchResultItem } from "@/types";
 import Image from "next/image";
 import { Button } from "..";
