@@ -30,7 +30,7 @@ export function SearchEngine() {
 
   function handlePageBottomReached() {
     if (preventPageFetching) return;
-    fetchNextPage();
+    if (!(debouncedText && debouncedText !== "")) fetchNextPage();
   }
 
   useBottomScroll(handlePageBottomReached);
