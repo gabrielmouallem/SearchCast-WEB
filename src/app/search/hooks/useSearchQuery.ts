@@ -28,7 +28,7 @@ export function useSearchQuery(text: string) {
             "Erro ao realizar pesquisa. Por favor realize o pagamento para poder usar a ferramenta de pesquisa.",
             {
               position: "top-right",
-              autoClose: 5000,
+              autoClose: 8000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -44,7 +44,7 @@ export function useSearchQuery(text: string) {
           "Erro ao realizar pesquisa. Tente procurar por algo mais específico ou tente novamente.",
           {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 8000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

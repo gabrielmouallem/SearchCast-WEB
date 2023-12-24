@@ -56,7 +56,7 @@ export function useLogin() {
       });
       toast.info("Logado com sucesso!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 8000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -68,7 +68,7 @@ export function useLogin() {
     } catch (error) {
       toast.error("Erro ao entrar. Por favor tente novamente.", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 8000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
