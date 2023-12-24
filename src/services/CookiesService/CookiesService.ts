@@ -1,4 +1,5 @@
 "use client";
+
 const getItem = (key: string) =>
   typeof document === "undefined"
     ? ""
@@ -9,13 +10,16 @@ const getItem = (key: string) =>
 
         return key === storedKey ? decodeURIComponent(storedValue) : total;
       }, "");
-const setItem = (key: string, value: string, numberOfDays: number) => {
-  const now = new Date();
 
-  // set the time to be now + numberOfDays
-  now.setTime(now.getTime() + numberOfDays * 60 * 60 * 24 * 1000);
-  if (document)
-    document.cookie = `${key}=${value}; expires=${now.toUTCString()}; path=/`;
+const setItem = (key: string, value: string, numberOfDays: number) => {
+  const expirationDate = new Date();
+  expirationDate.setTime(
+    expirationDate.getTime() + numberOfDays * 24 * 60 * 60 * 1000
+  );
+
+  if (document && typeof document !== "undefined") {
+    document.cookie = `${key}=${value}; expires=${expirationDate.toUTCString()}; path=/`;
+  }
 };
 
 export const CookiesService = {

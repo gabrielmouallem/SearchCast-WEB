@@ -6,3 +6,5 @@ export * from "./Footer";
 export * from "./Card";
 export * from "./ProfileCard";
 export * from "./Input";
+export * from "./SearchResultItem";
+export * from "./SearchResultItemPlaceholder";

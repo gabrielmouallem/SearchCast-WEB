@@ -1,27 +1,16 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useCookies, useRegister } from "@/hooks";
-import { RedirectType, redirect } from "next/navigation";
+import { useRedirectToSearchPage, useRegister } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 export function RegisterForm() {
   const { loading, handleSubmit, control, errors } = useRegister();
-  const cookies = useCookies("access_token", "");
 
-  useEffect(() => {
-    const access_token = cookies.getCookie();
-    const accessTokenIsNotEmpty = access_token !== "";
-    const accessTokenIsNotUndefined = !!access_token;
-
-    const shouldRedirectToLoginPage =
-      accessTokenIsNotEmpty && accessTokenIsNotUndefined;
-
-    if (shouldRedirectToLoginPage) redirect("/search", RedirectType.replace);
-  }, [cookies.getCookie]);
+  useRedirectToSearchPage();
 
   return (
     <>

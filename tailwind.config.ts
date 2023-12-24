@@ -32,11 +32,14 @@ const config: Config = {
       backgroundPosition: {
         "top-center": "top center",
       },
+      maxWidth: {
+        "736px": "736px",
+      },
       width: {
         "1190px": "1190px",
         "985px": "985px",
-        "360px": "360px",
         "500px": "500px",
+        "360px": "360px",
       },
       outlineWidth: {
         "24": "6rem",

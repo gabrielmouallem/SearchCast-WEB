@@ -15,11 +15,11 @@ axios.interceptors.response.use(
 );
 
 api.interceptors.request.use((config) => {
-  const token = CookiesService.getItem("token");
-  if (token) {
+  const access_token = CookiesService.getItem("access_token");
+  if (access_token) {
     config.headers = {
       ...config.headers,
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${access_token}`,
     } as AxiosRequestHeaders;
     return config;
   } else {

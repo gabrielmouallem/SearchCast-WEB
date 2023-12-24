@@ -1,10 +1,10 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useMutation } from "react-query";
 import api from "@/services/ApiService/ApiService";
 import { useRouter } from "next/navigation";
 import { useCookies } from "@/hooks";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 interface LoginResponse {
   _id: string;
@@ -21,6 +21,7 @@ interface LoginFormValues {
 }
 
 export function useLogin() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const cookies = useCookies("access_token", "");
   const {
@@ -29,27 +30,28 @@ export function useLogin() {
     formState: { errors },
   } = useForm<LoginFormValues>();
 
-  const loginMutation = useMutation(
-    (formData: LoginFormValues) =>
-      new Promise((resolve, reject) => {
-        api
-          .post<LoginResponse>("/v1/login", formData)
-          .then(({ data }) => {
-            cookies.updateCookie(data.access_token, 1);
-            resolve(data);
-            return data;
-          })
-          .catch((err) => {
-            console.log({ err });
-            reject(err);
-            return err;
-          });
-      })
-  );
+  const handleLogin = (formData: LoginFormValues) =>
+    new Promise((resolve, reject) => {
+      setLoading(true);
+      api
+        .post<LoginResponse>("/v1/login", formData)
+        .then(({ data }) => {
+          cookies.updateCookie(data.access_token, 1);
+          resolve(data);
+          return data;
+        })
+        .catch((err) => {
+          reject(err);
+          return err;
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    });
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
     try {
-      await loginMutation.mutateAsync(data).then(() => {
+      await handleLogin(data).then(() => {
         router.push("/search");
       });
       toast.info("Logado com sucesso!", {
@@ -80,7 +82,7 @@ export function useLogin() {
   };
 
   return {
-    loading: loginMutation.isLoading,
+    loading,
     handleSubmit: handleSubmit(onSubmit),
     control,
     errors,

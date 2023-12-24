@@ -11,7 +11,7 @@ export function SearchInput({ ...props }: SearchInputProps) {
       </div>
       <Input
         {...props}
-        className="pl-10 pr-3 py-2 rounded-md w-500px placeholder-text-primary"
+        className="pl-10 pr-3 py-2 rounded-md w-360px md:w-500px placeholder-text-primary"
         placeholder="Pesquise seu podcast"
       />
     </div>

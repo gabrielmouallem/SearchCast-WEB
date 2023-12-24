@@ -1,10 +1,10 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useMutation } from "react-query";
 import api from "@/services/ApiService/ApiService";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useCookies } from "@/hooks";
+import { useState } from "react";
 
 interface RegisterResponse {
   _id: string;
@@ -22,6 +22,7 @@ interface RegisterFormValues {
 }
 
 export function useRegister() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const cookies = useCookies("access_token", "");
   const {
@@ -30,27 +31,28 @@ export function useRegister() {
     formState: { errors },
   } = useForm<RegisterFormValues>();
 
-  const loginMutation = useMutation(
-    (formData: RegisterFormValues) =>
-      new Promise((resolve, reject) => {
-        api
-          .post<RegisterResponse>("/v1/register", formData)
-          .then(({ data }) => {
-            cookies.updateCookie(data.access_token, 1);
-            resolve(data);
-            return data;
-          })
-          .catch((err) => {
-            console.log({ err });
-            reject(err);
-            return err;
-          });
-      })
-  );
+  const handleLogin = (formData: RegisterFormValues) =>
+    new Promise((resolve, reject) => {
+      setLoading(true);
+      api
+        .post<RegisterResponse>("/v1/register", formData)
+        .then(({ data }) => {
+          cookies.updateCookie(data.access_token, 1);
+          resolve(data);
+          return data;
+        })
+        .catch((err) => {
+          reject(err);
+          return err;
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    });
 
   const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     try {
-      await loginMutation.mutateAsync(data).then(() => {
+      await handleLogin(data).then(() => {
         router.push("/search");
       });
       toast.info("Cadastrado com sucesso!", {
@@ -80,7 +82,7 @@ export function useRegister() {
   };
 
   return {
-    loading: loginMutation.isLoading,
+    loading,
     handleSubmit: handleSubmit(onSubmit),
     control,
     errors,
