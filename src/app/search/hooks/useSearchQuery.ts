@@ -25,14 +25,26 @@ export function useSearchQuery(text: string) {
       .catch((err) => {
         if (err?.response?.status === 403) {
           toast.warn(
-            "Erro ao realizar pesquisa. Por favor realize o pagamento para poder usar a ferramenta de pesquisa.",
+            "Erro ao realizar pesquisa. Por favor realize o pagamento para poder usar a ferramenta de pesquisa ou clique aqui para saber mais.",
             {
               position: "top-right",
-              autoClose: 8000,
+              autoClose: 15000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
+              onClick: () => {
+                const phoneNumber = "+5535998607515";
+                const message = encodeURIComponent(
+                  "Olá, gostaria de saber como realizar o pagamento e ter acesso a ferramenta SearchCast."
+                );
+
+                // Create the WhatsApp URL with the phone number and message
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+                // Open the WhatsApp URL in a new tab
+                window.open(whatsappUrl, "_blank");
+              },
               progress: undefined,
               theme: "dark",
             }
