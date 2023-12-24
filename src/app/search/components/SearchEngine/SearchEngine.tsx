@@ -45,7 +45,7 @@ export function SearchEngine() {
   }
 
   const lastUpdate = getLastUpdate();
-  const showResultItems = !(isLoading || isFetching || isFetchingNextPage);
+  const showResultItems = !((isLoading || isFetching) && !isFetchingNextPage);
   const showPlaceholders = !!(isLoading || isFetching || isFetchingNextPage);
 
   return (

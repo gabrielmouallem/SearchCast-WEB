@@ -52,19 +52,21 @@ export function useSearchQuery(text: string) {
         } else if ([401, 402, 404].includes(err?.response?.status)) {
           router.push("/login");
         }
-        toast.error(
-          "Erro ao realizar pesquisa. Tente procurar por algo mais específico ou tente novamente.",
-          {
-            position: "top-right",
-            autoClose: 8000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          }
-        );
+        if (typeof err?.response?.status === "number") {
+          toast.error(
+            "Erro ao realizar pesquisa. Tente procurar por algo mais específico ou tente novamente.",
+            {
+              position: "top-right",
+              autoClose: 8000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            }
+          );
+        }
         console.error(err); // Re-throw the error to indicate that the query has failed
         return undefined;
       });
