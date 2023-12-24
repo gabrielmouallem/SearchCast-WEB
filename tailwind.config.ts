@@ -21,9 +21,13 @@ const config: Config = {
     extend: {
       backgroundColor: {
         primary: colors.darkGray,
+        "radial-gradient":
+          "radial-gradient(circle, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
       },
       backgroundImage: {
         pattern: "url('/bg_pattern.svg')",
+        "default-gradient":
+          "radial-gradient(circle at center top, rgba(0,0,0,0) 0%, #0C111D 50%)",
       },
       backgroundPosition: {
         "top-center": "top center",
@@ -32,6 +36,7 @@ const config: Config = {
         "1190px": "1190px",
         "985px": "985px",
         "360px": "360px",
+        "500px": "500px",
       },
       outlineWidth: {
         "24": "6rem",
