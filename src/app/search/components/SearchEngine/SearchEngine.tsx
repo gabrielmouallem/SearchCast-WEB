@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { useSearch } from "../../hooks/useSearch";
 import Image from "next/image";
 import { getLastUpdate } from "@/utils";
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { SearchResultItem, SearchResultItemPlaceholder } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
 import useBottomScroll from "@/hooks/useBottomScroll";
@@ -28,10 +28,10 @@ export function SearchEngine() {
     );
   }, [data?.pages]);
 
-  function handlePageBottomReached() {
+  const handlePageBottomReached = useCallback(() => {
     if (preventPageFetching) return;
     if (debouncedText && debouncedText !== "") fetchNextPage();
-  }
+  }, [preventPageFetching, debouncedText, fetchNextPage]);
 
   useBottomScroll(handlePageBottomReached);
 
