@@ -4,7 +4,7 @@ import { useSearchQuery } from "./useSearchQuery";
 
 export function useSearch() {
   const [text, setText] = useState("");
-  const debouncedText = useDebounce(text, 1000);
+  const debouncedText = useDebounce(text, 3000);
 
   const {
     isError,
