@@ -73,7 +73,7 @@ export function useSearchQuery(text: string) {
   }
 
   return useInfiniteQuery({
-    queryKey: [`search`, text],
+    queryKey: [`search`],
     queryFn: ({ pageParam, signal }) => fetch({ text, pageParam, signal }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
@@ -84,7 +84,7 @@ export function useSearchQuery(text: string) {
       const nextPage = nextPageCondition ? undefined : lastPage?.data?.page + 1;
       return nextPage;
     },
-    enabled: text?.length >= 1,
+    enabled: false,
     refetchOnWindowFocus: false,
     refetchInterval: Infinity,
     refetchOnMount: false,
