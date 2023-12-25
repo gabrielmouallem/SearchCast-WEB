@@ -7,16 +7,19 @@ import React, { useCallback, useMemo } from "react";
 import { SearchResultItem, SearchResultItemPlaceholder } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
 import useBottomScroll from "@/hooks/useBottomScroll";
+import { Controller } from "react-hook-form";
 
 export function SearchEngine() {
   const {
-    debouncedText,
+    text,
     setText,
+    control,
     data,
     isLoading,
     isFetching,
     isFetchingNextPage,
     fetchNextPage,
+    handleSubmit,
   } = useSearch();
 
   const preventPageFetching = useMemo(() => {
@@ -30,14 +33,14 @@ export function SearchEngine() {
 
   const handlePageBottomReached = useCallback(() => {
     if (preventPageFetching) return;
-    if (debouncedText && debouncedText !== "") fetchNextPage();
-  }, [preventPageFetching, debouncedText, fetchNextPage]);
+    if (text && text !== "") fetchNextPage();
+  }, [preventPageFetching, text, fetchNextPage]);
 
   useBottomScroll(handlePageBottomReached);
 
-  const hasDebouncedText = debouncedText && debouncedText !== "";
-  const debouncedTextClases = hasDebouncedText
-    ? "justify-start pt-20"
+  const hasSubmittedSearch = !!data?.pages?.length || isFetching;
+  const debouncedTextClases = hasSubmittedSearch
+    ? "justify-start"
     : "justify-center";
 
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -52,17 +55,29 @@ export function SearchEngine() {
     <>
       <ToastContainer />
       <div
-        className={`flex-grow flex flex-col items-center gap-8 ${debouncedTextClases} mb-20`}
+        className={`flex-grow flex flex-col items-center gap-8 ${debouncedTextClases} mb-20 pt-20`}
       >
         <Image src="/logo.svg" width={48} height={29.5} alt="SearchCast Logo" />
-        {hasDebouncedText && (
+        {hasSubmittedSearch && (
           <div className="text-text-secondary">
             Última atualização do nosso banco de dados em:{" "}
             {lastUpdate.toLocaleDateString()} às{" "}
             {lastUpdate.toLocaleTimeString()}
           </div>
         )}
-        <SearchInput onChange={handleTextChange} disabled={showPlaceholders} />
+        <form onSubmit={handleSubmit}>
+          <Controller
+            name="text"
+            control={control}
+            render={({ field }) => (
+              <SearchInput
+                {...field}
+                onChange={handleTextChange}
+                disabled={showPlaceholders}
+              />
+            )}
+          />
+        </form>
         <div className="flex flex-col items-center gap-16">
           {showResultItems &&
             (data?.pages ?? []).map((group, i) => (
@@ -72,7 +87,7 @@ export function SearchEngine() {
                     return (
                       <SearchResultItem
                         key={props._id}
-                        searchText={debouncedText}
+                        searchText={text}
                         {...props}
                       />
                     );

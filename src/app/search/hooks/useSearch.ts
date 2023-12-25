@@ -1,10 +1,15 @@
 import { useDebounce } from "@uidotdev/usehooks";
 import { useState } from "react";
 import { useSearchQuery } from "./useSearchQuery";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+interface FormValues {
+  text: string;
+}
 
 export function useSearch() {
   const [text, setText] = useState("");
-  const debouncedText = useDebounce(text, 3000);
+  const { handleSubmit, control } = useForm<FormValues>();
 
   const {
     isError,
@@ -14,11 +19,14 @@ export function useSearch() {
     data,
     fetchNextPage,
     refetch,
-  } = useSearchQuery(debouncedText);
+  } = useSearchQuery(text);
+
+  const onSubmit: SubmitHandler<FormValues> = async () => {
+    refetch();
+  };
 
   return {
     text,
-    debouncedText,
     setText,
     isError,
     isLoading,
@@ -26,6 +34,8 @@ export function useSearch() {
     isFetchingNextPage,
     data,
     fetchNextPage,
+    control,
+    handleSubmit: handleSubmit(onSubmit),
     refetch,
   };
 }

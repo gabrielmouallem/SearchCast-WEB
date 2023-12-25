@@ -45,15 +45,13 @@ export function SearchResultItem({
           />
         </div>
       </div>
-      <div className="self-center">
+      <div className="self-center aspect-video w-screen !max-w-736px h-full bg-gray-600">
         <Image
           src={thumbnail?.url ?? ""}
           alt="Video Thumbnail"
           width={545}
           height={350}
           layout="responsive"
-          placeholder="blur"
-          blurDataURL="/video_placeholder.png"
           priority
         />
       </div>
