@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "..";
 import { useSearchTestSuggestions } from "@/hooks";
@@ -12,6 +12,10 @@ export function SearchInput({ onSuggestionClick, ...props }: SearchInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const textValue = props?.value as string;
   const { data } = useSearchTestSuggestions(textValue ?? "");
+
+  useEffect(() => {
+    if (props?.disabled) setIsFocused(false);
+  }, [props.disabled]);
 
   const suggestions =
     data?.suggestionGroups?.[0]?.searchSuggestions.map(
