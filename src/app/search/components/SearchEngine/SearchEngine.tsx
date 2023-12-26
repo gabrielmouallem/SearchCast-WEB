@@ -8,11 +8,13 @@ import { SearchResultItem, SearchResultItemPlaceholder } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
 import useBottomScroll from "@/hooks/useBottomScroll";
 import { Controller } from "react-hook-form";
+import { flushSync } from "react-dom";
 
 export function SearchEngine() {
   const {
     text,
     setText,
+    refetch,
     control,
     data,
     isLoading,
@@ -47,6 +49,13 @@ export function SearchEngine() {
     setText(e.target.value);
   }
 
+  function handleSuggestionClick(value: string) {
+    flushSync(() => {
+      setText(value);
+    });
+    refetch();
+  }
+
   const lastUpdate = getLastUpdate();
   const showResultItems = !((isLoading || isFetching) && !isFetchingNextPage);
   const showPlaceholders = !!(isLoading || isFetching || isFetchingNextPage);
@@ -72,6 +81,8 @@ export function SearchEngine() {
             render={({ field }) => (
               <SearchInput
                 {...field}
+                value={text}
+                onSuggestionClick={handleSuggestionClick}
                 onChange={handleTextChange}
                 disabled={showPlaceholders}
               />

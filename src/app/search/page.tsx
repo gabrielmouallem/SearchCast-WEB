@@ -9,7 +9,7 @@ export default function Search() {
 
   return (
     <Providers>
-      <div className="flex flex-col min-h-screen min-w-screen bg-default-gradient">
+      <div className="flex flex-col min-h-screen min-w-screen !bg-default-gradient">
         <Navbar isAuthenticated />
         <SearchEngine />
         <Footer />

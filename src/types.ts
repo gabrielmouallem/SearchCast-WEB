@@ -58,8 +58,72 @@ const typeofSearchResultData = {
   results: [typeofSearchResultItem],
 };
 
+const typeofSuggestions = {
+  _type: "Suggestions",
+  queryContext: {
+    originalQuery: "po",
+  },
+  suggestionGroups: [
+    {
+      name: "Web",
+      searchSuggestions: [
+        {
+          url: "https://www.bing.com/search?q=poki&FORM=USBAPI",
+          displayText: "poki",
+          query: "poki",
+          searchKind: "WebSearch",
+        },
+        {
+          url: "https://www.bing.com/search?q=portuguese+to+english&FORM=USBAPI",
+          displayText: "portuguese to english",
+          query: "portuguese to english",
+          searchKind: "WebSearch",
+        },
+        {
+          url: "https://www.bing.com/search?q=poupatempo&FORM=USBAPI",
+          displayText: "poupatempo",
+          query: "poupatempo",
+          searchKind: "WebSearch",
+        },
+        {
+          url: "https://www.bing.com/search?q=powerpoint&FORM=USBAPI",
+          displayText: "powerpoint",
+          query: "powerpoint",
+          searchKind: "WebSearch",
+        },
+        {
+          url: "https://www.bing.com/search?q=postman&FORM=USBAPI",
+          displayText: "postman",
+          query: "postman",
+          searchKind: "WebSearch",
+        },
+        {
+          url: "https://www.bing.com/search?q=portal+ecac&FORM=USBAPI",
+          displayText: "portal ecac",
+          query: "portal ecac",
+          searchKind: "WebSearch",
+        },
+        {
+          url: "https://www.bing.com/search?q=poki+games&FORM=USBAPI",
+          displayText: "poki games",
+          query: "poki games",
+          searchKind: "WebSearch",
+        },
+        {
+          url: "https://www.bing.com/search?q=power+bi&FORM=USBAPI",
+          displayText: "power bi",
+          query: "power bi",
+          searchKind: "WebSearch",
+        },
+      ],
+    },
+  ],
+};
+
 export type TTranscription = typeof typeofTranscription;
 
 export type TSearchResultItem = typeof typeofSearchResultItem;
 
 export type TSearchResult = typeof typeofSearchResultData;
+
+export type TSuggestions = typeof typeofSuggestions;

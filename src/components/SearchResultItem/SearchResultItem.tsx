@@ -28,7 +28,7 @@ export function SearchResultItem({
   return (
     <div className="max-w-736px flex flex-col gap-4">
       <div
-        className="text-xl flex cursor-pointer z-50"
+        className="text-xl flex cursor-pointer z-40"
         onClick={handleShowHideTranscriptions}
       >
         <span className="flex-grow">
