@@ -5,7 +5,7 @@ import { ProfileCard } from "../ProfileCard/ProfileCard";
 
 export function PageContent() {
   const phoneNumber = "+5535998607515";
-  const lernMoreMessage = encodeURIComponent(
+  const learnMoreMessage = encodeURIComponent(
     "Olá, gostaria de saber mais sobre a ferramenta SearchCast."
   );
   const questionsMessage = encodeURIComponent(
@@ -32,7 +32,7 @@ export function PageContent() {
             </Content.Gap>
             <div className="flex items-center flex-col md:flex-row justify-center gap-2.5">
               <a
-                href={`https://wa.me/${phoneNumber}?text=${lernMoreMessage}`}
+                href={`https://wa.me/${phoneNumber}?text=${learnMoreMessage}`}
                 target="_blank"
               >
                 <Button className="md:w-auto w-72 px-4 py-4 text-lg">
@@ -292,7 +292,7 @@ export function PageContent() {
               </Content.Gap>
             </div>
             <a
-              href={`https://wa.me/${phoneNumber}?text=${lernMoreMessage}`}
+              href={`https://wa.me/${phoneNumber}?text=${learnMoreMessage}`}
               target="_blank"
             >
               <Button className="!bg-brand">Entre em contato</Button>

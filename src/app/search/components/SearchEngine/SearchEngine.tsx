@@ -42,7 +42,7 @@ export function SearchEngine() {
 
   const hasSubmittedSearch = !!data?.pages?.length || isFetching;
   const debouncedTextClases = hasSubmittedSearch
-    ? "justify-start"
+    ? "justify-start bg-tight-gradient"
     : "justify-center";
 
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {

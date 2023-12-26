@@ -1,11 +1,12 @@
 "use client";
 import { Footer, Navbar } from "@/components";
-import { useRedirectToLoginPage } from "@/hooks";
+import { useRedirectToLoginPage, useRedirectToPaymentPage } from "@/hooks";
 import { SearchEngine } from "./components/SearchEngine";
 import { Providers } from "@/components/Providers";
 
 export default function Search() {
   useRedirectToLoginPage();
+  useRedirectToPaymentPage();
 
   return (
     <Providers>
