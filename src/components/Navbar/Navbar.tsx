@@ -2,8 +2,7 @@
 import Image from "next/image";
 import { Button } from "../Button";
 import { ComponentProps } from "react";
-import { useRouter } from "next/navigation";
-import { useCookies } from "@/hooks";
+import { useAuth } from "@/hooks/useAuth";
 
 const imageProps: ComponentProps<typeof Image> = {
   className: "mr-2",
@@ -18,12 +17,8 @@ interface NavbarProps {
 }
 
 export function Navbar({ isAuthenticated }: NavbarProps) {
-  const cookies = useCookies("access_token", "");
-  const router = useRouter();
-  function handleLogout() {
-    cookies.updateCookie("", 1);
-    router.push("/login");
-  }
+  const { handleLogout } = useAuth();
+
   return (
     <nav
       className="fixed inset-0 w-full h-20 sm:pl-20 sm:pr-20 flex items-center bg-gradient-to-b from-black-transparent to-transparent"
@@ -42,7 +37,7 @@ export function Navbar({ isAuthenticated }: NavbarProps) {
         <div className="ml-auto mr-9">
           <a href="/login">
             <Button startIcon={<Image {...imageProps} alt="Person Icon" />}>
-              Login
+              Acessar
             </Button>
           </a>
         </div>
