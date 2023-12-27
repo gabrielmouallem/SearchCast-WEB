@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
 import { useLogin, useRedirectToSearchPage } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 
 export function LoginForm() {
   const { loading, handleSubmit, control } = useLogin();
@@ -81,6 +82,7 @@ export function LoginForm() {
                   >
                     {loading ? "Entrando..." : "Entrar"}
                   </Button>
+                  <GoogleLoginButton />
                 </div>
               </form>
               <div className="text-sm font-normal leading-5">

@@ -3,14 +3,16 @@ import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useRedirectToSearchPage, useRegister } from "@/hooks";
+import { useGoogleApi, useRedirectToSearchPage, useRegister } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 
 export function RegisterForm() {
   const { loading, handleSubmit, control, errors } = useRegister();
 
   useRedirectToSearchPage();
+  useGoogleApi();
 
   return (
     <>
@@ -137,6 +139,7 @@ export function RegisterForm() {
                   >
                     {loading ? "Cadastrando..." : "Cadastrar"}
                   </Button>
+                  <GoogleLoginButton />
                 </div>
               </form>
               <div className="text-sm font-normal leading-5">

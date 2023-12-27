@@ -120,6 +120,15 @@ const typeofSuggestions = {
   ],
 };
 
+export interface LoginResponse {
+  _id: string;
+  name: string;
+  email: string;
+  active_subscription: boolean;
+  created_on: string;
+  access_token: string;
+}
+
 export type TTranscription = typeof typeofTranscription;
 
 export type TSearchResultItem = typeof typeofSearchResultItem;
