@@ -3,7 +3,7 @@ import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useLogin, useRedirectToSearchPage } from "@/hooks";
+import { useGoogleApi, useLogin, useRedirectToSearchPage } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { GoogleLoginButton } from "@/components/GoogleLoginButton";
@@ -12,6 +12,7 @@ export function LoginForm() {
   const { loading, handleSubmit, control } = useLogin();
 
   useRedirectToSearchPage();
+  useGoogleApi();
 
   return (
     <>
