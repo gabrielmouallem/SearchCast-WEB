@@ -7,6 +7,7 @@ import { useLogin, useRedirectToSearchPage } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { GoogleLoginButton } from "@/components/GoogleLoginButton";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export function LoginForm() {
   const { loading, handleSubmit, control } = useLogin();
@@ -14,7 +15,7 @@ export function LoginForm() {
   useRedirectToSearchPage();
 
   return (
-    <>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
       <div className="flex flex-col min-h-screen">
         <Navbar />
@@ -96,6 +97,6 @@ export function LoginForm() {
         </div>
         <Footer />
       </div>
-    </>
+    </GoogleOAuthProvider>
   );
 }
