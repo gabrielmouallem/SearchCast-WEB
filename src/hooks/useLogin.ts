@@ -5,15 +5,7 @@ import { useRouter } from "next/navigation";
 import { useCookies } from "@/hooks";
 import { toast } from "react-toastify";
 import { useState } from "react";
-
-interface LoginResponse {
-  _id: string;
-  name: string;
-  email: string;
-  active_subscription: boolean;
-  created_on: string;
-  access_token: string;
-}
+import { LoginResponse } from "@/types";
 
 interface LoginFormValues {
   email: string;

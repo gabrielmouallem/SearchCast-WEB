@@ -1,3 +1,4 @@
+import { useCookies } from "@/hooks";
 import api from "@/services/ApiService/ApiService";
 import { TSearchResult } from "@/types";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
@@ -6,6 +7,7 @@ import { toast } from "react-toastify";
 
 export function useSearchQuery(text: string) {
   const router = useRouter();
+  const cookies = useCookies("access_token", "");
 
   function fetch({
     text,
@@ -50,6 +52,7 @@ export function useSearchQuery(text: string) {
             }
           );
         } else if ([401, 402, 404].includes(err?.response?.status)) {
+          cookies.updateCookie("", 1);
           router.push("/login");
         }
         if (typeof err?.response?.status === "number") {
