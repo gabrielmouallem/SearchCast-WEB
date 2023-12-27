@@ -3,19 +3,19 @@ import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useGoogleApi, useRedirectToSearchPage, useRegister } from "@/hooks";
+import { useRedirectToSearchPage, useRegister } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { GoogleLoginButton } from "@/components/GoogleLoginButton";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export function RegisterForm() {
   const { loading, handleSubmit, control, errors } = useRegister();
 
   useRedirectToSearchPage();
-  useGoogleApi();
 
   return (
-    <>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
       <div className="flex flex-col min-h-screen">
         <Navbar />
@@ -155,6 +155,6 @@ export function RegisterForm() {
         </div>
         <Footer />
       </div>
-    </>
+    </GoogleOAuthProvider>
   );
 }

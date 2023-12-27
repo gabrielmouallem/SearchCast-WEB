@@ -120,6 +120,14 @@ const typeofSuggestions = {
   ],
 };
 
+export interface DecodedCredentials {
+  name: string;
+  picture: string;
+  family_name: string;
+  given_name: string;
+  email: string;
+}
+
 export interface LoginResponse {
   _id: string;
   name: string;
