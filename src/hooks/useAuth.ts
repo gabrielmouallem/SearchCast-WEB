@@ -14,7 +14,7 @@ export function useAuth() {
   const { getCookie, updateCookie } = useCookies("access_token", "");
   const router = useRouter();
 
-  const user = getDecodedJWT(getCookie())?.sub as User | undefined;
+  const user = getDecodedJWT<any>(getCookie())?.sub as User | undefined;
 
   function clearAccessToken() {
     updateCookie("", 1);
