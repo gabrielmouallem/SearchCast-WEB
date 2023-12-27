@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
-export function getDecodedJWT<T>(access_token: string) {
+export function getDecodedJWT<T = any>(access_token: string) {
   if (!access_token) return null;
   try {
     const decoded = jwtDecode(access_token); // Replace 'your-secret-key' with your actual secret key
