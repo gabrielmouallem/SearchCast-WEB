@@ -1,4 +1,3 @@
-import { gapi } from "gapi-script";
 import React from "react";
 
 export function useGoogleApi() {
