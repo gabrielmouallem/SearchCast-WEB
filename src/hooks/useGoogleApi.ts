@@ -7,6 +7,7 @@ export function useGoogleApi() {
       gapi.client.init({
         apiKey: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
         clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+        plugin_name: "SearchCast WEB App",
         scope: "profile email",
       });
     }
