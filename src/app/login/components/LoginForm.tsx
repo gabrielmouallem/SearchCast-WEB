@@ -27,7 +27,7 @@ export function LoginForm() {
                 <div className="flex flex-col items-center justify-center gap-3">
                   <div className="text-3xl font-semibold leading-9 flex flex-col items-center justify-center gap-5">
                     <div>
-                      <div className="text-sm text-gray-300 font-medium leading-5">
+                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
                         Email
                       </div>
                       <Controller
@@ -44,7 +44,7 @@ export function LoginForm() {
                       />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-300 font-medium leading-5">
+                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
                         Senha
                       </div>
                       <Controller
