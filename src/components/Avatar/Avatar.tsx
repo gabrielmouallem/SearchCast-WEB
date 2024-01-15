@@ -1,6 +1,6 @@
 interface AvatarProps {
   name: string;
-  size: "default" | "large";
+  size?: "default" | "large";
 }
 
 export function Avatar({ name, size = "default" }: AvatarProps) {
