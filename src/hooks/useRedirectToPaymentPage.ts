@@ -1,14 +1,20 @@
 import { useEffect } from "react";
 import { useAuth } from "./useAuth";
 import { RedirectType, redirect } from "next/navigation";
+import { useRefreshAccessToken } from ".";
 
 export function useRedirectToPaymentPage() {
-  const { user, clearAccessToken } = useAuth();
+  const { isLoading } = useRefreshAccessToken();
+  const { getUser, clearAccessToken } = useAuth();
 
   useEffect(() => {
-    if (!user || !user?.active_subscription) {
-      setTimeout(() => clearAccessToken(), 500);
-      redirect("/payment-required", RedirectType.replace);
+    const user = getUser();
+    if (
+      (!user || !user?.subscription) &&
+      !user?.allow_unpaid_access &&
+      !isLoading
+    ) {
+      redirect("/plans", RedirectType.replace);
     }
-  }, [user, clearAccessToken]);
+  }, [clearAccessToken, isLoading, getUser]);
 }

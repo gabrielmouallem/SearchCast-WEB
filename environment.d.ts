@@ -9,6 +9,7 @@ namespace NodeJS {
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: string;
     NEXT_PUBLIC_GOOGLE_CLIENT_SECRET: string;
     NEXT_PUBLIC_GOOGLE_API_KEY: string;
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
     DEV: boolean;
     PROD: boolean;
   }

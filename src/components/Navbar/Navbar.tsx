@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { Button } from "../Button";
 import { ComponentProps } from "react";
-import { Avatar } from "../Avatar";
 import { ProfilePopover } from "./components/ProfilePopover";
 
 const imageProps: ComponentProps<typeof Image> = {
@@ -19,10 +18,7 @@ interface NavbarProps {
 
 export function Navbar({ isAuthenticated }: NavbarProps) {
   return (
-    <nav
-      className="fixed inset-0 w-full h-20 sm:pl-20 sm:pr-20 flex items-center bg-gradient-to-b from-black-transparent to-transparent"
-      p-
-    >
+    <nav className="fixed inset-0 w-full h-20 sm:pl-20 sm:pr-20 flex items-center bg-gradient-to-b from-black-transparent to-transparent">
       <a href="/">
         <Image
           className="ml-8"

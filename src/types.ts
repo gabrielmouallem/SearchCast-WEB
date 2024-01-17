@@ -135,6 +135,11 @@ export interface LoginResponse {
   active_subscription: boolean;
   created_on: string;
   access_token: string;
+  subscription?: {
+    cancel_at: number;
+    current_period_end: number;
+    plan: "month" | "semester" | "year";
+  };
 }
 
 export type TTranscription = typeof typeofTranscription;

@@ -9,8 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 import useBottomScroll from "@/hooks/useBottomScroll";
 import { Controller } from "react-hook-form";
 import { flushSync } from "react-dom";
+import { useRedirectToLoginPage, useRedirectToPaymentPage } from "@/hooks";
 
 export function SearchEngine() {
+  useRedirectToLoginPage();
+  useRedirectToPaymentPage();
   const {
     text,
     setText,
