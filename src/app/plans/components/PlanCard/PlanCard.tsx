@@ -159,7 +159,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
               : isExpirationPending
               ? "!bg-red-800"
               : ""
-            : "bg-brand"
+            : "!bg-brand"
         }`}
         disabled={buttonDisabled}
         onClick={
