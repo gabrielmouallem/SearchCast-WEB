@@ -42,7 +42,11 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
   const { getUser } = useAuth();
   const user = useMemo(() => getUser(), [getUser]);
 
-  const isActive = user?.subscription?.plan === subscriptionType;
+  const currentPeriodEnd = user?.subscription?.current_period_end ?? 0;
+  const currentUnixTimestamp = Math.floor(Date.now() / 1000);
+  const hasNotExpired = currentPeriodEnd > currentUnixTimestamp;
+  const isActive =
+    user?.subscription?.plan === subscriptionType && hasNotExpired;
 
   const isCancellationPending = isActive && !!user?.subscription?.cancel_at;
   const isExpirationPending = isActive && !isCancellationPending;
@@ -52,9 +56,10 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
     (user?.subscription?.current_period_end ?? 0) * 1000
   );
 
-  const disabled = !isActive && !!user?.subscription;
+  const disabled = !isActive && !!user?.subscription && hasNotExpired;
   const buttonDisabled =
-    (!isActive && !!user?.subscription) || isCancellationPending;
+    ((!isActive && !!user?.subscription) || isCancellationPending) &&
+    hasNotExpired;
 
   const handlePaymentCancellation = async () => {
     try {
