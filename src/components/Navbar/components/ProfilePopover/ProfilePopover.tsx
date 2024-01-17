@@ -2,9 +2,11 @@ import { Button } from "@/components";
 import { Avatar } from "@/components/Avatar";
 import { useAuth } from "@/hooks/useAuth";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { useMemo } from "react";
 
 export function ProfilePopover() {
-  const { handleLogout, user } = useAuth();
+  const { getUser, handleLogout } = useAuth();
+  const user = useMemo(() => getUser(), [getUser]);
 
   const name = user?.name ?? "";
 

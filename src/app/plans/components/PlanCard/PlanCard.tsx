@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { Stripe } from "@stripe/stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import api from "@/services/ApiService/ApiService";
@@ -35,21 +35,35 @@ type SubscriptionType = "month" | "semester" | "year";
 
 interface PlanCardProps {
   subscriptionType: SubscriptionType;
+  onCancel: () => void;
 }
 
-const PlanCard = ({ subscriptionType }: PlanCardProps) => {
-  const { user } = useAuth();
-  console.log({ user });
+const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
+  const { getUser } = useAuth();
+  const user = useMemo(() => getUser(), [getUser]);
+
   const isActive = user?.subscription?.plan === subscriptionType;
-  const cancellsAt = new Date(user?.subscription?.cancel_at ?? 0);
+
+  const isCancellationPending = isActive && !!user?.subscription?.cancel_at;
+  const isExpirationPending = isActive && !isCancellationPending;
+
+  const cancellsAt = new Date((user?.subscription?.cancel_at ?? 0) * 1000);
+  const expiresAt = new Date(
+    (user?.subscription?.current_period_end ?? 0) * 1000
+  );
 
   const disabled = !isActive && !!user?.subscription;
+  const buttonDisabled =
+    (!isActive && !!user?.subscription) || isCancellationPending;
 
   const handlePaymentCancellation = async () => {
     try {
       await api.post("/cancel", {
         customer_email: user?.email,
       });
+      setTimeout(() => {
+        onCancel();
+      }, 1000);
       toast.info("Plano cancelado com sucesso!", {
         position: "top-center",
         autoClose: 8000,
@@ -127,17 +141,44 @@ const PlanCard = ({ subscriptionType }: PlanCardProps) => {
           Não há descontos.
         </span>
       )}
-      {isActive && (
+      {isExpirationPending && (
         <span className="font-light text-red-500 text-xs">
-          Expira em: {cancellsAt.toLocaleString()}
+          Renova em: {expiresAt.toLocaleDateString()}
+        </span>
+      )}
+      {isCancellationPending && (
+        <span className="font-light text-red-500 text-xs">
+          Encerra em: {cancellsAt.toLocaleDateString()}
         </span>
       )}
       <Button
-        className={`${isActive ? "!bg-red-800" : "!bg-brand"}`}
-        disabled={disabled}
-        onClick={isActive ? handlePaymentCancellation : handlePayment}
+        className={`font-bold ${
+          isActive
+            ? isCancellationPending
+              ? "!bg-brand"
+              : isExpirationPending
+              ? "!bg-red-800"
+              : ""
+            : "bg-brand"
+        }`}
+        disabled={buttonDisabled}
+        onClick={
+          isActive
+            ? isCancellationPending
+              ? handlePayment
+              : isExpirationPending
+              ? handlePaymentCancellation // You can replace this with the appropriate handler for expiration if needed
+              : handlePayment
+            : handlePayment
+        }
       >
-        {isActive ? "CANCELAR" : "ASSINAR"}
+        {isActive
+          ? isCancellationPending
+            ? "ASSINAR"
+            : isExpirationPending
+            ? "CANCELAR"
+            : "ASSINAR"
+          : "ASSINAR"}
       </Button>
     </div>
   );

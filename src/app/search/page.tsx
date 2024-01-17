@@ -1,15 +1,11 @@
 "use client";
 import { Footer, Navbar } from "@/components";
-import { useRedirectToLoginPage, useRedirectToPaymentPage } from "@/hooks";
 import { SearchEngine } from "./components/SearchEngine";
 import { Providers } from "@/components/Providers";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 export default function Search() {
-  useRedirectToLoginPage();
-  useRedirectToPaymentPage();
-
   return (
     <Providers>
       <ToastContainer />

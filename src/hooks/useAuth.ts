@@ -19,7 +19,9 @@ export function useAuth() {
   const { getCookie, updateCookie } = useCookies("access_token", "");
   const router = useRouter();
 
-  const user = getDecodedJWT<any>(getCookie())?.sub as User | undefined;
+  function getUser() {
+    return getDecodedJWT<any>(getCookie())?.sub as User | undefined;
+  }
 
   function clearAccessToken() {
     updateCookie("", 1);
@@ -31,7 +33,7 @@ export function useAuth() {
   }
 
   return {
-    user,
+    getUser,
     handleLogout,
     clearAccessToken,
   };
