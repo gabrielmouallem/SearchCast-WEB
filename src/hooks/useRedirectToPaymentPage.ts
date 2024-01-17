@@ -6,9 +6,8 @@ export function useRedirectToPaymentPage() {
   const { user, clearAccessToken } = useAuth();
 
   useEffect(() => {
-    if (!user || !user?.active_subscription) {
-      setTimeout(() => clearAccessToken(), 500);
-      redirect("/payment-required", RedirectType.replace);
+    if ((!user || !user?.subscription) && !user?.allow_unpaid_access) {
+      redirect("/plans", RedirectType.replace);
     }
   }, [user, clearAccessToken]);
 }

@@ -4,3 +4,4 @@ export * from "./getBingApiURL";
 export * from "./getBingApiKey";
 export * from "./getBoldText";
 export * from "./getDecodedJWT";
+export * from "./encodeToJWT";

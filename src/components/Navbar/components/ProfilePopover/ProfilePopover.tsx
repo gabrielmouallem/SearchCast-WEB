@@ -22,8 +22,18 @@ export function ProfilePopover() {
           className="bg-dark-gray rounded-lg p-4"
         >
           <DropdownMenu.Item className="cursor-pointer mb-4">
+            <Button className="w-full" as="a" href="/search">
+              Pesquisar
+            </Button>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className="cursor-pointer mb-4">
             <Button className="w-full" as="a" href="/profile">
               Meu Perfil
+            </Button>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className="cursor-pointer mb-4">
+            <Button className="w-full" as="a" href="/plans">
+              Planos
             </Button>
           </DropdownMenu.Item>
           <DropdownMenu.Item className="cursor-pointer">
