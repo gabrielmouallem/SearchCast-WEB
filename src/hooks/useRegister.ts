@@ -18,7 +18,9 @@ interface RegisterResponse {
 interface RegisterFormValues {
   name: string;
   email: string;
+  confirmEmail: string;
   password: string;
+  confirmPassword: string;
 }
 
 export function useRegister() {
@@ -29,6 +31,7 @@ export function useRegister() {
     handleSubmit,
     control,
     formState: { errors },
+    watch,
   } = useForm<RegisterFormValues>();
 
   const handleLogin = (formData: RegisterFormValues) =>
@@ -52,6 +55,35 @@ export function useRegister() {
 
   const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     try {
+      // Validate confirm email and confirm password
+      if (data.email !== data.confirmEmail) {
+        toast.error("Os emails não coincidem.", {
+          position: "top-right",
+          autoClose: 8000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        return;
+      }
+
+      if (data.password !== data.confirmPassword) {
+        toast.error("As senhas não coincidem.", {
+          position: "top-right",
+          autoClose: 8000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        return;
+      }
+
       await handleLogin(data).then(() => {
         router.push("/search");
       });
@@ -65,7 +97,6 @@ export function useRegister() {
         progress: undefined,
         theme: "dark",
       });
-      // Handle successful login
     } catch (error) {
       toast.error("Erro ao cadastrar. Por favor tente novamente.", {
         position: "top-right",
@@ -83,6 +114,7 @@ export function useRegister() {
 
   return {
     loading,
+    watch,
     handleSubmit: handleSubmit(onSubmit),
     control,
     errors,
