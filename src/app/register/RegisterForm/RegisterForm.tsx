@@ -10,7 +10,10 @@ import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export function RegisterForm() {
-  const { loading, handleSubmit, control, errors } = useRegister();
+  const { loading, handleSubmit, control, errors, watch } = useRegister();
+
+  const watchEmail = watch("email");
+  const watchPassword = watch("password");
 
   useRedirectToSearchPage();
 
@@ -19,7 +22,7 @@ export function RegisterForm() {
       <ToastContainer />
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        <div className="flex-grow flex justify-center items-center">
+        <div className="flex-grow flex justify-center items-center pt-28 pb-20 md:pt-0 md:pb-0">
           <div className="flex items-center justify-center">
             <div className="flex flex-col font-semibold items-center justify-center gap-8 w-full">
               <div className="text-center text-3xl">Cadastre-se</div>
@@ -87,6 +90,33 @@ export function RegisterForm() {
                     </div>
                     <div>
                       <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
+                        Confirmar Email
+                      </div>
+                      <Controller
+                        name="confirmEmail"
+                        control={control}
+                        rules={{
+                          required: "Confirmação de email é obrigatória",
+                          validate: (value) =>
+                            value === watchEmail || "Os emails não coincidem",
+                        }}
+                        render={({ field }) => (
+                          <Input
+                            className="w-360px"
+                            type="email"
+                            placeholder="Confirmar Email"
+                            {...field}
+                          />
+                        )}
+                      />
+                      {errors.confirmEmail && (
+                        <div className="text-xs text-red-600 font-light">
+                          {errors.confirmEmail.message}
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
                         Senha
                       </div>
                       <Controller
@@ -118,6 +148,34 @@ export function RegisterForm() {
                       {errors.password && (
                         <div className="text-xs text-red-600 font-light">
                           {errors.password.message}
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
+                        Confirmar Senha
+                      </div>
+                      <Controller
+                        name="confirmPassword"
+                        control={control}
+                        rules={{
+                          required: "Confirmação de senha é obrigatória",
+                          validate: (value) =>
+                            value === watchPassword ||
+                            "As senhas não coincidem",
+                        }}
+                        render={({ field }) => (
+                          <Input
+                            className="w-360px"
+                            type="password"
+                            placeholder="Confirmar Senha"
+                            {...field}
+                          />
+                        )}
+                      />
+                      {errors.confirmPassword && (
+                        <div className="text-xs text-red-600 font-light">
+                          {errors.confirmPassword.message}
                         </div>
                       )}
                     </div>
