@@ -53,6 +53,7 @@ export function PageContent() {
           <div className="flex items-center justify-center">
             <video
               autoPlay
+              muted
               loop
               className="w-[98%] lg:w-[60%] rounded-3xl border-black border-2"
               src="/searchcast_motion_design.mp4"
