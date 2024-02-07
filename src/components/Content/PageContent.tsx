@@ -51,23 +51,12 @@ export function PageContent() {
             </div>
           </Content.Gap>
           <div className="flex items-center justify-center">
-            <Image
-              className="md:block hidden"
-              src="/half_macbook_frame_w_login_page.png"
-              width={1190}
-              height={1190}
-              placeholder="empty"
-              priority
-              alt="Macbook"
-            />
-            <Image
-              className="md:hidden block"
-              src="/macbook_frame_w_login_page.png"
-              width={1190}
-              height={1190}
-              placeholder="empty"
-              priority
-              alt="Macbook"
+            <video
+              autoPlay
+              loop
+              className="w-[98%] lg:w-[60%] rounded-3xl border-black border-2"
+              src="/searchcast_motion_design.mp4"
+              controls
             />
           </div>
         </Content.Gap>
