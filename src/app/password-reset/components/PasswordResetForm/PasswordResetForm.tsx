@@ -3,53 +3,49 @@ import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useLogin, useRedirectToSearchPage } from "@/hooks";
+import { useRegister } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-export function LoginForm() {
-  const { loading, handleSubmit, control } = useLogin();
+export function PasswordResetForm() {
+  const { loading, handleSubmit, control, errors, watch } = useRegister();
 
-  useRedirectToSearchPage();
+  const watchPassword = watch("password");
 
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        <div className="flex-grow flex justify-center items-center">
+        <div className="flex-grow flex justify-center items-center pt-28 pb-20 md:pt-0 md:pb-0">
           <div className="flex items-center justify-center">
             <div className="flex flex-col font-semibold items-center justify-center gap-8 w-full">
-              <div className="text-center text-3xl">Faça o seu login</div>
+              <div className="text-center text-3xl">Redefinir Senha</div>
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center justify-center gap-3">
                   <div className="text-3xl font-semibold leading-9 flex flex-col items-center justify-center gap-5">
                     <div>
                       <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
-                        Email
-                      </div>
-                      <Controller
-                        name="email"
-                        control={control}
-                        render={({ field }) => (
-                          <Input
-                            className="w-360px"
-                            type="email"
-                            placeholder="Email"
-                            {...field}
-                          />
-                        )}
-                      />
-                    </div>
-                    <div>
-                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
-                        Senha
+                        Nova senha
                       </div>
                       <Controller
                         name="password"
                         control={control}
+                        rules={{
+                          required: "Senha é obrigatório",
+                          minLength: {
+                            value: 8,
+                            message:
+                              "A senha deve conter pelo menos 8 caracteres.",
+                          },
+                          pattern: {
+                            value:
+                              /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&.*]+$/,
+                            message:
+                              "A senha deve incluir números e caracteres especiais.",
+                          },
+                        }}
                         render={({ field }) => (
                           <Input
                             className="w-360px"
@@ -59,19 +55,39 @@ export function LoginForm() {
                           />
                         )}
                       />
-                    </div>
-                  </div>
-                  <div className="w-360px flex items-center justify-between text-sm font-normal leading-5">
-                    <div>
-                      <label className="inline-flex items-center">
-                        <input type="checkbox" />
-                        <span className="ml-2">Lembrar-me por 30 dias</span>
-                      </label>
+                      {errors.password && (
+                        <div className="text-xs text-red-600 font-light">
+                          {errors.password.message}
+                        </div>
+                      )}
                     </div>
                     <div>
-                      <a href="/forgot-password" className="text-gray-300">
-                        <b>Esqueci a senha</b>
-                      </a>
+                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
+                        Confirmar nova senha
+                      </div>
+                      <Controller
+                        name="confirmPassword"
+                        control={control}
+                        rules={{
+                          required: "Confirmação de senha é obrigatória",
+                          validate: (value) =>
+                            value === watchPassword ||
+                            "As senhas não coincidem",
+                        }}
+                        render={({ field }) => (
+                          <Input
+                            className="w-360px"
+                            type="password"
+                            placeholder="Confirmar nova Senha"
+                            {...field}
+                          />
+                        )}
+                      />
+                      {errors.confirmPassword && (
+                        <div className="text-xs text-red-600 font-light">
+                          {errors.confirmPassword.message}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <Button
@@ -81,17 +97,10 @@ export function LoginForm() {
                     }`}
                     disabled={loading}
                   >
-                    {loading ? "Entrando..." : "Entrar"}
+                    {loading ? "Redefinindo..." : "Redefinir"}
                   </Button>
-                  <GoogleLoginButton />
                 </div>
               </form>
-              <div className="text-sm font-normal leading-5">
-                <span className="text-text-secondary">Não tem uma conta?</span>
-                <a href="/register">
-                  <b className="text-gray-300"> Cadastrar</b>
-                </a>
-              </div>
             </div>
           </div>
         </div>

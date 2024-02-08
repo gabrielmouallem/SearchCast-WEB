@@ -53,9 +53,9 @@ export function RegisterForm() {
                           />
                         )}
                       />
-                      {errors.email && (
+                      {errors.name && (
                         <div className="text-xs text-red-600 font-light">
-                          {errors.email.message}
+                          {errors.name.message}
                         </div>
                       )}
                     </div>
