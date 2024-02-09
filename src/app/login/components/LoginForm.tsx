@@ -69,7 +69,7 @@ export function LoginForm() {
                       </label>
                     </div>
                     <div>
-                      <a href="#" className="text-gray-300">
+                      <a href="/forgot-password" className="text-gray-300">
                         <b>Esqueci a senha</b>
                       </a>
                     </div>
