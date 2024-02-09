@@ -4,26 +4,35 @@ import api from "@/services/ApiService/ApiService";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { LoginResponse } from "@/types";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface PasswordResetFormValues {
   password: string;
+  confirmPassword: string;
 }
 
-export function useForgotPassword() {
+export function usePasswordReset() {
   const [loading, setLoading] = useState(false);
+
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
   const router = useRouter();
   const {
     handleSubmit,
     control,
     formState: { errors },
+    watch,
   } = useForm<PasswordResetFormValues>();
 
-  const handleLogin = (formData: PasswordResetFormValues) =>
+  const handlePasswordReset = (formData: PasswordResetFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);
       api
-        .post<LoginResponse>("/v1/password-reset", formData)
+        .post<LoginResponse>("/v1/password-reset", {
+          password: formData?.password,
+          token,
+        })
         .then(({ data }) => {
           resolve(data);
           return data;
@@ -39,8 +48,10 @@ export function useForgotPassword() {
 
   const onSubmit: SubmitHandler<PasswordResetFormValues> = async (data) => {
     try {
-      await handleLogin(data).then(() => {
-        router.push("/login");
+      await handlePasswordReset(data).then(() => {
+        setTimeout(() => {
+          router.push("/login");
+        }, 4000);
       });
       toast.info("Senha alterada com sucesso!", {
         position: "top-right",
@@ -54,7 +65,7 @@ export function useForgotPassword() {
       });
       // Handle successful login
     } catch (error) {
-      toast.error("Erro. Por favor tente novamente.", {
+      toast.error("Erro. A redefinição de senha talvez tenha expirado.", {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -71,6 +82,7 @@ export function useForgotPassword() {
 
   return {
     loading,
+    watch,
     handleSubmit: handleSubmit(onSubmit),
     control,
     errors,

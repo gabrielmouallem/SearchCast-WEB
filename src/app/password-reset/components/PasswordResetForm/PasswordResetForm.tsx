@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
@@ -7,11 +7,22 @@ import { useRegister } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { useRouter, useSearchParams } from "next/navigation";
+import { usePasswordReset } from "../hooks/usePasswordReset";
 
 export function PasswordResetForm() {
-  const { loading, handleSubmit, control, errors, watch } = useRegister();
+  const { loading, handleSubmit, control, errors, watch } = usePasswordReset();
+
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
 
   const watchPassword = watch("password");
+
+  useEffect(() => {
+    if (!token) router.push("/login");
+  }, [token, router]);
 
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>

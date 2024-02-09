@@ -11,20 +11,18 @@ interface PasswordResetFormValues {
 
 export function useForgotPassword() {
   const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<PasswordResetFormValues>();
 
-  const handleLogin = (formData: PasswordResetFormValues) =>
+  const handleForgotPassword = (formData: PasswordResetFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);
       api
         .post<LoginResponse>("/v1/forgot-password", formData)
         .then(({ data }) => {
-          setDone(true);
           resolve(data);
           return data;
         })
@@ -39,7 +37,7 @@ export function useForgotPassword() {
 
   const onSubmit: SubmitHandler<PasswordResetFormValues> = async (data) => {
     try {
-      await handleLogin(data);
+      await handleForgotPassword(data);
       toast.info("Email de mudança de senha enviado com sucesso!", {
         position: "top-right",
         autoClose: 8000,
@@ -69,7 +67,6 @@ export function useForgotPassword() {
 
   return {
     loading,
-    done,
     handleSubmit: handleSubmit(onSubmit),
     control,
     errors,

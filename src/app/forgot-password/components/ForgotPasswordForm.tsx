@@ -10,7 +10,9 @@ import { useForgotPassword } from "../hooks";
 import "react-toastify/dist/ReactToastify.css";
 
 export function ForgotPasswordForm() {
-  const { loading, handleSubmit, control, done } = useForgotPassword();
+  const { loading, handleSubmit, control, errors } = useForgotPassword();
+
+  console.log({ errors });
 
   useRedirectToLoginPage("ATTEMPT_TO_ACCESS_FORGOT_PASSWORD_LOGGED_IN");
 
@@ -37,15 +39,27 @@ export function ForgotPasswordForm() {
                       <Controller
                         name="email"
                         control={control}
+                        rules={{
+                          required: "Email é obrigatório",
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                            message: "Endereço de email inválido.",
+                          },
+                        }}
                         render={({ field }) => (
                           <Input
                             className="w-360px"
                             type="email"
-                            placeholder="alan.turing@email.com"
+                            placeholder="Email"
                             {...field}
                           />
                         )}
                       />
+                      {errors.email && (
+                        <div className="text-xs text-red-600 font-light">
+                          {errors.email.message}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <Button
@@ -53,10 +67,9 @@ export function ForgotPasswordForm() {
                     className={`!bg-brand w-360px ${
                       loading ? "opacity-50" : ""
                     }`}
-                    disabled={loading || done}
+                    disabled={loading}
                   >
                     {loading ? "..." : "Requisitar redefinição de senha"}
-                    {!!(!loading && done) && "Instruções enviadas"}
                   </Button>
                 </div>
               </form>
