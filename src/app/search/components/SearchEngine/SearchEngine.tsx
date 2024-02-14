@@ -60,6 +60,7 @@ export function SearchEngine() {
   }
 
   const lastUpdate = getLastUpdate();
+  const resultCount = data?.pages?.[0]?.data?.count;
   const showResultItems = !((isLoading || isFetching) && !isFetchingNextPage);
   const showPlaceholders = !!(isLoading || isFetching || isFetchingNextPage);
 
@@ -92,6 +93,14 @@ export function SearchEngine() {
             )}
           />
         </form>
+        {!!(showResultItems && resultCount) && (
+          <div className="text-text-secondary -my-3">
+            {resultCount} Resultados
+          </div>
+        )}
+        {!showResultItems && (
+          <div className="text-text-secondary h-[20px] w-[300px] animate-pulse bg-gray-300 rounded -my-3" />
+        )}
         <div className="flex flex-col items-center gap-16">
           {showResultItems &&
             (data?.pages ?? []).map((group, i) => (
