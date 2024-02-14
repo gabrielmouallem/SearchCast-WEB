@@ -25,7 +25,7 @@ export function TranscriptionItem({
   return (
     <div className="border-t border-b border-border flex flex-col items-center justify-center text-center py-3 gap-4">
       {/* eslint-disable-next-line react/no-unescaped-entities */}
-      <div>"{getHighlightText(searchText, transcriptionText)}"</div>
+      <div>"(...) {getHighlightText(searchText, transcriptionText)} (...)"</div>
       {!isFetched && (
         <Button
           className="scale-[65%] -my-[10px]"
