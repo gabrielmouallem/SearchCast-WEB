@@ -67,6 +67,7 @@ export function SearchResultItem({
             <TranscriptionItem
               key={`TranscriptionItem_${props.duration}_${props.start}_${props.text}`}
               {...props}
+              videoId={videoId}
               watchUrl={watchUrl}
               searchText={searchText}
             />
