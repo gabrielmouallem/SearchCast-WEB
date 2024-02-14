@@ -1,7 +1,7 @@
 "use client";
 import { TSearchResultItem } from "@/types";
 import Image from "next/image";
-import { Button } from "..";
+import { Button, YoutubeVideo } from "..";
 import { useState } from "react";
 import { TranscriptionItem } from "./components/TranscriptionItem/TranscriptionItem";
 
@@ -13,6 +13,7 @@ export function SearchResultItem({
   const [showTranscriptions, setShowTranscriptions] = useState(false);
 
   const numberOfMoments = transcriptions?.length ?? 0;
+  const videoId = video._id;
   const title = video.title ?? "";
   const publishDate = new Date(video?.publishDate).toLocaleDateString();
   const viewCount = video?.viewCount ?? 0;
@@ -46,14 +47,12 @@ export function SearchResultItem({
         </div>
       </div>
       <div className="self-center aspect-video w-screen !max-w-736px h-full bg-gray-600">
-        <Image
-          src={thumbnail?.url ?? ""}
-          alt="Video Thumbnail"
-          width={545}
-          height={350}
-          layout="responsive"
-          priority
-        />
+        <div
+          className="aspect-video bg-cover"
+          style={{ backgroundImage: `url(${thumbnail?.url})` }}
+        >
+          <YoutubeVideo videoId={videoId} />
+        </div>
       </div>
       <div className="text-center">
         <div>{title}</div>
@@ -62,20 +61,22 @@ export function SearchResultItem({
         </div>
       </div>
       {showTranscriptions &&
-        transcriptions.map((props) => (
-          <TranscriptionItem
-            key={`TranscriptionItem_${props.duration}_${props.start}_${props.text}`}
-            {...props}
-            watchUrl={watchUrl}
-            searchText={searchText}
-          />
-        ))}
+        transcriptions
+          .sort((a, b) => a.start - b.start)
+          .map((props) => (
+            <TranscriptionItem
+              key={`TranscriptionItem_${props.duration}_${props.start}_${props.text}`}
+              {...props}
+              watchUrl={watchUrl}
+              searchText={searchText}
+            />
+          ))}
       {!showTranscriptions && (
         <Button
           className="w-fit self-center"
           onClick={handleShowHideTranscriptions}
         >
-          Visualizar momentos compatíveis
+          🔭 Visualizar momentos compatíveis
         </Button>
       )}
     </div>

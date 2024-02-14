@@ -15,7 +15,7 @@ export function TranscriptionItem({
     <div className="border-t border-b border-border flex flex-col items-center justify-center text-center py-3 gap-4">
       {/* eslint-disable-next-line react/no-unescaped-entities */}
       <div>"{getHighlightText(searchText, text)}"</div>
-      <a href={videoLink} className="underline">
+      <a href={videoLink} className="underline" target="_blank">
         Ir para o trecho do vídeo {getSecondsToHMS(start)}
       </a>
     </div>
