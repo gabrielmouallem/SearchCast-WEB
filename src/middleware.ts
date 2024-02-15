@@ -41,8 +41,10 @@ export async function middleware(req: any) {
         !refreshedUser?.allow_unpaid_access
       )
         return redirectToPage(req, "/plans");
-      return setAccessToken(req, refreshed_access_token);
+      setAccessToken(req, refreshed_access_token);
+      return NextResponse.next();
     }
+    return NextResponse.next();
   } else if (
     PAGES_THAT_SHOULD_NOT_RENDER_WHILE_AUTHENTICATED.includes(
       req.nextUrl.pathname
