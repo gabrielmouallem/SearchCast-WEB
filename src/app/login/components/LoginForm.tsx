@@ -3,7 +3,7 @@ import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useLogin, useRedirectToSearchPage } from "@/hooks";
+import { useLogin } from "@/hooks";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { GoogleLoginButton } from "@/components/GoogleLoginButton";
@@ -11,8 +11,6 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export function LoginForm() {
   const { loading, handleSubmit, control } = useLogin();
-
-  useRedirectToSearchPage();
 
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>

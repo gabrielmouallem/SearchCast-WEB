@@ -3,7 +3,6 @@ import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useRedirectToLoginPage } from "@/hooks";
 import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useForgotPassword } from "../hooks";
@@ -11,10 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export function ForgotPasswordForm() {
   const { loading, handleSubmit, control, errors } = useForgotPassword();
-
-  console.log({ errors });
-
-  useRedirectToLoginPage("ATTEMPT_TO_ACCESS_FORGOT_PASSWORD_LOGGED_IN");
 
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
