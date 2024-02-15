@@ -1,3 +1,4 @@
+"use client";
 import { CookiesService } from "@/services/CookiesService";
 import { useState } from "react";
 

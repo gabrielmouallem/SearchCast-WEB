@@ -1,3 +1,4 @@
+"use client";
 import { SearchInput } from "@/components/SearchInput";
 import { ToastContainer } from "react-toastify";
 import { useSearch } from "../../hooks/useSearch";
@@ -9,11 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import useBottomScroll from "@/hooks/useBottomScroll";
 import { Controller } from "react-hook-form";
 import { flushSync } from "react-dom";
-import { useRedirectToLoginPage, useRedirectToPaymentPage } from "@/hooks";
 
 export function SearchEngine() {
-  useRedirectToLoginPage();
-  useRedirectToPaymentPage();
   const {
     text,
     setText,

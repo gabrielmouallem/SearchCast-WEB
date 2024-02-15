@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components";
 import { Avatar } from "@/components/Avatar";
 import { useAuth } from "@/hooks/useAuth";

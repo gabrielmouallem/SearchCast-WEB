@@ -120,6 +120,19 @@ const typeofSuggestions = {
   ],
 };
 
+export interface User {
+  _id: string;
+  subscription?: {
+    cancel_at: number;
+    current_period_end: number;
+    plan: "month" | "semester" | "year";
+  };
+  allow_unpaid_access: boolean;
+  created_on: string;
+  email: string;
+  name: string;
+}
+
 export interface DecodedCredentials {
   name: string;
   picture: string;
