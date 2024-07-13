@@ -1,20 +1,18 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useRegister } from "@/hooks";
-import "react-toastify/dist/ReactToastify.css";
+import { usePasswordReset } from "../hooks/usePasswordReset";
 import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useRouter, useSearchParams } from "next/navigation";
-import { usePasswordReset } from "../hooks/usePasswordReset";
+import "react-toastify/dist/ReactToastify.css";
 
-export function PasswordResetForm() {
+function PasswordResetFormContent() {
   const { loading, handleSubmit, control, errors, watch } = usePasswordReset();
 
   const router = useRouter();
-
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
@@ -118,5 +116,19 @@ export function PasswordResetForm() {
         <Footer />
       </div>
     </GoogleOAuthProvider>
+  );
+}
+
+export function PasswordResetForm() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-[100vh] w-full items-center justify-center">
+          Carregando...
+        </div>
+      }
+    >
+      <PasswordResetFormContent />
+    </Suspense>
   );
 }
