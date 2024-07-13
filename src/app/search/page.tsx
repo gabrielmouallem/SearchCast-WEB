@@ -4,8 +4,9 @@ import { SearchEngine } from "./components/SearchEngine";
 import { Providers } from "@/components/Providers";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { Suspense } from "react";
 
-export default function Search() {
+function SearchContent() {
   return (
     <Providers>
       <ToastContainer />
@@ -15,5 +16,19 @@ export default function Search() {
         <Footer />
       </div>
     </Providers>
+  );
+}
+
+export function Search() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-[100vh] w-full items-center justify-center">
+          Carregando...
+        </div>
+      }
+    >
+      <SearchContent />
+    </Suspense>
   );
 }
