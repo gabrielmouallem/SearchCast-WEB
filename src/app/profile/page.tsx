@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Profile() {
   return (
     <Providers>
-      <div className="flex flex-col min-h-screen min-w-screen bg-background">
+      <div className="min-w-screen flex min-h-screen flex-col bg-background">
         <Navbar isAuthenticated />
         <ProfileForm />
         <Footer />

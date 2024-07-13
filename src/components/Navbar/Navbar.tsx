@@ -17,7 +17,7 @@ interface NavbarProps {
 
 export function Navbar({ isAuthenticated }: NavbarProps) {
   return (
-    <nav className="fixed inset-0 w-full h-20 sm:pl-20 sm:pr-20 flex items-center bg-gradient-to-b from-black-transparent to-transparent">
+    <nav className="fixed inset-0 flex h-20 w-full items-center bg-gradient-to-b from-black-transparent to-transparent sm:pl-20 sm:pr-20">
       <a href="/">
         <Image
           className="ml-8"

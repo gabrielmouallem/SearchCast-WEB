@@ -16,7 +16,7 @@ export function GoogleLoginButton() {
   async function onSuccess(response: CredentialResponse) {
     try {
       const googleLoginData = getDecodedJWT<DecodedCredentials>(
-        response.credential ?? ""
+        response.credential ?? "",
       );
       api
         .post("/v1/google_login", {

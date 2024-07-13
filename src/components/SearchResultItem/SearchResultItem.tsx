@@ -27,9 +27,9 @@ export function SearchResultItem({
   }
 
   return (
-    <div className="max-w-736px flex flex-col gap-4">
+    <div className="flex max-w-736px flex-col gap-4">
       <div
-        className="text-xl flex cursor-pointer z-40"
+        className="z-40 flex cursor-pointer text-xl"
         onClick={handleShowHideTranscriptions}
       >
         <span className="flex-grow">
@@ -46,7 +46,7 @@ export function SearchResultItem({
           />
         </div>
       </div>
-      <div className="self-center aspect-video w-screen !max-w-736px h-full bg-gray-600">
+      <div className="aspect-video h-full w-screen !max-w-736px self-center bg-gray-600">
         <div
           className="aspect-video bg-cover"
           style={{ backgroundImage: `url(${thumbnail?.url})` }}

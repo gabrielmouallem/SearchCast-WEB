@@ -13,7 +13,7 @@ export function ContentGap({
 }: ContentGapProps) {
   return (
     <div
-      className={`flex flex-col items-center gap self-stretch ${gap} ${className}`}
+      className={`gap flex flex-col items-center self-stretch ${gap} ${className}`}
     >
       {children}
     </div>

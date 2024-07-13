@@ -5,7 +5,7 @@ export function Input({ ...props }: InputProps) {
   return (
     <input
       {...props}
-      className={`rounded-md border border-solid border-border bg-background shadow-xs py-2 px-4 overflow-hidden  font-light text-base text-ellipsis text-16 leading-24 ${className}`}
+      className={`shadow-xs text-16 leading-24 overflow-hidden text-ellipsis rounded-md border border-solid border-border bg-background px-4 py-2 text-base font-light ${className}`}
     />
   );
 }

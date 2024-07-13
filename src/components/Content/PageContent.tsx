@@ -6,10 +6,10 @@ import { ProfileCard } from "../ProfileCard/ProfileCard";
 export function PageContent() {
   const phoneNumber = "+5535998607515";
   const learnMoreMessage = encodeURIComponent(
-    "Olá, gostaria de saber mais sobre a ferramenta SearchCast."
+    "Olá, gostaria de saber mais sobre a ferramenta SearchCast.",
   );
   const questionsMessage = encodeURIComponent(
-    "Olá, gostaria de tirar dúvidas sobre a ferramenta SearchCast."
+    "Olá, gostaria de tirar dúvidas sobre a ferramenta SearchCast.",
   );
   return (
     <Content.Root>
@@ -19,23 +19,23 @@ export function PageContent() {
             <Content.Gap gap="gap-6">
               <Content.Gap gap="gap-4">
                 <RedirectButton />
-                <div className="text-text-primary text-center md:text-6xl text-3xl font-semibold leading-tight tracking-tight max-w-4xl">
+                <div className="max-w-4xl text-center text-3xl font-semibold leading-tight tracking-tight text-text-primary md:text-6xl">
                   Encontre o podcast perfeito com facilidade
                 </div>
               </Content.Gap>
               <Content.Gap>
-                <div className="text-text-secondary text-center font-inter md:text-xl text-base font-normal leading-7 max-w-3xl">
+                <div className="font-inter max-w-3xl text-center text-base font-normal leading-7 text-text-secondary md:text-xl">
                   Com o SearchCast, a busca pelo conteúdo de áudio que você
                   adora é tão fácil quanto digitar uma palavra-chave.
                 </div>
               </Content.Gap>
             </Content.Gap>
-            <div className="flex items-center flex-col md:flex-row justify-center gap-2.5">
+            <div className="flex flex-col items-center justify-center gap-2.5 md:flex-row">
               <a
                 href={`https://wa.me/${phoneNumber}?text=${learnMoreMessage}`}
                 target="_blank"
               >
-                <Button className="md:w-auto w-72 px-4 py-4 text-lg">
+                <Button className="w-72 px-4 py-4 text-lg md:w-auto">
                   Saiba mais
                 </Button>
               </a>
@@ -44,7 +44,7 @@ export function PageContent() {
                 href={`https://wa.me/${phoneNumber}?text=${questionsMessage}`}
                 target="_blank"
               >
-                <Button className="md:w-auto w-72 px-4 py-4 !bg-brand text-lg">
+                <Button className="w-72 !bg-brand px-4 py-4 text-lg md:w-auto">
                   Entre em contato
                 </Button>
               </a>
@@ -55,7 +55,7 @@ export function PageContent() {
               autoPlay
               muted
               loop
-              className="w-[98%] lg:w-[60%] rounded-3xl border-black border-2"
+              className="w-[98%] rounded-3xl border-2 border-black lg:w-[60%]"
               src="/searchcast_motion_design.mp4"
               controls
             />
@@ -63,7 +63,7 @@ export function PageContent() {
         </Content.Gap>
       </Content.Section>
       <Content.Section>
-        <div className="py-16 md:py-24 border-t border-gray-800 flex text-center justify-center items-center bg-background flex-col gap-4 md:mx-16">
+        <div className="flex flex-col items-center justify-center gap-4 border-t border-gray-800 bg-background py-16 text-center md:mx-16 md:py-24">
           <Content.Gap gap="gap-8">
             <div className="text-text-secondary">
               Os principais podcasts do Youtube
@@ -209,22 +209,22 @@ export function PageContent() {
         </div>
       </Content.Section>
       <Content.Section>
-        <div className="py-16 md:py-24 border-t border-gray-800 flex text-center justify-center items-center bg-background flex-col gap-4 md:mx-16">
+        <div className="flex flex-col items-center justify-center gap-4 border-t border-gray-800 bg-background py-16 text-center md:mx-16 md:py-24">
           <Content.Gap gap="gap-16">
             <Content.Gap gap="gap-5">
               <Content.Gap gap="gap-3">
                 <div className="text-gray-300">Diferenciais</div>
-                <div className="text-center font-inter text-4xl font-semibold leading-tight tracking-tight">
+                <div className="font-inter text-center text-4xl font-semibold leading-tight tracking-tight">
                   Por que SearchCast?
                 </div>
               </Content.Gap>
-              <div className="text-center text-text-secondary font-inter text-xl font-normal leading-7 max-w-3xl">
+              <div className="font-inter max-w-3xl text-center text-xl font-normal leading-7 text-text-secondary">
                 Nossa tecnologia de busca inovadora vasculha o universo dos
                 podcasts para trazer a você exatamente o que você está
                 procurando.
               </div>
             </Content.Gap>
-            <div className="flex gap-6 items-center justify-center flex-wrap">
+            <div className="flex flex-wrap items-center justify-center gap-6">
               <Card
                 iconSrc="/chat_icon.svg"
                 title="Sugestões Personalizadas"
@@ -247,9 +247,9 @@ export function PageContent() {
       <Content.Section>
         <Content.Gap
           gap="gap-8"
-          className="py-24 bg-dark-gray flex -mx-8 items-center content-center text-center"
+          className="-mx-8 flex content-center items-center bg-dark-gray py-24 text-center"
         >
-          <div className="text-5xl max-w-6xl font-normal leading-15 tracking-tight md:ml-8">
+          <div className="leading-15 max-w-6xl text-5xl font-normal tracking-tight md:ml-8">
             “A plataforma me ajudou a encontrar vários podcast sobre os assuntos
             desejados”
           </div>
@@ -261,7 +261,7 @@ export function PageContent() {
         </Content.Gap>
       </Content.Section>
       <Content.Section>
-        <div className="my-16 md:py-8 md:px-8 px-4 py-8 rounded-2xl bg-dark-gray flex text-center justify-center items-center flex-col gap-4">
+        <div className="my-16 flex flex-col items-center justify-center gap-4 rounded-2xl bg-dark-gray px-4 py-8 text-center md:px-8 md:py-8">
           <Content.Gap gap="gap-8">
             <Image
               src="/avatar_group_icon.svg"
@@ -272,10 +272,10 @@ export function PageContent() {
             />
             <div>
               <Content.Gap gap="gap-2">
-                <div className="font-semibold text-xl leading-7">
+                <div className="text-xl font-semibold leading-7">
                   Ficou com dúvidas?
                 </div>
-                <div className="text-text-secondary text-lg max-w-3xl">
+                <div className="max-w-3xl text-lg text-text-secondary">
                   Nossa equipe de suporte está pronta para ajudar. Entre em
                   contato conosco por e-mail, Instagram ou WhatsApp.
                 </div>
@@ -291,20 +291,20 @@ export function PageContent() {
         </div>
       </Content.Section>
       <Content.Section>
-        <div className="py-16 md:py-24 border-t border-gray-800 flex text-center justify-center items-center bg-background flex-col gap-4 md:mx-16">
+        <div className="flex flex-col items-center justify-center gap-4 border-t border-gray-800 bg-background py-16 text-center md:mx-16 md:py-24">
           <Content.Gap gap="gap-16">
             <Content.Gap gap="gap-5">
               <Content.Gap gap="gap-3">
                 <div className="text-gray-300">Entre em contato</div>
-                <div className="text-center font-inter text-4xl font-semibold leading-tight tracking-tight">
+                <div className="font-inter text-center text-4xl font-semibold leading-tight tracking-tight">
                   Entre em contato conosco
                 </div>
               </Content.Gap>
-              <div className="text-center text-text-secondary font-inter text-xl font-normal leading-7 max-w-3xl">
+              <div className="font-inter max-w-3xl text-center text-xl font-normal leading-7 text-text-secondary">
                 Nosso time está aqui para atende-lo.
               </div>
             </Content.Gap>
-            <div className="flex gap-6 items-center justify-center flex-wrap">
+            <div className="flex flex-wrap items-center justify-center gap-6">
               <Card
                 iconSrc="/email_icon.svg"
                 title="Email"

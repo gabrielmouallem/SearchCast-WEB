@@ -23,12 +23,12 @@ export function TranscriptionItem({
   const timeSuffix = getFormatTime(transcriptionStart);
   const videoLink = `${watchUrl}&t=${timeSuffix}`;
   return (
-    <div className="border-t border-b border-border flex flex-col items-center justify-center text-center py-3 gap-4">
+    <div className="flex flex-col items-center justify-center gap-4 border-b border-t border-border py-3 text-center">
       {/* eslint-disable-next-line react/no-unescaped-entities */}
       <div>"(...) {getHighlightText(searchText, transcriptionText)} (...)"</div>
       {!isFetched && (
         <Button
-          className="scale-[65%] -my-[10px]"
+          className="-my-[10px] scale-[65%]"
           disabled={isLoading}
           onClick={() => refetch()}
         >
