@@ -1,12 +1,24 @@
-"use client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { QueryClient } from "@tanstack/react-query";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 
-const client = new QueryClient();
+const queryClient = new QueryClient();
+
+const persister = createSyncStoragePersister({
+  storage: window.localStorage,
+});
 
 interface ProvidersProps {
   children: React.ReactNode;
 }
 
 export function Providers({ children }: ProvidersProps) {
-  return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
+  return (
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{ persister }}
+    >
+      {children}
+    </PersistQueryClientProvider>
+  );
 }
