@@ -53,7 +53,7 @@ export function useSearchQuery(text: string) {
   }
 
   return useInfiniteQuery({
-    queryKey: [`search`],
+    queryKey: [`search`, text],
     queryFn: ({ pageParam, signal }) => fetch({ text, pageParam, signal }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
@@ -64,11 +64,11 @@ export function useSearchQuery(text: string) {
       const nextPage = nextPageCondition ? undefined : lastPage?.data?.page + 1;
       return nextPage;
     },
-    enabled: false,
+    enabled: !!text?.length,
     refetchOnWindowFocus: false,
     refetchInterval: Infinity,
     refetchOnMount: false,
-    staleTime: Infinity,
+    staleTime: 1 * 1000 * 60 * 60, // 1 hour
     placeholderData: keepPreviousData,
   });
 }

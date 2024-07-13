@@ -9,13 +9,13 @@ import { SearchResultItem, SearchResultItemPlaceholder } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
 import useBottomScroll from "@/hooks/useBottomScroll";
 import { Controller } from "react-hook-form";
-import { flushSync } from "react-dom";
 
 export function SearchEngine() {
   const {
     text,
-    setText,
-    refetch,
+    textQuery,
+    handleTextChange,
+    handleSuggestionClick,
     control,
     data,
     isLoading,
@@ -45,17 +45,6 @@ export function SearchEngine() {
   const debouncedTextClases = hasSubmittedSearch
     ? "justify-start bg-tight-gradient"
     : "justify-center";
-
-  function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setText(e.target.value);
-  }
-
-  function handleSuggestionClick(value: string) {
-    flushSync(() => {
-      setText(value);
-    });
-    refetch();
-  }
 
   const lastUpdate = getLastUpdate();
   const resultCount = data?.pages?.[0]?.data?.count;
@@ -108,7 +97,7 @@ export function SearchEngine() {
                     return (
                       <SearchResultItem
                         key={props._id}
-                        searchText={text}
+                        searchText={textQuery}
                         {...props}
                       />
                     );

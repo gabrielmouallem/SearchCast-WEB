@@ -1,15 +1,18 @@
-import { useDebounce } from "@uidotdev/usehooks";
 import { useState } from "react";
 import { useSearchQuery } from "./useSearchQuery";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useQueryState } from "next-usequerystate";
+import { flushSync } from "react-dom";
+import { executeIfExists } from "@/utils";
 
 interface FormValues {
   text: string;
 }
 
 export function useSearch() {
-  const [text, setText] = useState("");
-  const { handleSubmit, control } = useForm<FormValues>();
+  const [textQuery, setTextQuery] = useQueryState("text", { defaultValue: "" });
+  const [text, setText] = useState(textQuery);
+  const { handleSubmit, control, setValue } = useForm<FormValues>();
 
   const {
     isError,
@@ -18,16 +21,38 @@ export function useSearch() {
     isFetchingNextPage,
     data,
     fetchNextPage,
-    refetch,
-  } = useSearchQuery(text);
+  } = useSearchQuery(textQuery);
 
-  const onSubmit: SubmitHandler<FormValues> = async () => {
-    refetch();
+  function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
+    executeIfExists(e.target.value, (value) => {
+      setValue("text", value);
+      setText(value);
+    });
+  }
+
+  function handleSuggestionClick(value: string) {
+    executeIfExists(value, (validValue) => {
+      flushSync(() => {
+        setTextQuery(validValue);
+        setValue("text", validValue);
+        setText(validValue);
+      });
+    });
+  }
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    executeIfExists(data.text, (validText) => {
+      flushSync(() => {
+        setTextQuery(validText);
+      });
+    });
   };
 
   return {
     text,
-    setText,
+    textQuery,
+    handleTextChange,
+    handleSuggestionClick,
     isError,
     isLoading,
     isFetching,
@@ -36,6 +61,5 @@ export function useSearch() {
     fetchNextPage,
     control,
     handleSubmit: handleSubmit(onSubmit),
-    refetch,
   };
 }
