@@ -14,9 +14,9 @@ export function ProfilePopover() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button>
+        <div>
           <Avatar name={name} />
-        </button>
+        </div>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
