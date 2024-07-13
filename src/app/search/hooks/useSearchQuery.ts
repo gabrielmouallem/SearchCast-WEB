@@ -32,7 +32,7 @@ export function useSearchQuery(text: string) {
           router.push("/login");
         }
         if (typeof err?.response?.status === "number") {
-          toast.error(
+          toast(
             "Erro ao realizar pesquisa. Tente procurar por algo mais específico ou tente novamente.",
             {
               position: "top-right",
@@ -43,7 +43,8 @@ export function useSearchQuery(text: string) {
               draggable: true,
               progress: undefined,
               theme: "dark",
-            }
+              type: "error",
+            },
           );
         }
         console.error(err); // Re-throw the error to indicate that the query has failed

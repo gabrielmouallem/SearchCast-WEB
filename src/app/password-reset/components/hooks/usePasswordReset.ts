@@ -53,7 +53,7 @@ export function usePasswordReset() {
           router.push("/login");
         }, 4000);
       });
-      toast.info("Senha alterada com sucesso!", {
+      toast("Senha alterada com sucesso!", {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -62,10 +62,11 @@ export function usePasswordReset() {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "info",
       });
       // Handle successful login
     } catch (error) {
-      toast.error("Erro. A redefinição de senha talvez tenha expirado.", {
+      toast("Erro. A redefinição de senha talvez tenha expirado.", {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -74,6 +75,7 @@ export function usePasswordReset() {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "error",
       });
       // Handle login error
       console.error(error);
