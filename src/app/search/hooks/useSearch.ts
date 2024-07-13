@@ -24,10 +24,8 @@ export function useSearch() {
   } = useSearchQuery(textQuery);
 
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
-    executeIfExists(e.target.value, (value) => {
-      setValue("text", value);
-      setText(value);
-    });
+    setValue("text", e.target.value);
+    setText(e.target.value);
   }
 
   function handleSuggestionClick(value: string) {
