@@ -1,6 +1,6 @@
 export function getHighlightText(
   searchText: string,
-  text: string
+  text: string,
 ): React.ReactNode {
   if (!searchText) {
     return <>{text}</>;
@@ -20,14 +20,14 @@ export function getHighlightText(
       {parts.map((part, i) =>
         // Check if the part matches any of the search words
         searchWords.some(
-          (word) => part.toLowerCase() === word.toLowerCase()
+          (word) => part.toLowerCase() === word.toLowerCase(),
         ) ? (
           <span key={i} style={{ backgroundColor: "#333741" }}>
             {part}
           </span>
         ) : (
           <span key={i}>{part}</span>
-        )
+        ),
       )}
     </>
   );

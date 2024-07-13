@@ -15,17 +15,17 @@ export function LoginForm() {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
-      <div className="flex flex-col min-h-screen">
+      <div className="flex min-h-screen flex-col">
         <Navbar />
-        <div className="flex-grow flex justify-center items-center">
+        <div className="flex flex-grow items-center justify-center">
           <div className="flex items-center justify-center">
-            <div className="flex flex-col font-semibold items-center justify-center gap-8 w-full">
+            <div className="flex w-full flex-col items-center justify-center gap-8 font-semibold">
               <div className="text-center text-3xl">Faça o seu login</div>
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center justify-center gap-3">
-                  <div className="text-3xl font-semibold leading-9 flex flex-col items-center justify-center gap-5">
+                  <div className="flex flex-col items-center justify-center gap-5 text-3xl font-semibold leading-9">
                     <div>
-                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
+                      <div className="mb-[5px] text-sm font-medium leading-5 text-gray-300">
                         Email
                       </div>
                       <Controller
@@ -42,7 +42,7 @@ export function LoginForm() {
                       />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
+                      <div className="mb-[5px] text-sm font-medium leading-5 text-gray-300">
                         Senha
                       </div>
                       <Controller
@@ -59,7 +59,7 @@ export function LoginForm() {
                       />
                     </div>
                   </div>
-                  <div className="w-360px flex items-center justify-between text-sm font-normal leading-5">
+                  <div className="flex w-360px items-center justify-between text-sm font-normal leading-5">
                     <div>
                       <label className="inline-flex items-center">
                         <input type="checkbox" />
@@ -74,7 +74,7 @@ export function LoginForm() {
                   </div>
                   <Button
                     type="submit"
-                    className={`!bg-brand w-360px ${
+                    className={`w-360px !bg-brand ${
                       loading ? "opacity-50" : ""
                     }`}
                     disabled={loading}

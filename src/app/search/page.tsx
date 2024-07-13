@@ -9,7 +9,7 @@ export default function Search() {
   return (
     <Providers>
       <ToastContainer />
-      <div className="flex flex-col min-h-screen min-w-screen !bg-default-gradient">
+      <div className="min-w-screen flex min-h-screen flex-col !bg-default-gradient">
         <Navbar isAuthenticated />
         <SearchEngine />
         <Footer />

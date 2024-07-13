@@ -29,7 +29,7 @@ export function SearchEngine() {
     return (
       (data?.pages ?? []).reduce(
         (prev, group) => prev + (group?.data?.results?.length ?? 0),
-        0
+        0,
       ) === data?.pages?.[0]?.data?.count
     );
   }, [data?.pages]);
@@ -66,7 +66,7 @@ export function SearchEngine() {
     <>
       <ToastContainer />
       <div
-        className={`flex-grow flex flex-col items-center gap-8 ${debouncedTextClases} mb-20 pt-20`}
+        className={`flex flex-grow flex-col items-center gap-8 ${debouncedTextClases} mb-20 pt-20`}
       >
         <Image src="/logo.svg" width={48} height={29.5} alt="SearchCast Logo" />
         {hasSubmittedSearch && (
@@ -92,12 +92,12 @@ export function SearchEngine() {
           />
         </form>
         {!!(showResultItems && resultCount) && (
-          <div className="text-text-secondary -my-3">
+          <div className="-my-3 text-text-secondary">
             {resultCount} Resultados
           </div>
         )}
         {!showResultItems && (
-          <div className="text-text-secondary h-[20px] w-[300px] animate-pulse bg-gray-300 rounded -my-3" />
+          <div className="-my-3 h-[20px] w-[300px] animate-pulse rounded bg-gray-300 text-text-secondary" />
         )}
         <div className="flex flex-col items-center gap-16">
           {showResultItems &&

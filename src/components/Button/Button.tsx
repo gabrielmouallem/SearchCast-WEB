@@ -22,7 +22,7 @@ export function Button({
   return (
     <Component
       {...(props as any)}
-      className={`px-5 py-3 bg-dark-gray text-primary text-center rounded-lg border border-border flex items-center justify-center ${className} ${
+      className={`text-primary flex items-center justify-center rounded-lg border border-border bg-dark-gray px-5 py-3 text-center ${className} ${
         (props as any)?.disabled ? "opacity-50" : ""
       }`}
     >

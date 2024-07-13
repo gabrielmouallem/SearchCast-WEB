@@ -8,7 +8,7 @@ interface ProfileCardProps {
 
 export function ProfileCard({ profileSrc, name, role }: ProfileCardProps) {
   return (
-    <div className="flex flex-col gap-1.5 items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-1.5">
       <Image
         className="rounded-full"
         src={profileSrc}

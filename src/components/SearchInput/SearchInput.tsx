@@ -19,33 +19,33 @@ export function SearchInput({ onSuggestionClick, ...props }: SearchInputProps) {
 
   const suggestions =
     data?.suggestionGroups?.[0]?.searchSuggestions.map(
-      (el) => el.displayText
+      (el) => el.displayText,
     ) ?? [];
 
   return (
     <div className="relative">
       <Input
         {...props}
-        className="pl-3 pr-10 py-2 rounded-md w-360px md:w-500px placeholder-text-primary"
+        className="w-360px rounded-md py-2 pl-3 pr-10 placeholder-text-primary md:w-500px"
         placeholder="Pesquise seu podcast"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       />
       <button
-        className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer z-50 pl-8"
+        className="absolute inset-y-0 right-0 z-50 flex cursor-pointer items-center pl-8 pr-3"
         type="submit"
       >
         <Image src="/search_icon.svg" alt="Search" width={24} height={24} />
       </button>
       {isFocused && suggestions.length > 0 && (
-        <ul className="py-3 absolute z-50 mt-2 w-360px rounded-md md:w-500px text-text-primary bg-background border border-solid border-border">
+        <ul className="absolute z-50 mt-2 w-360px rounded-md border border-solid border-border bg-background py-3 text-text-primary md:w-500px">
           {suggestions.map((suggestion, index) => (
             <li
               key={index}
               onMouseDown={() =>
                 onSuggestionClick && onSuggestionClick(suggestion)
               }
-              className={`px-3 py-2 cursor-pointer border-b hover:bg-slate-900 ${
+              className={`cursor-pointer border-b px-3 py-2 hover:bg-slate-900 ${
                 suggestions.length - 1 !== index
                   ? "border-border"
                   : "border-none"
