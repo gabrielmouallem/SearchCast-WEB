@@ -1,3 +1,4 @@
+"use client";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { QueryClient } from "@tanstack/react-query";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
