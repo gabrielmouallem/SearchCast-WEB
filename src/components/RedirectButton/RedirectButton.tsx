@@ -37,14 +37,14 @@ const dotImageProps: React.ComponentProps<typeof Image> = {
 export function RedirectButton() {
   return (
     <a href="/search">
-      <button className="bg-background pr-2 p-0.5 rounded-lg border border-border flex gap-2.5 items-center justify-center">
-        <div className="flex items-center justify-center h-6 gap-1 rounded-md border border-border p-1.5 text-gray-300 text-sm font-medium">
+      <button className="flex items-center justify-center gap-2.5 rounded-lg border border-border bg-background p-0.5 pr-2">
+        <div className="flex h-6 items-center justify-center gap-1 rounded-md border border-border p-1.5 text-sm font-medium text-gray-300">
           <motion.div {...dotMotionProps}>
             <Image {...dotImageProps} alt="Ponto" />
           </motion.div>
           Nova função
         </div>
-        <div className="flex items-center justify-center text-gray-300 text-sm font-medium gap-1">
+        <div className="flex items-center justify-center gap-1 text-sm font-medium text-gray-300">
           Sugestões de busca
           <Image {...arrowImageProps} alt="Seta para direita" />
         </div>

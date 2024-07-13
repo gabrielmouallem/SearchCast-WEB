@@ -1,24 +1,24 @@
 export function SearchResultItemPlaceholder() {
   return (
-    <div className="!max-w-736px mx-auto flex flex-col gap-4 animate-pulse">
+    <div className="mx-auto flex !max-w-736px animate-pulse flex-col gap-4">
       {/* Placeholder for the number of moments */}
-      <div className="text-xl h-6 bg-gray-300 rounded"></div>
+      <div className="h-6 rounded bg-gray-300 text-xl"></div>
 
-      <div className="self-center aspect-video w-screen !max-w-736px h-full">
+      <div className="aspect-video h-full w-screen !max-w-736px self-center">
         {/* Placeholder for the thumbnail */}
-        <div className="bg-gray-300 rounded aspect-video w-screen !max-w-736px"></div>
+        <div className="aspect-video w-screen !max-w-736px rounded bg-gray-300"></div>
       </div>
 
       <div className="text-center">
         {/* Placeholder for the title */}
-        <div className="h-6 bg-gray-300 rounded mb-2"></div>
+        <div className="mb-2 h-6 rounded bg-gray-300"></div>
 
         {/* Placeholder for the publish date and view count */}
-        <div className="h-4 bg-gray-300 rounded"></div>
+        <div className="h-4 rounded bg-gray-300"></div>
       </div>
 
       <div
-        className="bg-gray-300 rounded self-center"
+        className="self-center rounded bg-gray-300"
         style={{ width: "295px", height: "50px" }}
       ></div>
     </div>

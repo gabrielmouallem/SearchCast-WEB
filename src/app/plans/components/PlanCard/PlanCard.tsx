@@ -53,7 +53,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
 
   const cancellsAt = new Date((user?.subscription?.cancel_at ?? 0) * 1000);
   const expiresAt = new Date(
-    (user?.subscription?.current_period_end ?? 0) * 1000
+    (user?.subscription?.current_period_end ?? 0) * 1000,
   );
 
   const disabled = !isActive && !!user?.subscription && hasNotExpired;
@@ -69,7 +69,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
       setTimeout(() => {
         onCancel();
       }, 1000);
-      toast.info("Plano cancelado com sucesso!", {
+      toast("Plano cancelado com sucesso!", {
         position: "top-center",
         autoClose: 8000,
         hideProgressBar: false,
@@ -78,9 +78,10 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "info",
       });
     } catch {
-      toast.error("Erro ao cancelar plano. Por favor tente novamente!", {
+      toast("Erro ao cancelar plano. Por favor tente novamente!", {
         position: "top-center",
         autoClose: 8000,
         hideProgressBar: false,
@@ -89,6 +90,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "error",
       });
     }
   };
@@ -99,7 +101,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
       customer_email: user?.email,
     });
     const stripePromise = loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     );
 
     const stripe = await stripePromise;
@@ -114,30 +116,30 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
 
   return (
     <div
-      className={`relative w-[250px] h-[280px] p-5 flex items-center justify-start flex-col gap-3 bg-dark-gray border border-gray-800 rounded-xl ${
+      className={`relative flex h-[280px] w-[250px] flex-col items-center justify-start gap-3 rounded-xl border border-gray-800 bg-dark-gray p-5 ${
         disabled ? "opacity-50" : ""
       }`}
     >
       {isActive && (
-        <div className="w-[100px] h-[20px] absolute p-2 rounded bg-green-600 top-[-10px] left-[80px] text-sm flex text-center justify-center items-center">
+        <div className="absolute left-[80px] top-[-10px] flex h-[20px] w-[100px] items-center justify-center rounded bg-green-600 p-2 text-center text-sm">
           Plano Atual
         </div>
       )}
-      <div className="font-bold text-4xl">
+      <div className="text-4xl font-bold">
         {subscriptionSwitchCase[subscriptionType].text}
       </div>
-      <div className="w-full h-[1px] bg-gray-800" />
+      <div className="h-[1px] w-full bg-gray-800" />
       <span>
-        <span className="font-bold text-4xl">
+        <span className="text-4xl font-bold">
           {subscriptionSwitchCase[subscriptionType].value}
         </span>
-        <span className="font-light text-sm">
+        <span className="text-sm font-light">
           {" "}
           {subscriptionSwitchCase[subscriptionType].recurrency}
         </span>
       </span>
       {!!(subscriptionType !== "month") && (
-        <span className="font-light text-green-600 text-sm">
+        <span className="text-sm font-light text-green-600">
           {subscriptionSwitchCase[subscriptionType].discount}
         </span>
       )}
@@ -147,12 +149,12 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
         </span>
       )}
       {isExpirationPending && (
-        <span className="font-light text-red-500 text-xs">
+        <span className="text-xs font-light text-red-500">
           Renova em: {expiresAt.toLocaleDateString()}
         </span>
       )}
       {isCancellationPending && (
-        <span className="font-light text-red-500 text-xs">
+        <span className="text-xs font-light text-red-500">
           Encerra em: {cancellsAt.toLocaleDateString()}
         </span>
       )}
@@ -162,8 +164,8 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
             ? isCancellationPending
               ? "!bg-brand"
               : isExpirationPending
-              ? "!bg-red-800"
-              : ""
+                ? "!bg-red-800"
+                : ""
             : "!bg-brand"
         }`}
         disabled={buttonDisabled}
@@ -172,8 +174,8 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
             ? isCancellationPending
               ? handlePayment
               : isExpirationPending
-              ? handlePaymentCancellation // You can replace this with the appropriate handler for expiration if needed
-              : handlePayment
+                ? handlePaymentCancellation // You can replace this with the appropriate handler for expiration if needed
+                : handlePayment
             : handlePayment
         }
       >
@@ -181,8 +183,8 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
           ? isCancellationPending
             ? "ASSINAR"
             : isExpirationPending
-            ? "CANCELAR"
-            : "ASSINAR"
+              ? "CANCELAR"
+              : "ASSINAR"
           : "ASSINAR"}
       </Button>
     </div>

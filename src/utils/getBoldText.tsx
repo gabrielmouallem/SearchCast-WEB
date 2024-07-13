@@ -17,14 +17,14 @@ export function getBoldText(searchText: string, text: string): React.ReactNode {
       {parts.map((part, i) =>
         // Check if the part matches any of the search words
         searchWords.some(
-          (word) => part.toLowerCase() === word.toLowerCase()
+          (word) => part.toLowerCase() === word.toLowerCase(),
         ) ? (
           <span key={i} style={{ fontWeight: "bold" }}>
             {part}
           </span>
         ) : (
           <span key={i}>{part}</span>
-        )
+        ),
       )}
     </>
   );

@@ -14,21 +14,21 @@ export function ForgotPasswordForm() {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
-      <div className="flex flex-col min-h-screen">
+      <div className="flex min-h-screen flex-col">
         <Navbar />
-        <div className="flex-grow flex justify-center items-center">
+        <div className="flex flex-grow items-center justify-center">
           <div className="flex items-center justify-center">
-            <div className="flex flex-col font-semibold items-start justify-center gap-8 w-full">
+            <div className="flex w-full flex-col items-start justify-center gap-8 font-semibold">
               <div className="text-3xl">Mudar Senha</div>
-              <div className="font-light text-base w-360px bg-background -my-3">
+              <div className="-my-3 w-360px bg-background text-base font-light">
                 Inclua o endereço de email associado à sua conta e nós
                 enviaremos um email com instruções para redefinir sua senha.
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center justify-center gap-3">
-                  <div className="text-3xl font-semibold leading-9 flex flex-col items-center justify-center gap-5">
+                  <div className="flex flex-col items-center justify-center gap-5 text-3xl font-semibold leading-9">
                     <div>
-                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
+                      <div className="mb-[5px] text-sm font-medium leading-5 text-gray-300">
                         Email
                       </div>
                       <Controller
@@ -51,7 +51,7 @@ export function ForgotPasswordForm() {
                         )}
                       />
                       {errors.email && (
-                        <div className="text-xs text-red-600 font-light">
+                        <div className="text-xs font-light text-red-600">
                           {errors.email.message}
                         </div>
                       )}
@@ -59,7 +59,7 @@ export function ForgotPasswordForm() {
                   </div>
                   <Button
                     type="submit"
-                    className={`!bg-brand w-360px ${
+                    className={`w-360px !bg-brand ${
                       loading ? "opacity-50" : ""
                     }`}
                     disabled={loading}

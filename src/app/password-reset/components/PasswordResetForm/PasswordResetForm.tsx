@@ -1,20 +1,18 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { Navbar, Footer } from "@/components"; // Assuming these components exist
-import { useRegister } from "@/hooks";
-import "react-toastify/dist/ReactToastify.css";
+import { usePasswordReset } from "../hooks/usePasswordReset";
 import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useRouter, useSearchParams } from "next/navigation";
-import { usePasswordReset } from "../hooks/usePasswordReset";
+import "react-toastify/dist/ReactToastify.css";
 
-export function PasswordResetForm() {
+function PasswordResetFormContent() {
   const { loading, handleSubmit, control, errors, watch } = usePasswordReset();
 
   const router = useRouter();
-
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
@@ -27,17 +25,17 @@ export function PasswordResetForm() {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
-      <div className="flex flex-col min-h-screen">
+      <div className="flex min-h-screen flex-col">
         <Navbar />
-        <div className="flex-grow flex justify-center items-center pt-28 pb-20 md:pt-0 md:pb-0">
+        <div className="flex flex-grow items-center justify-center pb-20 pt-28 md:pb-0 md:pt-0">
           <div className="flex items-center justify-center">
-            <div className="flex flex-col font-semibold items-center justify-center gap-8 w-full">
+            <div className="flex w-full flex-col items-center justify-center gap-8 font-semibold">
               <div className="text-center text-3xl">Redefinir Senha</div>
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center justify-center gap-3">
-                  <div className="text-3xl font-semibold leading-9 flex flex-col items-center justify-center gap-5">
+                  <div className="flex flex-col items-center justify-center gap-5 text-3xl font-semibold leading-9">
                     <div>
-                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
+                      <div className="mb-[5px] text-sm font-medium leading-5 text-gray-300">
                         Nova senha
                       </div>
                       <Controller
@@ -67,13 +65,13 @@ export function PasswordResetForm() {
                         )}
                       />
                       {errors.password && (
-                        <div className="text-xs text-red-600 font-light">
+                        <div className="text-xs font-light text-red-600">
                           {errors.password.message}
                         </div>
                       )}
                     </div>
                     <div>
-                      <div className="text-sm text-gray-300 font-medium leading-5 mb-[5px]">
+                      <div className="mb-[5px] text-sm font-medium leading-5 text-gray-300">
                         Confirmar nova senha
                       </div>
                       <Controller
@@ -95,7 +93,7 @@ export function PasswordResetForm() {
                         )}
                       />
                       {errors.confirmPassword && (
-                        <div className="text-xs text-red-600 font-light">
+                        <div className="text-xs font-light text-red-600">
                           {errors.confirmPassword.message}
                         </div>
                       )}
@@ -103,7 +101,7 @@ export function PasswordResetForm() {
                   </div>
                   <Button
                     type="submit"
-                    className={`!bg-brand w-360px ${
+                    className={`w-360px !bg-brand ${
                       loading ? "opacity-50" : ""
                     }`}
                     disabled={loading}
@@ -118,5 +116,19 @@ export function PasswordResetForm() {
         <Footer />
       </div>
     </GoogleOAuthProvider>
+  );
+}
+
+export function PasswordResetForm() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-[100vh] w-full items-center justify-center">
+          Carregando...
+        </div>
+      }
+    >
+      <PasswordResetFormContent />
+    </Suspense>
   );
 }

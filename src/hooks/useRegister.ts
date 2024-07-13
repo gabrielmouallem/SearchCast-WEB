@@ -57,7 +57,7 @@ export function useRegister() {
     try {
       // Validate confirm email and confirm password
       if (data.email !== data.confirmEmail) {
-        toast.error("Os emails não coincidem.", {
+        toast("Os emails não coincidem.", {
           position: "top-right",
           autoClose: 8000,
           hideProgressBar: false,
@@ -66,12 +66,13 @@ export function useRegister() {
           draggable: true,
           progress: undefined,
           theme: "dark",
+          type: "error",
         });
         return;
       }
 
       if (data.password !== data.confirmPassword) {
-        toast.error("As senhas não coincidem.", {
+        toast("As senhas não coincidem.", {
           position: "top-right",
           autoClose: 8000,
           hideProgressBar: false,
@@ -80,6 +81,7 @@ export function useRegister() {
           draggable: true,
           progress: undefined,
           theme: "dark",
+          type: "error",
         });
         return;
       }
@@ -87,7 +89,7 @@ export function useRegister() {
       await handleLogin(data).then(() => {
         router.push("/search");
       });
-      toast.info("Cadastrado com sucesso!", {
+      toast("Cadastrado com sucesso!", {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -96,9 +98,10 @@ export function useRegister() {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "info",
       });
     } catch (error) {
-      toast.error("Erro ao cadastrar. Por favor tente novamente.", {
+      toast("Erro ao cadastrar. Por favor tente novamente.", {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -107,6 +110,7 @@ export function useRegister() {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "error",
       });
       console.error(error);
     }

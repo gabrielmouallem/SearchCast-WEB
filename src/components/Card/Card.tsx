@@ -8,7 +8,7 @@ interface CardProps {
 
 export function Card({ iconSrc, title, description }: CardProps) {
   return (
-    <div className="w-96 flex flex-col items-center content-center text-center gap-5">
+    <div className="flex w-96 flex-col content-center items-center gap-5 text-center">
       <Image
         src={iconSrc}
         width={48}
@@ -16,9 +16,9 @@ export function Card({ iconSrc, title, description }: CardProps) {
         placeholder="empty"
         alt="Card Icon"
       />
-      <div className="flex flex-col items-center content-center text-center gap-2">
+      <div className="flex flex-col content-center items-center gap-2 text-center">
         <div className="text-xl font-semibold leading-7">{title}</div>
-        <div className="text-text-secondary text-base font-normal leading-6">
+        <div className="text-base font-normal leading-6 text-text-secondary">
           {description}
         </div>
       </div>

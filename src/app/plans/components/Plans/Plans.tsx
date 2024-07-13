@@ -11,14 +11,14 @@ export function Plans() {
     <>
       <ToastContainer />
       <Navbar isAuthenticated />
-      <div className="w-screen h-screen flex flex-col mt-40 mb-20 md:mb-0 md:mt-0 gap-8 items-center justify-center px-4">
-        <div className="text-4xl font-bold text-center">
+      <div className="mb-20 mt-40 flex h-screen w-screen flex-col items-center justify-center gap-8 px-4 md:mb-0 md:mt-0">
+        <div className="text-center text-4xl font-bold">
           Selecione um Plano:
         </div>
-        <div className="font-light text-lg text-center">
+        <div className="text-center text-lg font-light">
           Para poder utilizar a nossa plataforma selecione um dos planos abaixo.
         </div>
-        <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
           {!isLoading && (
             <>
               <PlanCard subscriptionType="month" onCancel={refetch} />
@@ -28,9 +28,9 @@ export function Plans() {
           )}
           {isLoading && (
             <>
-              <div className="animate-pulse relative w-[250px] h-[280px] bg-dark-gray border border-gray-800 rounded-xl" />
-              <div className="animate-pulse relative w-[250px] h-[280px] bg-dark-gray border border-gray-800 rounded-xl" />
-              <div className="animate-pulse relative w-[250px] h-[280px] bg-dark-gray border border-gray-800 rounded-xl" />
+              <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />
+              <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />
+              <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />
             </>
           )}
         </div>

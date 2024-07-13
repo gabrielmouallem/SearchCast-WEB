@@ -10,8 +10,8 @@ export function Avatar({ name, size = "default" }: AvatarProps) {
 
   return (
     <button
-      className={`flex items-center justify-center rounded-full w-[40px] h-[40px] bg-gray-500 text-gray-800 text-lg font-semibold ${
-        isLarge ? "scale-[2] m-5 pointer-events-none" : ""
+      className={`flex h-[40px] w-[40px] items-center justify-center rounded-full bg-gray-500 text-lg font-semibold text-gray-800 ${
+        isLarge ? "pointer-events-none m-5 scale-[2]" : ""
       }`}
     >
       {firstNameLetter}
