@@ -19,7 +19,7 @@ function SearchContent() {
   );
 }
 
-export function Search() {
+export default function Search() {
   return (
     <Suspense
       fallback={
