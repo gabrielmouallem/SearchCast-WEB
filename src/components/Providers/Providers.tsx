@@ -1,6 +1,6 @@
 "use client";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 
 const queryClient = new QueryClient();
@@ -14,16 +14,13 @@ const createPersister = () => {
   return null;
 };
 
-interface ProvidersProps {
-  children: React.ReactNode;
-}
-
-export function Providers({ children }: ProvidersProps) {
+const QueryProvider = ({ children }: ProvidersProps) => {
   const persister = createPersister();
 
   if (!persister) {
-    // Optionally, you can render a fallback UI or simply the children without persistence
-    return <>{children}</>;
+    return (
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    );
   }
 
   return (
@@ -34,4 +31,12 @@ export function Providers({ children }: ProvidersProps) {
       {children}
     </PersistQueryClientProvider>
   );
+};
+
+interface ProvidersProps {
+  children: React.ReactNode;
+}
+
+export function Providers({ children }: ProvidersProps) {
+  return <QueryProvider>{children}</QueryProvider>;
 }
