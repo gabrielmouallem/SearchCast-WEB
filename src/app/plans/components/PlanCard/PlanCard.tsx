@@ -69,7 +69,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
       setTimeout(() => {
         onCancel();
       }, 1000);
-      toast.info("Plano cancelado com sucesso!", {
+      toast("Plano cancelado com sucesso!", {
         position: "top-center",
         autoClose: 8000,
         hideProgressBar: false,
@@ -78,9 +78,10 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "info",
       });
     } catch {
-      toast.error("Erro ao cancelar plano. Por favor tente novamente!", {
+      toast("Erro ao cancelar plano. Por favor tente novamente!", {
         position: "top-center",
         autoClose: 8000,
         hideProgressBar: false,
@@ -89,6 +90,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "error",
       });
     }
   };

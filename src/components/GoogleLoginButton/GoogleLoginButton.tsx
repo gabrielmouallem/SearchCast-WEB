@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import React from "react";
-import axios from "axios";
 import api from "@/services/ApiService/ApiService";
 import { getDecodedJWT } from "@/utils";
 import { DecodedCredentials } from "@/types";
@@ -29,7 +28,7 @@ export function GoogleLoginButton() {
         })
         .then(({ data }) => {
           cookies.updateCookie(data.access_token, 1);
-          toast.info("Logado com sucesso!", {
+          toast("Logado com sucesso!", {
             position: "top-right",
             autoClose: 8000,
             hideProgressBar: false,
@@ -38,12 +37,13 @@ export function GoogleLoginButton() {
             draggable: true,
             progress: undefined,
             theme: "dark",
+            type: "info",
           });
           router.push("/search");
           return data;
         });
     } catch (err) {
-      toast.error("Erro com o Login Google. Por favor tente novamente.", {
+      toast("Erro com o Login Google. Por favor tente novamente.", {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -52,12 +52,13 @@ export function GoogleLoginButton() {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "error",
       });
     }
   }
 
   function onError() {
-    toast.error("Erro com o Login Google. Por favor tente novamente.", {
+    toast("Erro com o Login Google. Por favor tente novamente.", {
       position: "top-right",
       autoClose: 8000,
       hideProgressBar: false,
@@ -66,6 +67,7 @@ export function GoogleLoginButton() {
       draggable: true,
       progress: undefined,
       theme: "dark",
+      type: "error",
     });
   }
 

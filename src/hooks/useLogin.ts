@@ -46,7 +46,7 @@ export function useLogin() {
       await handleLogin(data).then(() => {
         router.push("/search");
       });
-      toast.info("Logado com sucesso!", {
+      toast("Logado com sucesso!", {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -55,10 +55,11 @@ export function useLogin() {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "info",
       });
       // Handle successful login
     } catch (error) {
-      toast.error("Erro ao entrar. Por favor tente novamente.", {
+      toast("Erro ao entrar. Por favor tente novamente.", {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -67,6 +68,7 @@ export function useLogin() {
         draggable: true,
         progress: undefined,
         theme: "dark",
+        type: "error",
       });
       // Handle login error
       console.error(error);
