@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useRouter, useSearchParams } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
+import { LoadingFallback } from "@/components/LoadingFallback";
 
 function PasswordResetFormContent() {
   const { loading, handleSubmit, control, errors, watch } = usePasswordReset();
@@ -121,13 +122,7 @@ function PasswordResetFormContent() {
 
 export function PasswordResetForm() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-[100vh] w-full items-center justify-center">
-          Carregando...
-        </div>
-      }
-    >
+    <Suspense fallback={<LoadingFallback />}>
       <PasswordResetFormContent />
     </Suspense>
   );

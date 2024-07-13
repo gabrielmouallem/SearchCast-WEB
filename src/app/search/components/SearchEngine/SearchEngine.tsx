@@ -2,8 +2,10 @@
 import { SearchInput } from "@/components/SearchInput";
 import { ToastContainer } from "react-toastify";
 import { useSearch } from "../../hooks/useSearch";
+import Lottie from "lottie-react";
 import Image from "next/image";
 import { getLastUpdate } from "@/utils";
+import logoLottieFile from "../../../../../public/logo_lottie_animation.json";
 import React, { useCallback, useMemo } from "react";
 import { SearchResultItem, SearchResultItemPlaceholder } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
@@ -51,13 +53,33 @@ export function SearchEngine() {
   const showResultItems = !((isLoading || isFetching) && !isFetchingNextPage);
   const showPlaceholders = !!(isLoading || isFetching || isFetchingNextPage);
 
+  const getLogoDisplayStyle = (show: boolean) => ({
+    display: show ? "initial" : "none",
+  });
+
   return (
     <>
       <ToastContainer />
       <div
         className={`flex flex-grow flex-col items-center gap-8 ${debouncedTextClases} mb-20 pt-20`}
       >
-        <Image src="/logo.svg" width={48} height={29.5} alt="SearchCast Logo" />
+        <Lottie
+          style={getLogoDisplayStyle(isFetching)}
+          width={48}
+          height={29.5}
+          animationData={logoLottieFile}
+          loop
+          alt="SearchCast Logo"
+        />
+
+        <Image
+          style={getLogoDisplayStyle(!isFetching)}
+          src="/logo.svg"
+          width={48}
+          height={29.5}
+          alt="SearchCast Logo"
+        />
+
         {hasSubmittedSearch && (
           <div className="text-text-secondary">
             Última atualização do nosso banco de dados em:{" "}
