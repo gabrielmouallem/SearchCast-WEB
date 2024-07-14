@@ -44,6 +44,7 @@
     "@types/react-dom": "npm:types-react-dom@rc"
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-methods": "^7.24.7",
     "@testing-library/dom": "^10.3.1",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
