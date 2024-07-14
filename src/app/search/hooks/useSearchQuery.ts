@@ -3,6 +3,7 @@ import api from "@/services/ApiService/ApiService";
 import { TSearchResult } from "@/types";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import posthog from "posthog-js";
 import { toast } from "react-toastify";
 
 export function useSearchQuery(text: string) {
@@ -30,6 +31,7 @@ export function useSearchQuery(text: string) {
         } else if ([401, 402, 404].includes(err?.response?.status)) {
           cookies.updateCookie("", 1);
           router.push("/login");
+          posthog.reset();
         }
         if (typeof err?.response?.status === "number") {
           toast(

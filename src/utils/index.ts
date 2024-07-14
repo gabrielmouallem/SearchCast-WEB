@@ -7,3 +7,4 @@ export * from "./getDecodedJWT";
 export * from "./encodeToJWT";
 export * from "./getRefreshedAccessToken";
 export * from "./executeIfExists";
+export * from "./getPosthogEnv";

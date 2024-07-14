@@ -6,8 +6,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Suspense } from "react";
 import { LoadingFallback } from "@/components/LoadingFallback";
+import { useIdentifyUser } from "@/hooks";
 
 function SearchContent() {
+  useIdentifyUser();
+
   return (
     <Providers>
       <ToastContainer />
