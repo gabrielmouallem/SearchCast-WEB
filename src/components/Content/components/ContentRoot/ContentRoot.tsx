@@ -4,7 +4,10 @@ interface ContentRootProps {
 
 export function ContentRoot({ children }: ContentRootProps) {
   return (
-    <div className="flex flex-col items-center self-stretch pt-24">
+    <div
+      data-testid="ContentRoot"
+      className="flex flex-col items-center self-stretch pt-24"
+    >
       {children}
     </div>
   );

@@ -1,4 +1,5 @@
 export * from "./Button";
+export * from "./Avatar";
 export * from "./Navbar";
 export * from "./Content";
 export * from "./RedirectButton";

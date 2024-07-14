@@ -1,7 +1,7 @@
 "use client";
-import { MotionProps, motion } from "framer-motion";
+import React from "react";
 import Image from "next/image";
-import React from "react"; // Don't forget to import React
+import { MotionProps, motion } from "framer-motion";
 
 const dotMotionProps: MotionProps = {
   initial: {

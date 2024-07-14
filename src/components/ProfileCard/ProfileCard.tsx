@@ -15,7 +15,7 @@ export function ProfileCard({ profileSrc, name, role }: ProfileCardProps) {
         width={64}
         height={64}
         placeholder="empty"
-        alt="Card Icon"
+        alt="Profile Card Icon"
       />
       <div className="text-lg">{name}</div>
       <div className="text-text-secondary">{role}</div>

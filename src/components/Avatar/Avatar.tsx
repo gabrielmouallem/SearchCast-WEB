@@ -4,8 +4,8 @@ interface AvatarProps {
 }
 
 export function Avatar({ name, size = "default" }: AvatarProps) {
-  const firstNameLetter = name?.charAt(0) ?? "";
-  const lastNameLetter = name?.split(" ")?.at(1)?.charAt(0) ?? "";
+  const firstNameLetter = name?.charAt(0);
+  const lastNameLetter = name?.split(" ")?.at(1)?.charAt(0);
   const isLarge = size === "large";
 
   return (

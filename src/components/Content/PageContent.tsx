@@ -1,6 +1,8 @@
 import Image from "next/image";
-import { Content } from ".";
-import { Button, Card, RedirectButton } from "..";
+import { Content } from "@/components/Content";
+import { Button } from "@/components/Button";
+import { Card } from "@/components/Card";
+import { RedirectButton } from "@/components/RedirectButton";
 import { ProfileCard } from "../ProfileCard/ProfileCard";
 
 export function PageContent() {
