@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useAuth } from "./useAuth";
 import posthog from "posthog-js";
+import { User } from "@/types";
 
 export function useIdentifyUser() {
   const { getUser } = useAuth();
@@ -12,4 +13,12 @@ export function useIdentifyUser() {
       posthog.identify(user._id, { ...user });
     }
   }, [getUser]);
+
+  function identifyUser(user: User) {
+    posthog.identify(user._id, { ...user });
+  }
+
+  return {
+    identifyUser,
+  };
 }

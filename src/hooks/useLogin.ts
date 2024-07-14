@@ -2,18 +2,31 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/services/ApiService/ApiService";
 import { useRouter } from "next/navigation";
-import { useCookies } from "@/hooks";
+import { useCookies, useIdentifyUser } from "@/hooks";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { LoginResponse } from "@/types";
+import { LoginResponse, User } from "@/types";
 
 interface LoginFormValues {
   email: string;
   password: string;
 }
 
+// Transformation function to ensure only User fields are passed
+function transformLoginResponseToUser(data: LoginResponse): User {
+  return {
+    _id: data._id,
+    name: data.name,
+    email: data.email,
+    created_on: data.created_on,
+    subscription: data.subscription,
+    allow_unpaid_access: false,
+  };
+}
+
 export function useLogin() {
   const [loading, setLoading] = useState(false);
+  const { identifyUser } = useIdentifyUser();
   const router = useRouter();
   const cookies = useCookies("access_token", "");
   const {
@@ -29,6 +42,14 @@ export function useLogin() {
         .post<LoginResponse>("/v1/login", formData)
         .then(({ data }) => {
           cookies.updateCookie(data.access_token, 1);
+          try {
+            const user = transformLoginResponseToUser(data);
+            identifyUser(user);
+          } catch (err) {
+            console.error("Error trying to send user identity to Posthog", {
+              err,
+            });
+          }
           resolve(data);
           return data;
         })
