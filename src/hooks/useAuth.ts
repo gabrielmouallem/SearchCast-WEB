@@ -2,6 +2,7 @@ import { getDecodedJWT } from "@/utils"; // Import encodeToJWT function for crea
 import { useCookies } from ".";
 import { useRouter } from "next/navigation";
 import { User } from "@/types";
+import posthog from "posthog-js";
 
 export function useAuth() {
   const { getCookie, updateCookie } = useCookies("access_token", "");
@@ -18,6 +19,7 @@ export function useAuth() {
   function handleLogout() {
     updateCookie("", 1);
     router.push("/login");
+    posthog.reset();
   }
 
   return {
