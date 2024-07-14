@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "SearchCast",
   description: "Encontre o podcast perfeito com facilidade",
+  themeColor: "#000000",
   keywords: [
     "podcast",
     "searchcast",
