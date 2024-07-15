@@ -49,6 +49,11 @@ export function ProfilePopover() {
               Planos
             </Button>
           </DropdownMenu.Item>
+          <DropdownMenu.Item className="mb-4 cursor-pointer">
+            <Button className="w-full" as="a" href="/guide">
+              Ajuda
+            </Button>
+          </DropdownMenu.Item>
           <DropdownMenu.Item className="cursor-pointer">
             <Button className="w-full" onClick={handleLogout}>
               Logout

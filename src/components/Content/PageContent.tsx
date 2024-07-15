@@ -23,9 +23,9 @@ export function PageContent() {
                 </div>
               </Content.Gap>
             </Content.Gap>
-            <div className="flex items-center flex-col md:flex-row justify-center gap-2.5">
-              <a href="/login">
-                <Button className="md:w-auto w-72 px-4 py-4 text-lg">
+            <div className="flex flex-col items-center justify-center gap-2.5 md:flex-row">
+              <a href="/guide">
+                <Button className="w-72 px-4 py-4 text-lg md:w-auto">
                   Saiba mais
                 </Button>
               </a>
