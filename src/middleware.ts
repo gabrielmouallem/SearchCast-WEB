@@ -3,7 +3,12 @@ import { getRefreshedAccessToken, getDecodedJWT } from "./utils";
 import { User } from "./types";
 import { RequestCookies } from "next/dist/compiled/@edge-runtime/cookies";
 
-const PROTECTED_ROUTES_PATHNAMES = ["/search", "/plans", "/profile"];
+const PROTECTED_ROUTES_PATHNAMES = [
+  "/search",
+  "/onboarding",
+  "/plans",
+  "/profile",
+];
 
 const PAGES_THAT_SHOULD_NOT_RENDER_WHILE_AUTHENTICATED = [
   "/forgot-password",
@@ -54,7 +59,7 @@ export async function middleware(req: any) {
     return NextResponse.next();
   } else if (
     PAGES_THAT_SHOULD_NOT_RENDER_WHILE_AUTHENTICATED.includes(
-      req.nextUrl.pathname
+      req.nextUrl.pathname,
     )
   ) {
     if (access_token) return redirectToPage(req, "/search");

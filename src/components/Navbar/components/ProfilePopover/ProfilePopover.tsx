@@ -25,10 +25,17 @@ export function ProfilePopover() {
           sideOffset={5}
           className="rounded-lg bg-dark-gray p-4"
         >
-          {hasAccess && (
+          {!hasAccess && (
             <DropdownMenu.Item className="mb-4 cursor-pointer">
               <Button className="w-full !bg-brand" as="a" href="/onboarding">
                 Experimente Gratuitamente!
+              </Button>
+            </DropdownMenu.Item>
+          )}
+          {hasAccess && (
+            <DropdownMenu.Item className="mb-4 cursor-pointer">
+              <Button className="w-full" as="a" href="/search">
+                Pesquisar
               </Button>
             </DropdownMenu.Item>
           )}
