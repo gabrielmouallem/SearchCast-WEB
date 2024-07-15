@@ -25,21 +25,13 @@ export function ProfilePopover() {
           sideOffset={5}
           className="rounded-lg bg-dark-gray p-4"
         >
-          <DropdownMenu.Item className="mb-4 cursor-pointer">
-            <Button className="w-full !bg-brand" as="a" href="/onboarding?skip_onboarding=false">
-              Experimente Gratuitamente!
-            </Button>
-          </DropdownMenu.Item>
-          {
-            hasAccess && 
-            (
-              <DropdownMenu.Item className="mb-4 cursor-pointer">
-                <Button className="w-full !bg-brand" as="a" href="/onboarding?skip_onboarding=false">
-                  Experimente Gratuitamente!
-                </Button>
-              </DropdownMenu.Item>
-            )
-          }
+          {hasAccess && (
+            <DropdownMenu.Item className="mb-4 cursor-pointer">
+              <Button className="w-full !bg-brand" as="a" href="/onboarding">
+                Experimente Gratuitamente!
+              </Button>
+            </DropdownMenu.Item>
+          )}
           <DropdownMenu.Item className="mb-4 cursor-pointer">
             <Button className="w-full" as="a" href="/profile">
               Meu Perfil
