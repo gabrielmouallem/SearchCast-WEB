@@ -18,11 +18,11 @@ export function RegisterForm() {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col pt-20">
         <Navbar />
         <div className="flex flex-grow items-center justify-center pb-20 pt-28 md:pb-0 md:pt-0">
           <div className="flex items-center justify-center">
-            <div className="flex w-full flex-col items-center justify-center gap-8 font-semibold">
+            <div className="flex w-full flex-col items-center justify-center gap-8 pb-14 font-semibold">
               <div className="text-center text-3xl">Cadastre-se</div>
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col items-center justify-center gap-3">
@@ -200,12 +200,22 @@ export function RegisterForm() {
                   <GoogleLoginButton />
                 </div>
               </form>
+              <div className="w-360px text-center text-sm font-normal leading-5">
+                <span className="text-text-secondary">
+                  Ao utilizar a plataforma SearchCast, você declara ter lido e
+                  aceitado a nossa{" "}
+                  <a href="/privacy-policy" target="_blank">
+                    <b className="text-gray-300">Política de Privacidade</b>
+                  </a>
+                  .
+                </span>
+              </div>
               <div className="text-sm font-normal leading-5">
                 <span className="text-text-secondary">
                   Já possui uma conta?
                 </span>
                 <a href="/login">
-                  <b className="text-gray-300"> Entrar</b>
+                  <b className="ml-2 text-gray-300">Entrar</b>
                 </a>
               </div>
             </div>
