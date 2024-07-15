@@ -1,15 +1,16 @@
 "use client";
 import { Button } from "@/components";
 import { Avatar } from "@/components/Avatar";
+import { useUser } from "@/hooks";
 import { useAuth } from "@/hooks/useAuth";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { useMemo } from "react";
 
 export function ProfilePopover() {
-  const { getUser, handleLogout } = useAuth();
-  const user = useMemo(() => getUser(), [getUser]);
+  const { handleLogout } = useAuth();
+  const user = useUser();
 
   const name = user?.name ?? "";
+  const hasAccess = user?.subscription || user?.allow_unpaid_access;
 
   return (
     <DropdownMenu.Root>
@@ -25,10 +26,20 @@ export function ProfilePopover() {
           className="rounded-lg bg-dark-gray p-4"
         >
           <DropdownMenu.Item className="mb-4 cursor-pointer">
-            <Button className="w-full" as="a" href="/search">
-              Pesquisar
+            <Button className="w-full !bg-brand" as="a" href="/onboarding?skip_onboarding=false">
+              Experimente Gratuitamente!
             </Button>
           </DropdownMenu.Item>
+          {
+            hasAccess && 
+            (
+              <DropdownMenu.Item className="mb-4 cursor-pointer">
+                <Button className="w-full !bg-brand" as="a" href="/onboarding?skip_onboarding=false">
+                  Experimente Gratuitamente!
+                </Button>
+              </DropdownMenu.Item>
+            )
+          }
           <DropdownMenu.Item className="mb-4 cursor-pointer">
             <Button className="w-full" as="a" href="/profile">
               Meu Perfil

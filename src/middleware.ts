@@ -18,12 +18,17 @@ function getAccessToken(req: any) {
   return (req.cookies as RequestCookies).get("access_token")?.value;
 }
 
+function getSkipOnboarding(req: any) {
+  return (req.cookies as RequestCookies).get("skip_onboarding")?.value;
+}
+
 function redirectToPage(req: any, pathname: `/${string}`) {
   return NextResponse.redirect(new URL(pathname, req.url));
 }
 
 export async function middleware(req: any) {
   const access_token = getAccessToken(req);
+  const skip_onboarding = getSkipOnboarding(req);
   const user = getDecodedJWT<any>(access_token ?? "")?.sub as User | undefined;
 
   if (PROTECTED_ROUTES_PATHNAMES.includes(req.nextUrl.pathname)) {
@@ -39,8 +44,10 @@ export async function middleware(req: any) {
       if (
         (!refreshedUser || !refreshedUser?.subscription) &&
         !refreshedUser?.allow_unpaid_access
-      )
-        return redirectToPage(req, "/plans");
+      ) {
+        if (skip_onboarding) return redirectToPage(req, "/plans");
+        return redirectToPage(req, "/onboarding");
+      }
       setAccessToken(req, refreshed_access_token);
       return NextResponse.next();
     }
