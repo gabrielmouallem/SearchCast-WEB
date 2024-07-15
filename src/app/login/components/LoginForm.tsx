@@ -84,10 +84,20 @@ export function LoginForm() {
                   <GoogleLoginButton />
                 </div>
               </form>
+              <div className="w-360px text-center text-sm font-normal leading-5">
+                <span className="text-text-secondary">
+                  Ao utilizar a plataforma SearchCast, você declara ter lido e
+                  aceitado a nossa{" "}
+                  <a href="/privacy-policy" target="_blank">
+                    <b className="text-gray-300">Política de Privacidade</b>
+                  </a>
+                  .
+                </span>
+              </div>
               <div className="text-sm font-normal leading-5">
                 <span className="text-text-secondary">Não tem uma conta?</span>
                 <a href="/register">
-                  <b className="text-gray-300"> Cadastrar</b>
+                  <b className="ml-2 text-gray-300">Cadastrar</b>
                 </a>
               </div>
             </div>
