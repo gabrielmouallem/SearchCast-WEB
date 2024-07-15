@@ -103,6 +103,7 @@ export function RegisterForm() {
                             className="w-360px"
                             type="email"
                             placeholder="Confirmar Email"
+                            autoComplete="new-email"
                             {...field}
                           />
                         )}
@@ -167,6 +168,7 @@ export function RegisterForm() {
                             className="w-360px"
                             type="password"
                             placeholder="Confirmar Senha"
+                            autoComplete="new-password"
                             {...field}
                           />
                         )}

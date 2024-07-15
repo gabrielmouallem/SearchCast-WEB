@@ -4,13 +4,6 @@ import { Button, Card, RedirectButton } from "..";
 import { ProfileCard } from "../ProfileCard/ProfileCard";
 
 export function PageContent() {
-  const phoneNumber = "+5535998607515";
-  const learnMoreMessage = encodeURIComponent(
-    "Olá, gostaria de saber mais sobre a ferramenta SearchCast.",
-  );
-  const questionsMessage = encodeURIComponent(
-    "Olá, gostaria de tirar dúvidas sobre a ferramenta SearchCast.",
-  );
   return (
     <Content.Root>
       <Content.Section>
@@ -30,18 +23,17 @@ export function PageContent() {
                 </div>
               </Content.Gap>
             </Content.Gap>
-            <div className="flex flex-col items-center justify-center gap-2.5 md:flex-row">
-              <a
-                href={`https://wa.me/${phoneNumber}?text=${learnMoreMessage}`}
-                target="_blank"
-              >
-                <Button className="w-72 px-4 py-4 text-lg md:w-auto">
+            <div className="flex items-center flex-col md:flex-row justify-center gap-2.5">
+              <a href="/login">
+                <Button className="md:w-auto w-72 px-4 py-4 text-lg">
                   Saiba mais
                 </Button>
               </a>
 
               <a
-                href={`https://wa.me/${phoneNumber}?text=${questionsMessage}`}
+                href={
+                  "mailto:contato@searchcast.app?subject=Assunto%20da%20Mensagem&body=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20SearchCast.%20Obrigado!"
+                }
                 target="_blank"
               >
                 <Button className="w-72 !bg-brand px-4 py-4 text-lg md:w-auto">
@@ -282,7 +274,9 @@ export function PageContent() {
               </Content.Gap>
             </div>
             <a
-              href={`https://wa.me/${phoneNumber}?text=${learnMoreMessage}`}
+              href={
+                "mailto:contato@searchcast.app?subject=Assunto%20da%20Mensagem&body=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20SearchCast.%20Obrigado!"
+              }
               target="_blank"
             >
               <Button className="!bg-brand">Entre em contato</Button>
@@ -308,17 +302,7 @@ export function PageContent() {
               <Card
                 iconSrc="/email_icon.svg"
                 title="Email"
-                description="Em breve"
-              />
-              <Card
-                iconSrc="/instagram_icon.svg"
-                title="Instagram"
-                description="Em breve"
-              />
-              <Card
-                iconSrc="/whatsapp_icon.svg"
-                title="Whatsapp"
-                description="+55 (35) 998607515"
+                description="contato@searchcast.app"
               />
             </div>
           </Content.Gap>
