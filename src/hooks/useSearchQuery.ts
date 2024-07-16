@@ -43,10 +43,16 @@ export function useSearchQuery(text: string, options?: SearchQueryOptions) {
     if (options?.mockedText) {
       return new Promise<AxiosResponse<TSearchResult>>((resolve, _reject) => {
         try {
-          posthog.capture("demo_search", {
-            ...user,
-            search: options?.mockedText,
-          });
+          posthog.capture(
+            "demo_search",
+            {
+              ...user,
+              search: options?.mockedText,
+            },
+            {
+              send_instantly: true,
+            },
+          );
         } catch (err) {
           console.error("Error trying to send 'demo_search' to Posthog", {
             err,

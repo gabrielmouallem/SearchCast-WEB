@@ -12,7 +12,9 @@ const FreePlanCard = () => {
     useLocalStorage<string>("trial_requested");
 
   const handleRequest = () => {
-    posthog.capture("trial_requested", user);
+    posthog.capture("trial_requested", user, {
+      send_instantly: true,
+    });
     toast(
       "Solicitação recebida com sucesso. O processamento pode levar até 24 horas.",
       {
