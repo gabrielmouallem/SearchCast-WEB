@@ -5,51 +5,84 @@ const typeofTranscription = {
 };
 
 const typeofSearchResultItem = {
-  _id: "3751cccf395f2979235dab4f1b71d156",
-  transcriptions: [typeofTranscription],
+  _id: "No02Ze6rqYk",
+  transcriptions: [
+    {
+      duration: 4.32,
+      start: 2796.24,
+      text: "com mudança climática mais acontecimento de mudar \na geografia das cidades tipo vamos tirar a cidade  ",
+    },
+    {
+      duration: 6.44,
+      start: 2259.64,
+      text: "10 anos atrás você via negacionista dizendo \nque não mudança climática não acontece hoje  ",
+    },
+    {
+      duration: 5.2,
+      start: 4230.36,
+      text: "problema é que a gente tá amplificando essas ondas \nné Então isso que é mudança climática mudança  ",
+    },
+    {
+      duration: 5.8,
+      start: 1509.28,
+      text: "equilibrar então mudança climática aquecimento \nglobal não é só que ah vai ter todo dia mais  ",
+    },
+    {
+      duration: 5.84,
+      start: 3480.4,
+      text: "essa quantidade de mudanças climáticas que você tá \ntendo parece que cada vez mais esse intervalo fica  ",
+    },
+    {
+      duration: 6.64,
+      start: 1957.68,
+      text: "os primeiros estudos eh que começaram ali sobre \nmudança climática na década de 60 os lugares que  ",
+    },
+  ],
   video: {
-    _id: "prTpQU0ekb0",
+    _id: "No02Ze6rqYk",
     allowRatings: true,
-    author: "Flow Podcast 1.0 - Episódios Completos",
-    channelId: "UC4ncvgh5hFr5O83MH7-jRJg",
+    author: "ACHISMOS",
+    channelId: "UCxcDCeShqZWIUQuEo2iJSVA",
     isCrawlable: true,
-    isLiveContent: true,
+    isLiveContent: false,
+    isLowLatencyLiveStream: false,
     isOwnerViewing: false,
     isPrivate: false,
     isUnpluggedCorpus: false,
     latencyClass: "MDE_STREAM_OPTIMIZATIONS_RENDERER_LATENCY_NORMAL",
-    lengthSeconds: "8527",
-    publishDate: "ISOStringDate",
+    lengthSeconds: "4737",
+    musicVideoType: "MUSIC_VIDEO_TYPE_PODCAST_EPISODE",
+    publishDate: "Mon, 20 May 2024 00:00:00 GMT",
     thumbnail: {
       thumbnails: [
         {
           height: 180,
-          url: "https://i.ytimg.com/vi/prTpQU0ekb0/mqdefault.jpg?v=618db9dc",
+          url: "https://i.ytimg.com/vi/No02Ze6rqYk/mqdefault.jpg?v=6647b5ff",
           width: 320,
         },
         {
           height: 224,
-          url: "https://i.ytimg.com/vi/prTpQU0ekb0/hqdefault.jpg?sqp=-oaymwEXCJADEOABSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAzxA50WNllNQ6xv1eVAwqhaQ_Z4Q",
+          url: "https://i.ytimg.com/vi/No02Ze6rqYk/hqdefault.jpg?sqp=-oaymwEXCJADEOABSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLARgoWLG0xh7Q4NCwL7ziyMal2a6Q",
           width: 400,
         },
         {
           height: 450,
-          url: "https://i.ytimg.com/vi/prTpQU0ekb0/hq720.jpg?sqp=-oaymwEXCKAGEMIDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCbHiHQmPEe3lOdMk_1J0K8OPwVqw",
+          url: "https://i.ytimg.com/vi/No02Ze6rqYk/hq720.jpg?sqp=-oaymwEXCKAGEMIDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCSgDI5Z_hXLEm9s4FxMZk0kSqq6g",
           width: 800,
         },
         {
           height: 720,
-          url: "https://i.ytimg.com/vi/prTpQU0ekb0/hq720.jpg?v=618db9dc",
+          url: "https://i.ytimg.com/vi/No02Ze6rqYk/hq720.jpg?v=6647b5ff",
           width: 1280,
         },
       ],
     },
-    title: "FELIPE MOURA BRASIL - Flow Podcast #502",
-    videoId: "prTpQU0ekb0",
-    viewCount: "275130",
-    watchUrl: "https://youtube.com/watch?v=prTpQU0ekb0",
+    title:
+      "TUDO QUE VOCÊ NUNCA QUIS SABER SOBRE METEOROLOGIA FT. JOÃO HACKEROTT | #ACHISMOS PODCAST #311",
+    videoId: "No02Ze6rqYk",
+    viewCount: "19044",
+    watchUrl: "https://youtube.com/watch?v=No02Ze6rqYk",
   },
-  videoId: "prTpQU0ekb0",
 };
 
 const typeofSearchResultData = {
