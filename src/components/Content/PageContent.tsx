@@ -24,7 +24,10 @@ export function PageContent() {
             <Content.Gap gap="gap-6">
               <Content.Gap gap="gap-4">
                 <RedirectButton />
-                <div className="mx-auto max-w-4xl text-center text-3xl font-semibold leading-tight tracking-tight text-text-primary md:text-6xl">
+                <div
+                  className="mx-auto max-w-4xl text-center text-3xl font-semibold leading-relaxed leading-tight tracking-tight text-text-primary md:text-6xl"
+                  style={{ lineHeight: "1.1" }}
+                >
                   Encontre o podcast perfeito{" "}
                   <span className="relative inline-block h-10">
                     com <span style={{ opacity: 0 }}>agilidade</span>&nbsp;
