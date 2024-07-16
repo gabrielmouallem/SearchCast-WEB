@@ -87,7 +87,7 @@ export function useRegister() {
       }
 
       await handleLogin(data).then(() => {
-        router.push("/search");
+        router.push("/onboarding");
       });
       toast("Cadastrado com sucesso!", {
         position: "top-right",
