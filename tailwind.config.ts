@@ -28,6 +28,8 @@ const config: Config = {
         pattern: "url('/bg_pattern.svg')",
         "default-gradient":
           "radial-gradient(circle at center top, rgba(0,0,0,0) 0%, #0C111D 50%)",
+        "foggy-gradient":
+          "radial-gradient(circle at center top, rgba(12,17,29,0.5) 0%, #0C111D 50%)",
         "tight-gradient":
           "radial-gradient(circle at center top, rgba(0,0,0,0) 0%, #0C111D 3%)",
       },
