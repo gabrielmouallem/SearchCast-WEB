@@ -5,6 +5,8 @@ import { useIdentifyUser } from "@/hooks";
 import { Navbar } from "@/components";
 import { useSkipOnboarding } from "./hooks/useSkipOnboarding";
 import { useQueryState } from "next-usequerystate";
+import { Suspense } from "react";
+import { LoadingFallback } from "@/components/LoadingFallback";
 
 const useIsRestrictedMode = () => {
   const [initialStep] = useQueryState("initialStep", {
@@ -19,7 +21,7 @@ const useIsRestrictedMode = () => {
   return isRestrictedMode;
 };
 
-export default function Onboarding() {
+function OnboardingContentWrapper() {
   const isRestrictedMode = useIsRestrictedMode();
 
   return (
@@ -27,5 +29,13 @@ export default function Onboarding() {
       <Navbar isAuthenticated restrictedMode={isRestrictedMode} />
       <OnboardingContent />
     </Providers>
+  );
+}
+
+export default function Onboarding() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <OnboardingContentWrapper />
+    </Suspense>
   );
 }
