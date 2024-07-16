@@ -22,7 +22,7 @@ export function useOnboarding() {
   const showBackButton = [2, 3].includes(step) && stringStep !== "3";
 
   const handleSteps = (step: Step) => {
-    if (step === 4) {
+    if (step === 3) {
       finishOnboarding();
     }
   };

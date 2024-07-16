@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components";
 import { useUser } from "@/hooks";
 import { toast } from "react-toastify";
@@ -8,7 +8,8 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 
 const FreePlanCard = () => {
   const user = useUser();
-  const [requested, setRequested] = useLocalStorage("trial_requested", false);
+  const [requestedId, setRequestedId] =
+    useLocalStorage<string>("trial_requested");
 
   const handleRequest = () => {
     posthog.capture("trial_requested", user);
@@ -26,7 +27,7 @@ const FreePlanCard = () => {
         type: "success",
       },
     );
-    setRequested(true);
+    setRequestedId(user?._id as string);
   };
 
   return (
@@ -46,11 +47,11 @@ const FreePlanCard = () => {
         Por tempo limitado
       </span>
       <Button
-        className={`!bg-brand font-bold ${requested ? "opacity-50" : ""}`}
+        className={`!bg-brand font-bold ${requestedId === user?._id ? "opacity-50" : ""}`}
         onClick={handleRequest}
-        disabled={requested}
+        disabled={requestedId === user?._id}
       >
-        {requested ? "SOLICITADO" : "SOLICITAR"}
+        {requestedId === user?._id ? "SOLICITADO" : "SOLICITAR"}
       </Button>
     </div>
   );

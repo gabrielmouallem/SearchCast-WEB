@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { getRefreshedAccessToken, getDecodedJWT } from "./utils";
+import {
+  getRefreshedAccessToken,
+  getDecodedJWT,
+  stringToBoolean,
+} from "./utils";
 import { User } from "./types";
 import { RequestCookies } from "next/dist/compiled/@edge-runtime/cookies";
 
@@ -24,7 +28,9 @@ function getAccessToken(req: any) {
 }
 
 function getSkipOnboarding(req: any) {
-  return (req.cookies as RequestCookies).get("skip_onboarding")?.value;
+  return stringToBoolean(
+    (req.cookies as RequestCookies).get("skip_onboarding")?.value ?? "",
+  );
 }
 
 function redirectToPage(req: any, pathname: `/${string}`) {
