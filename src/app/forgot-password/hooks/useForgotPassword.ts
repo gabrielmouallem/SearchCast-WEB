@@ -37,18 +37,35 @@ export function useForgotPassword() {
 
   const onSubmit: SubmitHandler<PasswordResetFormValues> = async (data) => {
     try {
-      await handleForgotPassword(data);
-      toast("Email de mudança de senha enviado com sucesso!", {
-        position: "top-right",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        type: "info",
-      });
+      handleForgotPassword(data)
+        .then(() => {
+          toast("Email de mudança de senha enviado com sucesso!", {
+            position: "top-right",
+            autoClose: 8000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            type: "info",
+          });
+        })
+        .catch((error) => {
+          toast("Erro. Por favor tente novamente.", {
+            position: "top-right",
+            autoClose: 8000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            type: "error",
+          });
+          // Handle login error
+          console.error(error);
+        });
       // Handle successful login
     } catch (error) {
       toast("Erro. Por favor tente novamente.", {
