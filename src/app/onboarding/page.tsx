@@ -1,19 +1,31 @@
 "use client";
 import { Providers } from "@/components/Providers";
-import { Onboarding } from "./components/Onboarding";
+import { OnboardingContent } from "./components/OnboardingContent";
 import { useIdentifyUser } from "@/hooks";
 import { Navbar } from "@/components";
 import { useSkipOnboarding } from "./hooks/useSkipOnboarding";
+import { useQueryState } from "next-usequerystate";
 
-export default function OnboardingPage() {
+const useIsRestrictedMode = () => {
+  const [initialStep] = useQueryState("initialStep", {
+    defaultValue: "1",
+  });
   useIdentifyUser();
 
-  const isSkipOnboarding = useSkipOnboarding();
+  const { skipOnboarding } = useSkipOnboarding();
+
+  const isRestrictedMode = !skipOnboarding && initialStep !== "3";
+
+  return isRestrictedMode;
+};
+
+export default function Onboarding() {
+  const isRestrictedMode = useIsRestrictedMode();
 
   return (
     <Providers>
-      {isSkipOnboarding && <Navbar isAuthenticated />}
-      <Onboarding />
+      <Navbar isAuthenticated restrictedMode={isRestrictedMode} />
+      <OnboardingContent />
     </Providers>
   );
 }

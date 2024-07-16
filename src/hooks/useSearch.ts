@@ -9,8 +9,14 @@ interface FormValues {
   text: string;
 }
 
-export function useSearch() {
-  const [textQuery, setTextQuery] = useQueryState("text", { defaultValue: "" });
+interface SearchOptions {
+  options?: { mockedText?: string };
+}
+
+export function useSearch({ options }: SearchOptions) {
+  const [textQuery, setTextQuery] = useQueryState("text", {
+    defaultValue: options?.mockedText || "",
+  });
   const [text, setText] = useState(textQuery);
   const { handleSubmit, control, setValue } = useForm<FormValues>();
 
@@ -21,7 +27,7 @@ export function useSearch() {
     isFetchingNextPage,
     data,
     fetchNextPage,
-  } = useSearchQuery(textQuery);
+  } = useSearchQuery(textQuery, options);
 
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
     setValue("text", e.target.value);

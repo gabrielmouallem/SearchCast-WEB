@@ -9,3 +9,4 @@ export * from "./Input";
 export * from "./SearchResultItem";
 export * from "./SearchResultItemPlaceholder";
 export * from "./YoutubeVideo";
+export * from "./SearchEngine";

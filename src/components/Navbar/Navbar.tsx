@@ -13,11 +13,12 @@ const imageProps: ComponentProps<typeof Image> = {
 
 interface NavbarProps {
   isAuthenticated?: boolean;
+  restrictedMode?: boolean;
 }
 
-export function Navbar({ isAuthenticated }: NavbarProps) {
+export function Navbar({ isAuthenticated, restrictedMode }: NavbarProps) {
   return (
-    <nav className="fixed inset-0 flex h-20 w-full items-center bg-gradient-to-b from-black-transparent to-transparent sm:pl-20 sm:pr-20">
+    <nav className="fixed inset-0 z-50 flex h-20 w-full items-center bg-gradient-to-b from-black-transparent to-transparent sm:pl-20 sm:pr-20">
       <a href="/">
         <Image
           className="ml-8"
@@ -27,7 +28,7 @@ export function Navbar({ isAuthenticated }: NavbarProps) {
           alt="SearchCast Logo"
         />
       </a>
-      {!isAuthenticated && (
+      {!!(!isAuthenticated && !restrictedMode) && (
         <div className="ml-auto mr-9">
           <a href="/login">
             <Button startIcon={<Image {...imageProps} alt="Person Icon" />}>
@@ -36,9 +37,9 @@ export function Navbar({ isAuthenticated }: NavbarProps) {
           </a>
         </div>
       )}
-      {isAuthenticated && (
+      {!!isAuthenticated && (
         <div className="ml-auto mr-9 cursor-pointer">
-          <ProfilePopover />
+          <ProfilePopover restrictedMode={restrictedMode} />
         </div>
       )}
     </nav>

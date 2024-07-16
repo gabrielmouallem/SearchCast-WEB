@@ -1,28 +1,67 @@
-import { useCookies } from "@/hooks";
+import { useCookies, useUser } from "@/hooks";
 import api from "@/services/ApiService/ApiService";
 import { TSearchResult } from "@/types";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import posthog from "posthog-js";
 import { toast } from "react-toastify";
+import { mockedSearchResultSwitchCase } from "./useSearchQuery.constants";
+import { MockedTextOptions } from "./useSearchQuery.types";
+import { AxiosResponse } from "axios";
 
-export function useSearchQuery(text: string) {
+interface SearchQueryOptions {
+  mockedText?: string;
+}
+
+function getMockedDataForText(text: MockedTextOptions) {
+  const data = mockedSearchResultSwitchCase[text];
+  if (data) return data;
+  return {
+    data: {
+      count: 0,
+      page: 1,
+      results: [],
+    },
+  } as AxiosResponse;
+}
+
+export function useSearchQuery(text: string, options?: SearchQueryOptions) {
+  const user = useUser();
   const router = useRouter();
   const cookies = useCookies("access_token", "");
 
-  function fetch({
+  async function fetch({
     text,
     pageParam,
     signal,
-    ...options
+    ...rest
   }: {
     text: string;
     pageParam: number;
     signal: AbortSignal;
   }) {
+    if (options?.mockedText) {
+      return new Promise<AxiosResponse<TSearchResult>>((resolve, _reject) => {
+        try {
+          posthog.capture("demo_search", {
+            ...user,
+            search: options?.mockedText,
+          });
+        } catch (err) {
+          console.error("Error trying to send 'demo_search' to Posthog", {
+            err,
+          });
+        }
+        setTimeout(() => {
+          resolve(
+            getMockedDataForText(options.mockedText as MockedTextOptions),
+          );
+        }, 2000);
+      });
+    }
     return api
       .get<TSearchResult | undefined>("/v1/search_by_video", {
-        params: { text, page: pageParam, ...options },
+        params: { text, page: pageParam, ...rest },
         signal,
       })
       .catch((err) => {

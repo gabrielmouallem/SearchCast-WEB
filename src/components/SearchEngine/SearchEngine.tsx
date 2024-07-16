@@ -1,18 +1,24 @@
 "use client";
 import { SearchInput } from "@/components/SearchInput";
 import { ToastContainer } from "react-toastify";
-import { useSearch } from "../../hooks/useSearch";
+import { useSearch } from "@/hooks";
 import Lottie from "lottie-react";
 import Image from "next/image";
 import { getLastUpdate } from "@/utils";
-import logoLottieFile from "../../../../../public/logo_lottie_animation.json";
+import logoLottieFile from "../../../public/logo_lottie_animation.json";
 import React, { useCallback, useMemo } from "react";
 import { SearchResultItem, SearchResultItemPlaceholder } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
-import useBottomScroll from "@/hooks/useBottomScroll";
+import usePageBottom from "@/hooks/usePageBottom";
 import { Controller } from "react-hook-form";
 
-export function SearchEngine() {
+interface SearchEngineProps {
+  options?: {
+    mockedText?: string;
+  };
+}
+
+export function SearchEngine({ options }: SearchEngineProps) {
   const {
     text,
     textQuery,
@@ -25,7 +31,7 @@ export function SearchEngine() {
     isFetchingNextPage,
     fetchNextPage,
     handleSubmit,
-  } = useSearch();
+  } = useSearch({ options });
 
   const preventPageFetching = useMemo(() => {
     return (
@@ -37,11 +43,11 @@ export function SearchEngine() {
   }, [data?.pages]);
 
   const handlePageBottomReached = useCallback(() => {
-    if (preventPageFetching) return;
+    if (preventPageFetching || options?.mockedText) return;
     if (text && text !== "") fetchNextPage();
-  }, [preventPageFetching, text, fetchNextPage]);
+  }, [preventPageFetching, text, fetchNextPage, options?.mockedText]);
 
-  useBottomScroll(handlePageBottomReached);
+  usePageBottom(handlePageBottomReached);
 
   const hasSubmittedSearch = !!data?.pages?.length || isFetching;
   const debouncedTextClases = hasSubmittedSearch
@@ -79,8 +85,17 @@ export function SearchEngine() {
           height={29.5}
           alt="SearchCast Logo"
         />
-
-        {hasSubmittedSearch && (
+        {options?.mockedText && (
+          <div className="max-w-xl text-center text-text-secondary">
+            Você está no{" "}
+            <span className="text-red-800">modo demonstrativo</span>. Nesta
+            seção, você pode visualizar o funcionamento da plataforma. Os
+            resultados são limitados a 10 itens, com dados atualizados em{" "}
+            {new Date("2024-07-15T00:00:00").toLocaleDateString()} às{" "}
+            {new Date("2024-07-15T00:00:00").toLocaleTimeString()}.
+          </div>
+        )}
+        {hasSubmittedSearch && !options?.mockedText && (
           <div className="text-text-secondary">
             Última atualização do nosso banco de dados em:{" "}
             {lastUpdate.toLocaleDateString()} às{" "}
@@ -94,10 +109,14 @@ export function SearchEngine() {
             render={({ field }) => (
               <SearchInput
                 {...field}
+                title={
+                  options?.mockedText &&
+                  "Você não pode alterar essa pesquisa, pois está no modo demonstrativo."
+                }
                 value={text}
                 onSuggestionClick={handleSuggestionClick}
                 onChange={handleTextChange}
-                disabled={showPlaceholders}
+                disabled={showPlaceholders || !!options?.mockedText}
               />
             )}
           />
@@ -118,6 +137,7 @@ export function SearchEngine() {
                   group.data.results.map((props) => {
                     return (
                       <SearchResultItem
+                        options={options}
                         key={props._id}
                         searchText={textQuery}
                         {...props}

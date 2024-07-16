@@ -8,4 +8,5 @@ export * from "./encodeToJWT";
 export * from "./getRefreshedAccessToken";
 export * from "./executeIfExists";
 export * from "./getPosthogEnv";
-export * from './stringToBoolean';
+export * from "./stringToBoolean";
+export * from "./suffleArray";

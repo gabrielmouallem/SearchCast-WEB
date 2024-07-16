@@ -9,9 +9,15 @@ export function TranscriptionItem({
   videoId,
   searchText,
   watchUrl,
+  disabled,
   text,
   start,
-}: TTranscription & { searchText: string; watchUrl: string; videoId: string }) {
+}: TTranscription & {
+  searchText: string;
+  watchUrl: string;
+  videoId: string;
+  disabled: boolean;
+}) {
   const { isLoading, data, refetch, isFetched } = useExpandTranscription({
     videoId,
     start,
@@ -28,8 +34,9 @@ export function TranscriptionItem({
       <div>"(...) {getHighlightText(searchText, transcriptionText)} (...)"</div>
       {!isFetched && (
         <Button
-          className="-my-[10px] scale-[65%]"
-          disabled={isLoading}
+          className={`-my-[10px] scale-[65%] ${!!(isLoading || disabled) ? "opacity-55" : ""}`}
+          disabled={isLoading || disabled}
+          title={disabled ? "Funcionalidade indisponivel" : ""}
           onClick={() => refetch()}
         >
           {isLoading && "Carregando..."}

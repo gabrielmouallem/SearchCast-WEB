@@ -144,9 +144,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
         </span>
       )}
       {!(subscriptionType !== "month") && (
-        <span className="font-ligh text-sm text-gray-400">
-          Não há descontos.
-        </span>
+        <span className="text-sm text-gray-400">Não há descontos.</span>
       )}
       {isExpirationPending && (
         <span className="text-xs font-light text-red-500">
