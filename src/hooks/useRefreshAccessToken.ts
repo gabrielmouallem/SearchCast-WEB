@@ -8,6 +8,7 @@ export function useRefreshAccessToken() {
   const fetchAccessToken = async () => {
     const { data } = await api.get<{ access_token: string }>("/v1/refresh");
     updateCookie(data.access_token, 1);
+    return data.access_token;
   };
 
   return useQuery({
