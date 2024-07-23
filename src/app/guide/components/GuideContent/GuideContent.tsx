@@ -1,6 +1,6 @@
 export function GuideContent() {
   return (
-    <div className="mx-auto mt-14 max-w-screen-md p-10">
+    <div className="mx-auto max-w-screen-md">
       <h1 className="my-6 text-3xl font-bold">Sobre a Plataforma</h1>
 
       <p className="my-6">

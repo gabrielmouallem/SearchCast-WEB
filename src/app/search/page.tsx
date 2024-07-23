@@ -14,7 +14,7 @@ function SearchContent() {
   return (
     <Providers>
       <ToastContainer />
-      <div className="min-w-screen flex min-h-screen flex-col !bg-default-gradient">
+      <div className="min-w-screen -mt-28 flex min-h-screen flex-col !bg-default-gradient">
         <Navbar isAuthenticated />
         <SearchEngine />
         <Footer />

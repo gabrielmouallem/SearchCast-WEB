@@ -1,3 +1,5 @@
+import { Footer, Navbar } from "@/components";
+import { PageWrapper } from "@/components/PageWrapper/PageWrapper";
 import { DEFAULT_METADATA_KEYWORDS } from "@/constants";
 import type { Metadata } from "next";
 import Head from "next/head";
@@ -18,7 +20,9 @@ export default function RootLayout({
       <Head>
         <title>SearchCast - Meu Perfil</title>
       </Head>
-      {children}
+      <Navbar isAuthenticated />
+      <PageWrapper>{children}</PageWrapper>
+      <Footer />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { Footer, Navbar } from "@/components";
+import { PageWrapper } from "@/components/PageWrapper/PageWrapper";
 import { DEFAULT_METADATA_KEYWORDS } from "@/constants";
 import type { Metadata } from "next";
 import Head from "next/head";
@@ -22,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <>
       <Head>
         <title>SearchCast - Faça o seu login</title>
       </Head>
-      {children}
-    </div>
+      <Navbar />
+      <PageWrapper>{children}</PageWrapper>
+      <Footer />
+    </>
   );
 }

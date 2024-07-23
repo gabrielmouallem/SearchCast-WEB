@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
-import { Input, Button } from "@/components"; // Adjust the path as needed
+import { Input, Button } from "@/components";
 import { Controller } from "react-hook-form";
-import { Navbar, Footer } from "@/components"; // Assuming these components exist
 import { useLogin } from "@/hooks";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import "react-toastify/dist/ReactToastify.css";
 
 export function LoginForm() {
   const { loading, handleSubmit, control } = useLogin();
@@ -15,8 +14,7 @@ export function LoginForm() {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
-      <div className="flex min-h-screen flex-col">
-        <Navbar />
+      <div className="flex flex-col">
         <div className="flex flex-grow items-center justify-center">
           <div className="flex items-center justify-center">
             <div className="flex w-full flex-col items-center justify-center gap-8 font-semibold">
@@ -103,7 +101,6 @@ export function LoginForm() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </GoogleOAuthProvider>
   );

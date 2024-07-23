@@ -2,12 +2,11 @@
 import React from "react";
 import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
-import { Navbar, Footer } from "@/components"; // Assuming these components exist
 import { useRegister } from "@/hooks";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import "react-toastify/dist/ReactToastify.css";
 
 export function RegisterForm() {
   const { loading, handleSubmit, control, errors, watch } = useRegister();
@@ -18,9 +17,8 @@ export function RegisterForm() {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
-      <div className="flex min-h-screen flex-col pt-20">
-        <Navbar />
-        <div className="flex flex-grow items-center justify-center pb-20 pt-28 md:pb-0 md:pt-0">
+      <div className="flex flex-col">
+        <div className="flex flex-grow items-center justify-center">
           <div className="flex items-center justify-center">
             <div className="flex w-full flex-col items-center justify-center gap-8 pb-14 font-semibold">
               <div className="text-center text-3xl">Cadastre-se</div>
@@ -221,7 +219,6 @@ export function RegisterForm() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </GoogleOAuthProvider>
   );
