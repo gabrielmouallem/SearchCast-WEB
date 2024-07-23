@@ -12,12 +12,12 @@ export function useExpandTranscription({
 }) {
   function fetchExpandTranscription() {
     return api.get<TTranscription>(
-      `/v1/expand-transcription?videoId=${videoId}&start=${start}`
+      `/v1/expand-transcription?videoId=${videoId}&start=${start}`,
     );
   }
 
   return useQuery({
-    queryKey: ["refreshToken", videoId, start],
+    queryKey: ["expandTranscription", videoId, start],
     queryFn: fetchExpandTranscription,
     enabled: false,
     refetchOnMount: false,
