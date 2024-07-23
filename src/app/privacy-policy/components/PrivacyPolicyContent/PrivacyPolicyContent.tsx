@@ -1,6 +1,6 @@
 export function PrivacyPolicyContent() {
   return (
-    <div className="mx-auto mt-14 max-w-screen-md p-10">
+    <div className="mx-auto max-w-screen-md p-10 pt-0">
       <h1 className="mb-4 text-3xl font-bold">Política de Privacidade</h1>
 
       <p className="mb-4">

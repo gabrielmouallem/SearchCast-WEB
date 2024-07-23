@@ -51,7 +51,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
 
   const hasSubmittedSearch = !!data?.pages?.length || isFetching;
   const debouncedTextClases = hasSubmittedSearch
-    ? "justify-start bg-tight-gradient"
+    ? "justify-start bg-tight-gradient pt-28"
     : "justify-center";
 
   const lastUpdate = getLastUpdate();
@@ -67,7 +67,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
     <>
       <ToastContainer />
       <div
-        className={`flex flex-grow flex-col items-center gap-8 ${debouncedTextClases} mb-20 pt-20`}
+        className={`flex flex-grow flex-col items-center gap-8 ${debouncedTextClases}`}
       >
         <Lottie
           style={getLogoDisplayStyle(isFetching)}
@@ -96,7 +96,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
           </div>
         )}
         {hasSubmittedSearch && !options?.mockedText && (
-          <div className="text-text-secondary">
+          <div className="text-center text-text-secondary">
             Última atualização do nosso banco de dados em:{" "}
             {lastUpdate.toLocaleDateString()} às{" "}
             {lastUpdate.toLocaleTimeString()}

@@ -1,8 +1,7 @@
 "use client";
 import React, { Suspense, useEffect } from "react";
-import { Input, Button } from "@/components"; // Adjust the path as needed
+import { Input, Button } from "@/components";
 import { Controller } from "react-hook-form";
-import { Navbar, Footer } from "@/components"; // Assuming these components exist
 import { usePasswordReset } from "../hooks/usePasswordReset";
 import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -26,9 +25,8 @@ function PasswordResetFormContent() {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
-      <div className="flex min-h-screen flex-col">
-        <Navbar />
-        <div className="flex flex-grow items-center justify-center pb-20 pt-28 md:pb-0 md:pt-0">
+      <div className="flex flex-col pt-[10vh]">
+        <div className="flex flex-grow items-center justify-center">
           <div className="flex items-center justify-center">
             <div className="flex w-full flex-col items-center justify-center gap-8 font-semibold">
               <div className="text-center text-3xl">Redefinir Senha</div>
@@ -114,7 +112,6 @@ function PasswordResetFormContent() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </GoogleOAuthProvider>
   );

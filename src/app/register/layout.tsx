@@ -1,3 +1,5 @@
+import { Footer, Navbar } from "@/components";
+import { PageWrapper } from "@/components/PageWrapper/PageWrapper";
 import { DEFAULT_METADATA_KEYWORDS } from "@/constants";
 import type { Metadata } from "next";
 import Head from "next/head";
@@ -25,7 +27,9 @@ export default function RootLayout({
       <Head>
         <title>SearchCast - Cadastre-se</title>
       </Head>
-      {children}
+      <Navbar />
+      <PageWrapper>{children}</PageWrapper>
+      <Footer />
     </div>
   );
 }

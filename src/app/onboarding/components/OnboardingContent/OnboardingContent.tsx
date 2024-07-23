@@ -18,7 +18,7 @@ export function OnboardingContent() {
   } = useOnboarding();
 
   return (
-    <div className="bg-foggy-gradient relative flex min-h-screen flex-col justify-center p-4 py-20 text-text-primary">
+    <div className="relative -mt-28 flex min-h-screen flex-col justify-center bg-foggy-gradient p-4 py-20 text-text-primary">
       <AnimatePresence mode="wait">
         <>
           {step === 1 && <StepOne {...getStepOneProps()} />}
