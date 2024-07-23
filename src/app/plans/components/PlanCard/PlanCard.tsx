@@ -13,19 +13,19 @@ const subscriptionSwitchCase: Record<
 > = {
   month: {
     text: "Mensal",
-    value: "R$20",
+    value: "R$10",
     recurrency: "por mês",
     discount: "0% de desconto.",
   },
   semester: {
     text: "Semestral",
-    value: "R$110",
+    value: "R$54",
     recurrency: "por semestre",
     discount: "~10% de desconto.",
   },
   year: {
     text: "Anual",
-    value: "R$190",
+    value: "R$96",
     recurrency: "por ano",
     discount: "~20% de desconto.",
   },
