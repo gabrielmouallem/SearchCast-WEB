@@ -14,7 +14,7 @@ export function LoginForm() {
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
       <ToastContainer />
-      <div className="flex flex-col">
+      <div className="flex flex-col md:pt-4">
         <div className="flex flex-grow items-center justify-center">
           <div className="flex items-center justify-center">
             <div className="flex w-full flex-col items-center justify-center gap-8 font-semibold">
