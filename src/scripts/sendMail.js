@@ -15,9 +15,9 @@ const resend = new Resend(""); // fill the resend api key
     const htmlTemplate = fs.readFileSync(templatePath, "utf8");
 
     const { data, error } = await resend.emails.send({
-      from: "SearchCast Marketing <contato@searchcast.app>",
+      from: "SearchCast Marketing <contato@searchcast.app>", // change the from if needed
       to: [], // fill the emails here
-      subject: "Encontre Trechos de Podcasts em Segundos - 100% BR!",
+      subject: "", // fill the subject here
       html: htmlTemplate,
     });
 
