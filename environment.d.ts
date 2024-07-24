@@ -13,6 +13,7 @@ namespace NodeJS {
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
     NEXT_PUBLIC_POSTHOG_KEY: string;
     NEXT_PUBLIC_POSTHOG_HOST: string;
+    NEXT_PUBLIC_RESEND_API_KEY: string;
     DEV: boolean;
     PROD: boolean;
   }

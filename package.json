@@ -9,7 +9,8 @@
     "lint": "next lint",
     "stripe:login": "stripe login",
     "stripe:listen": "stripe listen --forward-to localhost:5000/webhook",
-    "stripe:prepare": "stripe trigger checkout.session.completed"
+    "stripe:prepare": "stripe trigger checkout.session.completed",
+    "send:mail": "node ./src/scripts/sendMail.js"
   },
   "dependencies": {
     "@radix-ui/react-popover": "^1.1.1",
@@ -32,6 +33,7 @@
     "react-dom": "^19.0.0-rc-df5f2736-20240712",
     "react-hook-form": "^7.49.2",
     "react-toastify": "^10.0.5",
+    "resend": "^3.5.0",
     "stripe": "^14.12.0",
     "tailwindest": "^2.2.1"
   },
