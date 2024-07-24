@@ -7,7 +7,7 @@ export default function Home() {
   useIdentifyUser();
 
   return (
-    <main className="px-8 pt-5">
+    <main className="px-8 pt-5 md:pt-16">
       <Navbar />
       <PageContent />
       <Footer />
