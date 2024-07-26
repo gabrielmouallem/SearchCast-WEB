@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Encontre o podcast perfeito com facilidade",
     start_url: "/",
     display: "fullscreen",
-    background_color: "#161B26",
-    theme_color: "#161B26",
+    background_color: "#0C111D",
+    theme_color: "#0C111D",
     icons: [
       {
         src: "/favicon.ico",
