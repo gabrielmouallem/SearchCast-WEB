@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { DEFAULT_METADATA_KEYWORDS } from "@/constants";
+import { getAppURL } from "@/utils/getAppURL";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,6 +10,10 @@ export const metadata: Metadata = {
   title: "SearchCast",
   description: "Encontre o podcast perfeito com facilidade",
   keywords: [...DEFAULT_METADATA_KEYWORDS],
+  metadataBase: new URL(getAppURL()),
+  alternates: {
+    canonical: "./",
+  },
 };
 
 export default function RootLayout({
