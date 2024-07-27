@@ -7,8 +7,8 @@ import { Suspense } from "react";
 import { LoadingFallback } from "@/components/LoadingFallback";
 import { getAndIdentifyUser } from "@/utils/server/getAndIdentifyUser";
 
-function SearchContent() {
-  getAndIdentifyUser();
+async function SearchContent() {
+  await getAndIdentifyUser();
   return (
     <Providers>
       <ToastContainer />
