@@ -1,5 +1,5 @@
 "use client";
-import { getApiURL } from "@/utils";
+import { getApiURL } from "@/utils/shared";
 import axios, { AxiosRequestHeaders } from "axios";
 import { CookiesService } from "../CookiesService";
 
@@ -11,7 +11,7 @@ axios.interceptors.response.use(
   (response) => response,
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 api.interceptors.request.use((config) => {

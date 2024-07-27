@@ -1,4 +1,4 @@
-import { getAppURL } from "@/utils/getAppURL";
+import { getAppURL } from "@/utils/shared";
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {

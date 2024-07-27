@@ -3,7 +3,7 @@ import {
   getRefreshedAccessToken,
   getDecodedJWT,
   stringToBoolean,
-} from "./utils";
+} from "./utils/shared";
 import { User } from "./types";
 import { RequestCookies } from "next/dist/compiled/@edge-runtime/cookies";
 

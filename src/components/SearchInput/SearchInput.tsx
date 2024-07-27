@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "..";
 import { useSearchTestSuggestions } from "@/hooks";
-import { getBoldText } from "@/utils";
+import { getBoldText } from "@/utils/shared";
 
 type SearchInputProps = React.ComponentProps<"input"> & {
   onSuggestionClick?: (value: string) => void;
