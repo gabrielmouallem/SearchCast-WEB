@@ -1,10 +1,9 @@
-"use client";
 import { Navbar } from "@/components";
 import { GuideContent } from "./components/GuideContent";
-import { useUser } from "@/hooks";
+import { getUser } from "@/utils/server";
 
-export default function Guide() {
-  const user = useUser();
+export default async function Guide() {
+  const user = await getUser();
 
   const isAuthenticated = !!user;
 
