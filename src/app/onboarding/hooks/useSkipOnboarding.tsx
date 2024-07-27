@@ -1,6 +1,7 @@
+"use client";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { useCookies } from "@/hooks";
-import { stringToBoolean } from "@/utils";
+import { stringToBoolean } from "@/utils/shared";
 
 interface SkipOnboardingContextProps {
   skipOnboarding: boolean;

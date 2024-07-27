@@ -1,3 +1,4 @@
+"use client";
 import { useRefreshAccessToken } from "@/hooks";
 import { ToastContainer } from "react-toastify";
 import PlanCard from "../PlanCard/PlanCard";

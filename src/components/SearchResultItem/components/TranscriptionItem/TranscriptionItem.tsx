@@ -1,8 +1,8 @@
 import { Button } from "@/components";
 import { TTranscription } from "@/types";
-import { getFormatTime } from "@/utils/getFormatTime";
-import { getHighlightText } from "@/utils/getHighlightText";
-import { getSecondsToHMS } from "@/utils/getSecondsToHMS";
+import { getFormatTime } from "@/utils/shared";
+import { getHighlightText } from "@/utils/shared";
+import { getSecondsToHMS } from "@/utils/shared";
 import { useExpandTranscription } from "./hooks/useExpandTranscription";
 
 export function TranscriptionItem({

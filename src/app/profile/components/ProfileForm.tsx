@@ -1,11 +1,9 @@
 import { Button, Input } from "@/components";
 import { Avatar } from "@/components/Avatar";
-import { useAuth } from "@/hooks/useAuth";
-import { useMemo } from "react";
+import { getUser } from "@/utils/server";
 
-export function ProfileForm() {
-  const { getUser } = useAuth();
-  const user = useMemo(() => getUser(), [getUser]);
+export async function ProfileForm() {
+  const user = await getUser();
 
   const name = user?.name ?? "";
   const firstName = name?.split(" ").at(0);

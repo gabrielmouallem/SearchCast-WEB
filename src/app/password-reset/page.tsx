@@ -1,4 +1,3 @@
-"use client";
 import { PasswordResetForm } from "./components/PasswordResetForm";
 import { Providers } from "@/components/Providers";
 

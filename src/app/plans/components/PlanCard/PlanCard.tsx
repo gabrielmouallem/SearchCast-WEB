@@ -1,11 +1,11 @@
 "use client";
-import React, { useMemo } from "react";
+import React from "react";
 import { Stripe } from "@stripe/stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import api from "@/services/ApiService/ApiService";
-import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components";
 import { toast } from "react-toastify";
+import { useUser } from "@/hooks";
 
 const subscriptionSwitchCase: Record<
   SubscriptionType,
@@ -39,8 +39,7 @@ interface PlanCardProps {
 }
 
 const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
-  const { getUser } = useAuth();
-  const user = useMemo(() => getUser(), [getUser]);
+  const user = useUser();
 
   const currentPeriodEnd = user?.subscription?.current_period_end ?? 0;
   const currentUnixTimestamp = Math.floor(Date.now() / 1000);

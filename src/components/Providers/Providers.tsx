@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
-import { getPosthogEnv } from "@/utils";
+import { getPosthogEnv } from "@/utils/shared";
 
 const queryClient = new QueryClient();
 

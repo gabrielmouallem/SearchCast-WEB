@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import React from "react";
 import api from "@/services/ApiService/ApiService";
-import { getDecodedJWT } from "@/utils";
+import { getDecodedJWT } from "@/utils/shared";
 import { DecodedCredentials } from "@/types";
 
 export function GoogleLoginButton() {

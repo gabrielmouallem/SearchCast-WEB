@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { ForgotPasswordForm } from "./components";
 import { Providers } from "@/components/Providers";
