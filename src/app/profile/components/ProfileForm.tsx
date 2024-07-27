@@ -1,9 +1,9 @@
 import { Button, Input } from "@/components";
 import { Avatar } from "@/components/Avatar";
-import { useUser } from "@/hooks";
+import { getUser } from "@/utils/server";
 
 export function ProfileForm() {
-  const user = useUser();
+  const user = getUser();
 
   const name = user?.name ?? "";
   const firstName = name?.split(" ").at(0);
