@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components";
 import { AnimatePresence } from "framer-motion";
 import { useOnboarding } from "../../hooks/useOnboarding";
