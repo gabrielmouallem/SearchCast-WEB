@@ -1,11 +1,9 @@
 import { Button, Input } from "@/components";
 import { Avatar } from "@/components/Avatar";
-import { useAuth } from "@/hooks/useAuth";
-import { useMemo } from "react";
+import { useUser } from "@/hooks";
 
 export function ProfileForm() {
-  const { getUser } = useAuth();
-  const user = useMemo(() => getUser(), [getUser]);
+  const user = useUser();
 
   const name = user?.name ?? "";
   const firstName = name?.split(" ").at(0);
