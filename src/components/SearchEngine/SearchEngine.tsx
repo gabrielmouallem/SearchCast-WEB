@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { useSearch } from "@/hooks";
 import Lottie from "lottie-react";
 import Image from "next/image";
-import { getLastUpdate } from "@/utils";
+import { getLastUpdate } from "@/utils/shared";
 import logoLottieFile from "../../../public/logo_lottie_animation.json";
 import React, { useCallback, useMemo } from "react";
 import { SearchResultItem, SearchResultItemPlaceholder } from "@/components";

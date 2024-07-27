@@ -1,18 +1,17 @@
 "use client";
 import { useEffect } from "react";
-import { useAuth } from "./useAuth";
 import posthog from "posthog-js";
 import { User } from "@/types";
+import { useUser } from "./useUser";
 
 export function useIdentifyUser() {
-  const { getUser } = useAuth();
+  const user = useUser();
 
   useEffect(() => {
-    const user = getUser();
     if (user) {
       posthog.identify(user._id, { ...user });
     }
-  }, [getUser]);
+  }, [user]);
 
   function identifyUser(user: User) {
     posthog.identify(user._id, { ...user });

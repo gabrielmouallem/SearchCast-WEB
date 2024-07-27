@@ -1,8 +1,7 @@
-import api from "@/services/ApiService/ApiService";
 import { getApiURL } from ".";
 
 export async function getRefreshedAccessToken(
-  access_token: string
+  access_token: string,
 ): Promise<{ access_token: string } | null> {
   return new Promise(async (resolve, _reject) => {
     const baseURL = getApiURL(); // Retrieves the base URL from your utility function
@@ -37,7 +36,7 @@ export async function getRefreshedAccessToken(
     } catch (error) {
       console.error(
         "There was an error with the fetch /v1/refresh request:",
-        error
+        error,
       );
       resolve(null);
     }

@@ -1,4 +1,4 @@
-import { getDecodedJWT } from "@/utils"; // Import encodeToJWT function for creating JWT
+import { getDecodedJWT } from "@/utils/shared"; // Import encodeToJWT function for creating JWT
 import { useCookies } from ".";
 import { useRouter } from "next/navigation";
 import { User } from "@/types";

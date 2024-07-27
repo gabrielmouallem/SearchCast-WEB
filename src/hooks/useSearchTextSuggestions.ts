@@ -1,6 +1,6 @@
 import AutoSuggestService from "@/services/AutoSuggestService/AutoSuggestService";
 import { TSuggestions } from "@/types";
-import { getAutosuggestionIsEnabled } from "@/utils/getAutosuggestionIsEnabled";
+import { getAutosuggestionIsEnabled } from "@/utils/shared";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 

@@ -3,7 +3,7 @@ import { useSearchQuery } from "./useSearchQuery";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryState } from "next-usequerystate";
 import { flushSync } from "react-dom";
-import { executeIfExists } from "@/utils";
+import { executeIfExists } from "@/utils/shared";
 
 interface FormValues {
   text: string;

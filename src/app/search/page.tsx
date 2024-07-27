@@ -1,4 +1,3 @@
-"use client";
 import { Footer, Navbar } from "@/components";
 import { SearchEngine } from "@/components";
 import { Providers } from "@/components/Providers";
@@ -6,11 +5,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Suspense } from "react";
 import { LoadingFallback } from "@/components/LoadingFallback";
-import { useIdentifyUser } from "@/hooks";
+import { getAndIdentifyUser } from "@/utils/server/getAndIdentifyUser";
 
-function SearchContent() {
-  useIdentifyUser();
-
+async function SearchContent() {
+  await getAndIdentifyUser();
   return (
     <Providers>
       <ToastContainer />

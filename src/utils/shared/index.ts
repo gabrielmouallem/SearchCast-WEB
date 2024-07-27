@@ -10,3 +10,8 @@ export * from "./executeIfExists";
 export * from "./getPosthogEnv";
 export * from "./stringToBoolean";
 export * from "./suffleArray";
+export * from "./getAppURL";
+export * from "./getFormatTime";
+export * from "./getHighlightText";
+export * from "./getSecondsToHMS";
+export * from "./getAutosuggestionIsEnabled";

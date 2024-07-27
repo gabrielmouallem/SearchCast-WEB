@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components";
 import { ONBOARDING_SEARCH_OPTIONS } from "../../OnboardingContent.constants";
-import { shuffleArray } from "@/utils";
+import { shuffleArray } from "@/utils/shared";
 import { useMemo } from "react";
 
 interface StepThreeProps {

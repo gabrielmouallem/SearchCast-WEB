@@ -1,4 +1,3 @@
-"use client";
 import Head from "next/head";
 import { SkipOnboardingProvider } from "./hooks/useSkipOnboarding";
 

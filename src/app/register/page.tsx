@@ -1,4 +1,3 @@
-"use client";
 import { RegisterForm } from "./RegisterForm";
 import { Providers } from "@/components/Providers";
 
