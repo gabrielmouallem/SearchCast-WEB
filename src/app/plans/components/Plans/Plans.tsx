@@ -4,9 +4,14 @@ import { ToastContainer } from "react-toastify";
 import PlanCard from "../PlanCard/PlanCard";
 import FreePlanCard from "../FreePlanCard/FreePlanCard";
 import "react-toastify/dist/ReactToastify.css";
+import { useIsMounted } from "@/hooks/useIsMounted";
 
 export function Plans() {
   const { isLoading, refetch } = useRefreshAccessToken();
+
+  const isMounted = useIsMounted();
+
+  const showPlans = isMounted && !isLoading;
 
   return (
     <>
@@ -19,7 +24,7 @@ export function Plans() {
           Para poder utilizar a nossa plataforma selecione um dos planos abaixo.
         </div>
         <div className="flex w-full flex-wrap items-center justify-center gap-6">
-          {!isLoading && (
+          {showPlans && (
             <>
               <FreePlanCard />
               <PlanCard subscriptionType="month" onCancel={refetch} />
@@ -27,7 +32,7 @@ export function Plans() {
               <PlanCard subscriptionType="year" onCancel={refetch} />
             </>
           )}
-          {isLoading && (
+          {!showPlans && (
             <>
               <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />
               <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />
