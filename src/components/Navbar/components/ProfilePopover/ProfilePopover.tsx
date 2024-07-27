@@ -5,6 +5,7 @@ import { useUser } from "@/hooks";
 import { useAuth } from "@/hooks/useAuth";
 import * as Popover from "@radix-ui/react-popover";
 import { usePathname } from "next/navigation";
+import { useIsMounted } from "@/hooks/useIsMounted";
 
 interface ProfilePopoverProps {
   restrictedMode?: boolean;
@@ -14,6 +15,7 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
   const { handleLogout } = useAuth();
   const pathname = usePathname();
   const user = useUser();
+  const isMounted = useIsMounted();
 
   const name = user?.name ?? "";
   const hasAccess = user?.subscription || user?.allow_unpaid_access;
@@ -24,6 +26,10 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
     { label: "Planos", href: "/plans", condition: true },
     { label: "Ajuda", href: "/guide", condition: true },
   ];
+
+  if (!isMounted) {
+    return <Avatar name={name} isLoading />;
+  }
 
   return (
     <Popover.Root>
