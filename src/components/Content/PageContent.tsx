@@ -1,22 +1,13 @@
-"use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { Content } from ".";
 import { Button, Card, RedirectButton } from "..";
 import { ProfileCard } from "../ProfileCard/ProfileCard";
+import { RotatingWordsBanner } from "@/app/components";
 
 const words = ["facilidade", "agilidade", "precisão"];
 
 export function PageContent() {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <Content.Root>
       <Content.Section>
@@ -25,28 +16,7 @@ export function PageContent() {
             <Content.Gap gap="gap-6">
               <Content.Gap gap="gap-4">
                 <RedirectButton />
-                <div
-                  className="mx-auto max-w-4xl text-center text-3xl font-semibold leading-relaxed leading-tight tracking-tight text-text-primary md:text-6xl"
-                  style={{ lineHeight: "1.1" }}
-                >
-                  Encontre o podcast perfeito{" "}
-                  <span className="relative inline-block h-10">
-                    com <span style={{ opacity: 0 }}>agilidade</span>&nbsp;
-                    {words.map((word, index) => (
-                      <span
-                        key={index}
-                        className={`absolute left-[33%] transform transition-opacity duration-1000 ${
-                          index === currentWordIndex
-                            ? "animate-slideDown"
-                            : "animate-slideUp"
-                        }`}
-                        style={{ whiteSpace: "nowrap" }}
-                      >
-                        {word}
-                      </span>
-                    ))}
-                  </span>
-                </div>
+                <RotatingWordsBanner words={words} />
               </Content.Gap>
               <Content.Gap>
                 <div className="font-inter max-w-3xl text-center text-base font-normal leading-7 text-text-secondary md:text-xl">
