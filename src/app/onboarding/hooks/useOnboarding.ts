@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { flushSync } from "react-dom";
 import { useQueryState } from "next-usequerystate";
