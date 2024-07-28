@@ -1,5 +1,5 @@
 import { useCookies, useUser } from "@/hooks";
-import api from "@/services/ApiService/ApiService";
+import { api } from "@/services/client";
 import { TSearchResult } from "@/types";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

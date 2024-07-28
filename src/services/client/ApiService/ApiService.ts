@@ -3,7 +3,7 @@ import { getApiURL } from "@/utils/shared";
 import axios, { AxiosRequestHeaders } from "axios";
 import { CookiesService } from "../CookiesService";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: getApiURL(),
 });
 
@@ -26,5 +26,3 @@ api.interceptors.request.use((config) => {
     return config;
   }
 });
-
-export default api;
