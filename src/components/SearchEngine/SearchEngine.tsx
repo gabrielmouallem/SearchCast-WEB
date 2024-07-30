@@ -186,15 +186,14 @@ export function SearchEngine({ options }: SearchEngineProps) {
                   })}
               </React.Fragment>
             ))}
-          {showPlaceholders && (
-            <div className="mt-14">
-              {new Array(10).fill(0).map((_, index) => (
+          {showPlaceholders &&
+            new Array(10)
+              .fill(0)
+              .map((_, index) => (
                 <SearchResultItemPlaceholder
                   key={`SearchResultItemPlaceholder_${index}`}
                 />
               ))}
-            </div>
-          )}
         </div>
       </div>
     </>
