@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryState } from "next-usequerystate";
 import { flushSync } from "react-dom";
 import { executeIfExists } from "@/utils/shared";
+import { OrderByValue } from "@/types";
 
 interface FormValues {
   text: string;
@@ -14,6 +15,10 @@ interface SearchOptions {
 }
 
 export function useSearch({ options }: SearchOptions) {
+  const [orderBy, setOrderBy] = useQueryState("order_by", {
+    defaultValue: "video.publishDate.desc" satisfies OrderByValue,
+  });
+
   const [textQuery, setTextQuery] = useQueryState("text", {
     defaultValue: options?.mockedText || "",
   });
@@ -27,7 +32,14 @@ export function useSearch({ options }: SearchOptions) {
     isFetchingNextPage,
     data,
     fetchNextPage,
-  } = useSearchQuery(textQuery, options);
+  } = useSearchQuery(
+    { text: textQuery, filters: { order_by: orderBy as OrderByValue } },
+    options,
+  );
+
+  function handleOrderByChange(value: OrderByValue) {
+    setOrderBy(value);
+  }
 
   function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
     setValue("text", e.target.value);
@@ -55,6 +67,8 @@ export function useSearch({ options }: SearchOptions) {
   return {
     text,
     textQuery,
+    orderBy,
+    handleOrderByChange,
     handleTextChange,
     handleSuggestionClick,
     isError,

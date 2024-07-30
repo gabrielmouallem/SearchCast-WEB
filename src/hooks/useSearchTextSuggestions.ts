@@ -1,4 +1,4 @@
-import AutoSuggestService from "@/services/AutoSuggestService/AutoSuggestService";
+import { AutoSuggestService } from "@/services/client";
 import { TSuggestions } from "@/types";
 import { getAutosuggestionIsEnabled } from "@/utils/shared";
 import { useQuery } from "@tanstack/react-query";

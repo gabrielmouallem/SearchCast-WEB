@@ -2,9 +2,15 @@
 import Lottie from "lottie-react";
 import logoLottieFile from "../../../public/logo_lottie_animation.json";
 
-export function LoadingFallback() {
+interface LoadingFallbackProps {
+  height?: string;
+}
+
+export function LoadingFallback({ height }: LoadingFallbackProps) {
   return (
-    <div className="flex h-[100vh] w-full items-center justify-center">
+    <div
+      className={`flex ${height || "h-[100vh]"} w-full items-center justify-center`}
+    >
       <Lottie
         style={{ scale: 1.5 }}
         animationData={logoLottieFile}

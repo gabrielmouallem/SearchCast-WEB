@@ -1,6 +1,6 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import api from "@/services/ApiService/ApiService";
+import { api } from "@/services/client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useCookies } from "@/hooks";
