@@ -7,10 +7,17 @@ import Image from "next/image";
 import { getLastUpdate } from "@/utils/shared";
 import logoLottieFile from "../../../public/logo_lottie_animation.json";
 import React, { useCallback, useMemo } from "react";
-import { SearchResultItem, SearchResultItemPlaceholder } from "@/components";
+import {
+  SearchOrderBy,
+  SearchResultItem,
+  SearchResultItemPlaceholder,
+} from "@/components";
 import "react-toastify/dist/ReactToastify.css";
 import usePageBottom from "@/hooks/usePageBottom";
 import { Controller } from "react-hook-form";
+import { useIsMounted } from "@/hooks/useIsMounted";
+import { LoadingFallback } from "../LoadingFallback";
+import { OrderByValue } from "@/types";
 
 interface SearchEngineProps {
   options?: {
@@ -19,10 +26,14 @@ interface SearchEngineProps {
 }
 
 export function SearchEngine({ options }: SearchEngineProps) {
+  const isMounted = useIsMounted();
+
   const {
     text,
     textQuery,
     handleTextChange,
+    orderBy,
+    handleOrderByChange,
     handleSuggestionClick,
     control,
     data,
@@ -56,12 +67,16 @@ export function SearchEngine({ options }: SearchEngineProps) {
 
   const lastUpdate = getLastUpdate();
   const resultCount = data?.pages?.[0]?.data?.count;
-  const showResultItems = !((isLoading || isFetching) && !isFetchingNextPage);
+  const showResultItems =
+    !((isLoading || isFetching) && !isFetchingNextPage) && !!resultCount;
   const showPlaceholders = !!(isLoading || isFetching || isFetchingNextPage);
 
   const getLogoDisplayStyle = (show: boolean) => ({
     display: show ? "initial" : "none",
   });
+
+  if (!isMounted)
+    return <LoadingFallback height="[height:calc(100vh-100px)]" />;
 
   return (
     <>
@@ -126,8 +141,33 @@ export function SearchEngine({ options }: SearchEngineProps) {
             {resultCount} Resultados
           </div>
         )}
-        {!showResultItems && (
+        {showPlaceholders && (
           <div className="-my-3 h-[20px] w-[300px] animate-pulse rounded bg-gray-300 text-text-secondary" />
+        )}
+        {showPlaceholders && (
+          <div className="flex w-full items-center justify-center">
+            <div className="flex w-full max-w-[736px] items-center justify-center gap-4 sm:justify-end">
+              <div
+                className={`w-fit animate-pulse rounded-full border border-solid border-gray-300 bg-gray-300 px-4 py-2 text-sm text-gray-300`}
+              >
+                Ordenar por
+              </div>
+            </div>
+          </div>
+        )}
+        {showResultItems && (
+          <div className="flex w-full items-center justify-center">
+            <div className="flex w-full max-w-[736px] items-center justify-center gap-4 sm:justify-end">
+              <SearchOrderBy
+                disabled={showPlaceholders || !!options?.mockedText}
+                value={
+                  (orderBy as OrderByValue) ||
+                  ("video.publishDate.desc" satisfies OrderByValue)
+                }
+                onSelect={handleOrderByChange}
+              />
+            </div>
+          </div>
         )}
         <div className="flex flex-col items-center gap-16">
           {showResultItems &&
@@ -146,14 +186,15 @@ export function SearchEngine({ options }: SearchEngineProps) {
                   })}
               </React.Fragment>
             ))}
-          {showPlaceholders &&
-            new Array(10)
-              .fill(0)
-              .map((_, index) => (
+          {showPlaceholders && (
+            <div className="mt-14">
+              {new Array(10).fill(0).map((_, index) => (
                 <SearchResultItemPlaceholder
                   key={`SearchResultItemPlaceholder_${index}`}
                 />
               ))}
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -153,6 +153,14 @@ const typeofSuggestions = {
   ],
 };
 
+export type OrderByValue =
+  `${"video"}.${"viewCount" | "publishDate"}.${"asc" | "desc"}`;
+
+export interface FilterOptions<T = string> {
+  label: string;
+  value: T;
+}
+
 export interface User {
   _id: string;
   subscription?: {
