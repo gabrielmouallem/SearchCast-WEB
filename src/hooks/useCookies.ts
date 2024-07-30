@@ -1,5 +1,5 @@
 "use client";
-import { CookiesService } from "@/services/CookiesService";
+import { CookiesService } from "@/services/client";
 import { useState } from "react";
 
 export function useCookies(key: string, defaultValue: string) {

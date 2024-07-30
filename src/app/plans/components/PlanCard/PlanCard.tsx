@@ -2,7 +2,7 @@
 import React from "react";
 import { Stripe } from "@stripe/stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import api from "@/services/ApiService/ApiService";
+import { api } from "@/services/client";
 import { Button } from "@/components";
 import { toast } from "react-toastify";
 import { useUser } from "@/hooks";

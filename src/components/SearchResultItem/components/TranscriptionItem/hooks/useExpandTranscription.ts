@@ -1,5 +1,5 @@
 "use client";
-import api from "@/services/ApiService/ApiService";
+import { api } from "@/services/client";
 import { TTranscription } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 

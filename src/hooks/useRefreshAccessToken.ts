@@ -1,4 +1,4 @@
-import api from "@/services/ApiService/ApiService";
+import { api } from "@/services/client";
 import { useCookies } from ".";
 import { useQuery } from "@tanstack/react-query";
 

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import React from "react";
-import api from "@/services/ApiService/ApiService";
+import { api } from "@/services/client";
 import { getDecodedJWT } from "@/utils/shared";
 import { DecodedCredentials } from "@/types";
 

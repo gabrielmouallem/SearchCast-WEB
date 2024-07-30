@@ -2,7 +2,7 @@
 import { getBingApiKey, getBingApiURL } from "@/utils/shared";
 import axios from "axios";
 
-const AutoSuggestService = axios.create({
+export const AutoSuggestService = axios.create({
   baseURL: `${getBingApiURL()}`,
 });
 
@@ -20,5 +20,3 @@ AutoSuggestService.interceptors.request.use((config) => ({
     "Ocp-Apim-Subscription-Key": getBingApiKey(),
   } as any,
 }));
-
-export default AutoSuggestService;
