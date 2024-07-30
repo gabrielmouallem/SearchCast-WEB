@@ -10,3 +10,5 @@ export * from "./SearchResultItem";
 export * from "./SearchResultItemPlaceholder";
 export * from "./YoutubeVideo";
 export * from "./SearchEngine";
+export * from "./FilterButton";
+export * from "./SearchOrderBy";

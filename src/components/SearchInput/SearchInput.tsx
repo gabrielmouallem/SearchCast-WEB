@@ -26,7 +26,7 @@ export function SearchInput({ onSuggestionClick, ...props }: SearchInputProps) {
     <div className={`relative ${props.disabled ? "opacity-50" : ""}`}>
       <Input
         {...props}
-        className="{} w-360px rounded-md py-2 pl-3 pr-10 placeholder-text-primary md:w-500px"
+        className="w-360px rounded-md py-2 pl-3 pr-10 placeholder-text-primary md:w-500px"
         placeholder="Pesquise seu podcast"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}

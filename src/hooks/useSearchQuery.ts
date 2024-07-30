@@ -1,6 +1,6 @@
 import { useCookies, useUser } from "@/hooks";
 import api from "@/services/ApiService/ApiService";
-import { TSearchResult } from "@/types";
+import { OrderByValue, TSearchResult } from "@/types";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import posthog from "posthog-js";
@@ -11,6 +11,15 @@ import { AxiosResponse } from "axios";
 
 interface SearchQueryOptions {
   mockedText?: string;
+}
+
+interface SearchQueryFilters {
+  order_by?: OrderByValue;
+}
+
+interface useSearchQueryArgs {
+  text: string;
+  filters: SearchQueryFilters;
 }
 
 function getMockedDataForText(text: MockedTextOptions) {
@@ -25,18 +34,23 @@ function getMockedDataForText(text: MockedTextOptions) {
   } as AxiosResponse;
 }
 
-export function useSearchQuery(text: string, options?: SearchQueryOptions) {
+export function useSearchQuery(
+  { text, filters }: useSearchQueryArgs,
+  options?: SearchQueryOptions,
+) {
   const user = useUser();
   const router = useRouter();
   const cookies = useCookies("access_token", "");
 
   async function fetch({
     text,
+    filters,
     pageParam,
     signal,
     ...rest
   }: {
     text: string;
+    filters: SearchQueryFilters;
     pageParam: number;
     signal: AbortSignal;
   }) {
@@ -66,8 +80,8 @@ export function useSearchQuery(text: string, options?: SearchQueryOptions) {
       });
     }
     return api
-      .get<TSearchResult | undefined>("/v1/search_by_video", {
-        params: { text, page: pageParam, ...rest },
+      .get<TSearchResult | undefined>("/v1/search", {
+        params: { text, page: pageParam, ...filters, ...rest },
         signal,
       })
       .catch((err) => {
@@ -100,8 +114,9 @@ export function useSearchQuery(text: string, options?: SearchQueryOptions) {
   }
 
   return useInfiniteQuery({
-    queryKey: [`search`, text],
-    queryFn: ({ pageParam, signal }) => fetch({ text, pageParam, signal }),
+    queryKey: [`search`, text, filters],
+    queryFn: ({ pageParam, signal }) =>
+      fetch({ text, filters, pageParam, signal }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (!lastPage?.data?.results) return 1;
