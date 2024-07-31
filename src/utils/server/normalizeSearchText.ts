@@ -4,12 +4,10 @@ import natural from "natural";
 
 const stemmer = natural.PorterStemmerPt;
 
-// Função para remover símbolos não intencionais
 function removeUnintendedSymbols(text: string): string {
   return text.replace(/[^\w\s]/gi, "");
 }
 
-// Função para normalizar o texto de pesquisa
 export async function normalizeSearchText(text: string): Promise<string> {
   const sanitizedText = removeUnintendedSymbols(text);
 
