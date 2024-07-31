@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@radix-ui/react-popover": "^1.1.1",
+    "@radix-ui/react-tooltip": "^1.1.2",
     "@react-oauth/google": "^0.12.1",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.3.0",
@@ -26,6 +27,7 @@
     "jwt-decode": "^4.0.0",
     "jwt-encode": "^1.0.1",
     "lottie-react": "^2.4.0",
+    "natural": "^7.1.0",
     "next": "^15.0.0-rc.0",
     "next-usequerystate": "^1.17.4",
     "posthog-js": "^1.147.0",
