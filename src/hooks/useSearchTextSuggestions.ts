@@ -16,7 +16,7 @@ export function useSearchTestSuggestions(textToDebounce: string) {
         return res.data;
       })
       .catch((err) => {
-        return err;
+        throw err;
       });
   }
 

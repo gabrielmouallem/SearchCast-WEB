@@ -92,24 +92,34 @@ export function useSearchQuery(
           router.push("/login");
           posthog.reset();
         }
-        if (typeof err?.response?.status === "number") {
-          toast(
-            "Erro ao realizar pesquisa. Tente procurar por algo mais específico ou tente novamente.",
-            {
-              position: "top-right",
-              autoClose: 8000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-              type: "error",
-            },
-          );
-        }
-        console.error(err); // Re-throw the error to indicate that the query has failed
-        return undefined;
+        toast(
+          <div>
+            Erro. Tente
+            <span className="whitespace-nowrap"> palavras-chave </span>
+            mais específicas, consulte nosso
+            <a
+              href="/guide"
+              className="cursor-pointer text-blue-500"
+              target="_blank"
+            >
+              {" "}
+              guia{" "}
+            </a>
+            ou tente novamente.
+          </div>,
+          {
+            position: "top-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            type: "error",
+          },
+        );
+        throw err; // Re-throw the error to indicate that the query has failed
       });
   }
 
@@ -129,6 +139,7 @@ export function useSearchQuery(
     enabled: !!text?.length,
     refetchOnWindowFocus: false,
     refetchInterval: Infinity,
+    retry: false,
     refetchOnMount: false,
     staleTime: 1 * 1000 * 60 * 60, // 1 hour
     placeholderData: keepPreviousData,

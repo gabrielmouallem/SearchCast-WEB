@@ -1,6 +1,6 @@
 "use client";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Query, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
@@ -42,10 +42,21 @@ const QueryProvider = ({ children }: ProvidersProps) => {
     );
   }
 
+  // Prevent caching of erroneous or empty data queries.
+  // This ensures that retries can be performed to retrieve the correct data without being affected by previous errors.
+  const shouldDehydrateQuery = ({ state }: Query) => {
+    return !!state?.data;
+  };
+
   return (
     <PersistQueryClientProvider
       client={queryClient}
-      persistOptions={{ persister }}
+      persistOptions={{
+        persister,
+        dehydrateOptions: {
+          shouldDehydrateQuery,
+        },
+      }}
     >
       {children}
     </PersistQueryClientProvider>
