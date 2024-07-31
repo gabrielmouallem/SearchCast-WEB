@@ -10,6 +10,7 @@ const resend = new Resend(""); // fill the resend api key
       __dirname,
       "..",
       "templates",
+      "email",
       "", // fill the template here, ex: "welcome-leads-email-template.html" from the templates folder
     );
     const htmlTemplate = fs.readFileSync(templatePath, "utf8");
