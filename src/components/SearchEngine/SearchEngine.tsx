@@ -72,6 +72,10 @@ export function SearchEngine({ options }: SearchEngineProps) {
   const resultCount = data?.pages?.[0]?.data?.count;
   const showResultItems =
     !((isLoading || isFetching) && !isFetchingNextPage) && !!resultCount;
+  const showNoResultsFound =
+    !((isLoading || isFetching) && !isFetchingNextPage) && !resultCount;
+
+  console.log({ showNoResultsFound });
   const showPlaceholders = !!(isLoading || isFetching || isFetchingNextPage);
 
   const getLogoDisplayStyle = (show: boolean) => ({
@@ -202,6 +206,25 @@ export function SearchEngine({ options }: SearchEngineProps) {
                   key={`SearchResultItemPlaceholder_${index}`}
                 />
               ))}
+          {showNoResultsFound && (
+            <div className="w-full text-center text-sm text-text-secondary">
+              Nenhum resultado encontrado, experimente a:
+              <div>
+                <div>
+                  <button
+                    className="mt-2 text-text-primary"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleImproveClick(text);
+                    }}
+                  >
+                    ✨ <u>Pesquisa aprimorada</u>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
