@@ -72,10 +72,9 @@ export function SearchEngine({ options }: SearchEngineProps) {
   const resultCount = data?.pages?.[0]?.data?.count;
   const showResultItems =
     !((isLoading || isFetching) && !isFetchingNextPage) && !!resultCount;
-  const showNoResultsFound =
+  const noResultsFound =
     !((isLoading || isFetching) && !isFetchingNextPage) && !resultCount;
 
-  console.log({ showNoResultsFound });
   const showPlaceholders = !!(isLoading || isFetching || isFetchingNextPage);
 
   const getLogoDisplayStyle = (show: boolean) => ({
@@ -140,7 +139,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
                 onImproveTextSearchClick={handleImproveClick}
                 onChange={handleTextChange}
                 disabled={showPlaceholders || !!options?.mockedText}
-                isError={isError}
+                showImproveTextActions={isError || noResultsFound}
               />
             )}
           />
@@ -206,7 +205,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
                   key={`SearchResultItemPlaceholder_${index}`}
                 />
               ))}
-          {showNoResultsFound && (
+          {noResultsFound && (
             <div className="w-full text-center text-sm text-text-secondary">
               Nenhum resultado encontrado, experimente a:
               <div>
@@ -219,7 +218,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
                       handleImproveClick(text);
                     }}
                   >
-                    ✨ <u>Pesquisa aprimorada</u>
+                    ✨ <u>Pesquisa Aprimorada</u>
                   </button>
                 </div>
               </div>

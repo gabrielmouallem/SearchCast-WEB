@@ -8,11 +8,11 @@ import { Input } from "@/components/Input";
 type SearchInputProps = React.ComponentProps<"input"> & {
   onSuggestionClick?: (value: string) => void;
   onImproveTextSearchClick?: (value: string) => void;
-  isError: boolean;
+  showImproveTextActions: boolean;
 };
 
 export function SearchInput({
-  isError,
+  showImproveTextActions,
   onSuggestionClick,
   onImproveTextSearchClick,
   ...props
@@ -24,7 +24,7 @@ export function SearchInput({
   const showImproveTextButton = !!(
     textValue?.length &&
     !props.disabled &&
-    isError
+    showImproveTextActions
   );
 
   useEffect(() => {
