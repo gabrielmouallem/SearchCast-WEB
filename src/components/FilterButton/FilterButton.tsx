@@ -1,5 +1,7 @@
+"use client";
 import { FilterOptions } from "@/types";
 import * as Popover from "@radix-ui/react-popover";
+import { useState } from "react";
 
 interface FilterButtonProps<T = string> {
   disabled?: boolean;
@@ -16,14 +18,22 @@ export function FilterButton<T = string>({
   value,
   onSelect,
 }: FilterButtonProps<T>) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClose = () => setIsOpen(false);
+
+  const handleToggle = () => setIsOpen((state) => !state);
+
   const handleClick = (optionValue: T) => () => {
     onSelect(optionValue);
+    setIsOpen(false);
   };
 
   return (
-    <Popover.Root>
+    <Popover.Root open={isOpen}>
       <Popover.Trigger asChild>
         <button
+          onClick={handleToggle}
           title={disabled ? "Funcionalidade indisponível" : ""}
           disabled={disabled}
           className={`w-fit rounded-full border border-solid border-border bg-background px-4 py-2 text-sm text-gray-300 hover:border-gray-600 disabled:pointer-events-none disabled:opacity-30`}
@@ -36,6 +46,7 @@ export function FilterButton<T = string>({
         align="center"
         side="bottom"
         sideOffset={5}
+        onInteractOutside={handleClose}
       >
         <ul className="mt-2 max-h-96 scroll-m-0 overflow-auto">
           {options.map(({ value: optionValue, label: optionLabel }, index) => {
@@ -46,11 +57,10 @@ export function FilterButton<T = string>({
               <li
                 onClick={handleClick(optionValue)}
                 key={index}
-                className={`z-50 cursor-pointer border-b px-3 py-2 hover:bg-slate-900 ${
+                className={`z-50 cursor-pointer border-b px-3 py-2 text-sm text-gray-300 hover:bg-slate-900 ${
                   options.length - 1 !== index ? "border-border" : "border-none"
-                } ${isSelected ? "bg-slate-900" : ""}`}
+                } ${isSelected ? "bg-slate-800 hover:bg-slate-800" : ""}`}
               >
-                {isSelected ? "• " : "◦ "}
                 {optionLabel}
               </li>
             );

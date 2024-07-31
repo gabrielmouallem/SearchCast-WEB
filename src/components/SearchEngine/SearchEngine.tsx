@@ -18,6 +18,7 @@ import { Controller } from "react-hook-form";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { LoadingFallback } from "../LoadingFallback";
 import { OrderByValue } from "@/types";
+import { ORDER_BY_VALUE_TO_LABEL_MAP } from "../SearchOrderBy/SearchOrderBy.constants";
 
 interface SearchEngineProps {
   options?: {
@@ -150,7 +151,10 @@ export function SearchEngine({ options }: SearchEngineProps) {
               <div
                 className={`w-fit animate-pulse rounded-full border border-solid border-gray-300 bg-gray-300 px-4 py-2 text-sm text-gray-300`}
               >
-                Ordenar por
+                Ordenar por:
+                {ORDER_BY_VALUE_TO_LABEL_MAP?.[
+                  orderBy as OrderByValue
+                ]?.toLowerCase() || ""}
               </div>
             </div>
           </div>
