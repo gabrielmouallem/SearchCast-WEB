@@ -4,7 +4,7 @@ import { getAutosuggestionIsEnabled } from "@/utils/shared";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 
-export function useSearchTestSuggestions(textToDebounce: string) {
+export function useSearchTextSuggestions(textToDebounce: string) {
   const text = useDebounce(textToDebounce, 500);
 
   function fetch({ text, signal }: { text: string; signal: AbortSignal }) {
