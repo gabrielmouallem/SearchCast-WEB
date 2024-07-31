@@ -56,7 +56,9 @@ export function SearchInput({
         </button>
       </div>
       {isFocused && suggestions.length > 0 && (
-        <ul className="absolute z-50 mt-2 w-360px rounded-md border border-solid border-border bg-background py-3 text-text-primary md:w-500px">
+        <ul
+          className={`absolute top-[48px] z-50 mx-4 w-[calc(100%-24px)] rounded-md border border-solid border-border bg-background py-3 text-text-primary [translate-y:50%] ${showImproveTextButton ? "md:mr-[52px]" : ""} md:w-500px`}
+        >
           {suggestions.map((suggestion, index) => (
             <li
               key={index}
