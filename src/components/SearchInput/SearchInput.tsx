@@ -80,6 +80,7 @@ export function SearchInput({
             <Tooltip.Trigger>
               <button
                 onClick={(e) => {
+                  if (props.disabled) return;
                   e.preventDefault();
                   e.stopPropagation();
                   onImproveTextSearchClick?.(textValue);

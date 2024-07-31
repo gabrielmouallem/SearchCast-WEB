@@ -73,7 +73,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
   const showResultItems =
     !((isLoading || isFetching) && !isFetchingNextPage) && !!resultCount;
   const noResultsFound =
-    !((isLoading || isFetching) && !isFetchingNextPage) && !resultCount;
+    !isLoading && !!data?.pages?.[0].data && !data?.pages?.[0].data?.count;
 
   const showPlaceholders = !!(isLoading || isFetching || isFetchingNextPage);
 
