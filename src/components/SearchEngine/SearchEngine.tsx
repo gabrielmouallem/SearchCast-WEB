@@ -88,7 +88,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
     <>
       <ToastContainer />
       <div
-        className={`flex flex-grow flex-col items-center gap-8 ${debouncedTextClases}`}
+        className={`flex flex-grow flex-col items-center gap-8 ${debouncedTextClases} pb-20`}
       >
         <Lottie
           style={getLogoDisplayStyle(isFetching)}
