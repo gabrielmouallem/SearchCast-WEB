@@ -128,81 +128,54 @@ export function GuideContent() {
         {'"cybertruck"'}.
       </p>
 
-      <h2 className="my-6 text-2xl font-bold">
-        Exemplos de Palavras-Chave Eficientes
-      </h2>
+      <h2 className="my-6 text-2xl font-bold">Utilize o Stemming</h2>
+      <p className="my-6">
+        Um stemmer em português é uma ferramenta ou algoritmo que reduz as
+        palavras ao seu radical ou raiz. A ideia principal é transformar
+        diferentes formas de uma palavra em uma forma base ou raiz, eliminando
+        sufixos, prefixos e outros morfemas que não são essenciais para o
+        significado básico da palavra. Isso é especialmente útil em tarefas de
+        processamento de linguagem natural (NLP), como a indexação de
+        documentos, busca e recuperação de informações, e análise de texto.
+      </p>
 
-      <h3 className="mb-2 text-xl font-bold">Tecnologia e Inovação</h3>
+      <p className="my-6">
+        <b>Exemplos de Stemming em Português:</b>
+      </p>
       <ul className="my-6 list-inside list-disc">
-        <li>chat gpt</li>
-        <li>inteligência artificial</li>
-        <li>elon musk</li>
-        <li>cyber truck</li>
-        <li>5g brasil</li>
-        <li>criptomoeda</li>
-        <li>startup brasileira</li>
-        <li>privacidade dado</li>
+        <li>
+          <b>Palavra original:</b> {"correndo"} <b>Raiz (stem):</b> {"corr"}
+        </li>
+        <li>
+          <b>Palavra original:</b> {"correr"} <b>Raiz (stem):</b> {"corr"}
+        </li>
+        <li>
+          <b>Palavra original:</b> {"corrida"} <b>Raiz (stem):</b> {"corr"}
+        </li>
+        <li>
+          <b>Palavra original:</b> {"corredores"} <b>Raiz (stem):</b> {"corr"}
+        </li>
       </ul>
 
-      <h3 className="mb-2 text-xl font-bold">Saúde e Bem-Estar</h3>
+      <p className="my-6">
+        <b>Importância do Stemming:</b>
+      </p>
       <ul className="my-6 list-inside list-disc">
-        <li>meditação</li>
-        <li>saúde mental</li>
-        <li>ansiedade</li>
-        <li>depressão</li>
-        <li>terapia alternativa</li>
-        <li>terapia online</li>
-        <li>burnout</li>
-        <li>dengue</li>
-      </ul>
-
-      <h3 className="mb-2 text-xl font-bold">Cultura, Política e Sociedade</h3>
-      <ul className="my-6 list-inside list-disc">
-        <li>eleições municipais</li>
-        <li>anitta</li>
-        <li>privatiza praia</li>
-        <li>reforma tributária</li>
-        <li>marco temporal</li>
-        <li>congresso nacional</li>
-        <li>endrick</li>
-        <li>política inclusão</li>
-        <li>meio ambiente</li>
-      </ul>
-
-      <h3 className="mb-2 text-xl font-bold">Esportes e Entretenimento</h3>
-      <ul className="my-6 list-inside list-disc">
-        <li>gta 6</li>
-        <li>copa feminina</li>
-        <li>flamengo</li>
-        <li>palmeiras</li>
-        <li>neymar</li>
-        <li>melhor série</li>
-        <li>olimpíadas paris</li>
-        <li>oscar</li>
-      </ul>
-
-      <h3 className="mb-2 text-xl font-bold">Ciência e Espaço</h3>
-      <ul className="my-6 list-inside list-disc">
-        <li>spacex</li>
-        <li>missão artemis</li>
-        <li>james web</li>
-        <li>explora marte</li>
-        <li>buraco negro</li>
-        <li>amazônia</li>
-        <li>mudança climática</li>
-        <li>astrobiologia</li>
-      </ul>
-
-      <h3 className="mb-2 text-xl font-bold">Economia e Negócios</h3>
-      <ul className="my-6 list-inside list-disc">
-        <li>empreendedorismo</li>
-        <li>vaga tecnologia</li>
-        <li>maior salario</li>
-        <li>mercado imobiliário</li>
-        <li>inflação brasil</li>
-        <li>taxa selic</li>
-        <li>ensino híbrido</li>
-        <li>intercâmbio</li>
+        <li>
+          <b>Melhora a busca e recuperação de informações:</b> Ao reduzir as
+          palavras à sua forma base, um sistema de busca pode encontrar todas as
+          variantes de uma palavra, aumentando a relevância dos resultados.
+        </li>
+        <li>
+          <b>Reduz a dimensionalidade dos dados:</b> Em análise de texto, ter
+          menos variantes de uma palavra diminui o número total de palavras
+          únicas (ou tokens), facilitando a análise e processamento.
+        </li>
+        <li>
+          <b>Consistência na análise:</b> Facilita a comparação de textos e a
+          identificação de temas e tópicos, pois diferentes formas de uma
+          palavra são tratadas como a mesma unidade.
+        </li>
       </ul>
 
       <p className="mt-8">

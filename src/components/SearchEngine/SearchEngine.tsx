@@ -36,8 +36,10 @@ export function SearchEngine({ options }: SearchEngineProps) {
     orderBy,
     handleOrderByChange,
     handleSuggestionClick,
+    handleImproveClick,
     control,
     data,
+    isError,
     isLoading,
     isFetching,
     isFetchingNextPage,
@@ -131,8 +133,10 @@ export function SearchEngine({ options }: SearchEngineProps) {
                 }
                 value={text}
                 onSuggestionClick={handleSuggestionClick}
+                onImproveTextSearchClick={handleImproveClick}
                 onChange={handleTextChange}
                 disabled={showPlaceholders || !!options?.mockedText}
+                isError={isError}
               />
             )}
           />
