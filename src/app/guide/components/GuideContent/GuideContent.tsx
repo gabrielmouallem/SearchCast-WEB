@@ -144,16 +144,16 @@ export function GuideContent() {
       </p>
       <ul className="my-6 list-inside list-disc">
         <li>
-          <b>Palavra original:</b> "correndo" <b>Raiz (stem):</b> "corr"
+          <b>Palavra original:</b> {"correndo"} <b>Raiz (stem):</b> {"corr"}
         </li>
         <li>
-          <b>Palavra original:</b> "correr" <b>Raiz (stem):</b> "corr"
+          <b>Palavra original:</b> {"correr"} <b>Raiz (stem):</b> {"corr"}
         </li>
         <li>
-          <b>Palavra original:</b> "corrida" <b>Raiz (stem):</b> "corr"
+          <b>Palavra original:</b> {"corrida"} <b>Raiz (stem):</b> {"corr"}
         </li>
         <li>
-          <b>Palavra original:</b> "corredores" <b>Raiz (stem):</b> "corr"
+          <b>Palavra original:</b> {"corredores"} <b>Raiz (stem):</b> {"corr"}
         </li>
       </ul>
 
