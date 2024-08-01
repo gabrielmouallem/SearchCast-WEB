@@ -1,6 +1,7 @@
 import { AutoSuggestService } from "@/services/client";
 import { TSuggestions } from "@/types";
 import { getAutosuggestionIsEnabled } from "@/utils/shared";
+import { normalizeTextForSearch } from "@/utils/shared/normalizeTextForSearch";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 
@@ -12,7 +13,21 @@ export function useSearchTextSuggestions(textToDebounce: string) {
       params: { q: text, mkt: "pt-BR" },
       signal,
     })
-      .then((res) => {
+      .then(async (res) => {
+        let response = res;
+        response.data.suggestionGroups = response.data.suggestionGroups.map(
+          (el) => ({
+            ...el,
+            searchSuggestions: el.searchSuggestions.map((el) => {
+              const { displayText } = el;
+              const normalizedDisplayText = normalizeTextForSearch(displayText);
+              return {
+                ...el,
+                displayText: normalizedDisplayText,
+              };
+            }),
+          }),
+        );
         return res.data;
       })
       .catch((err) => {

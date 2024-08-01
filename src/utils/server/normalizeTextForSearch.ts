@@ -1,14 +1,11 @@
 "use server";
 import { stopwordsPtBr } from "@/constants";
 import natural from "natural";
+import { removeUnintendedSymbols } from "../shared/removeUnintendedSymbols";
 
 const stemmer = natural.PorterStemmerPt;
 
-function removeUnintendedSymbols(text: string): string {
-  return text.replace(/[^\w\s]/gi, "");
-}
-
-export async function normalizeSearchText(text: string): Promise<string> {
+export async function normalizeTextForSearch(text: string): Promise<string> {
   const sanitizedText = removeUnintendedSymbols(text);
 
   const noDiacriticsText = natural.removeDiacritics(sanitizedText);

@@ -5,7 +5,7 @@ import { useQueryState } from "next-usequerystate";
 import { flushSync } from "react-dom";
 import { executeIfExists } from "@/utils/shared";
 import { OrderByValue } from "@/types";
-import { normalizeSearchText } from "@/utils/server/normalizeSearchText";
+import { normalizeTextForSearch } from "@/utils/server/normalizeTextForSearch";
 
 interface FormValues {
   text: string;
@@ -60,7 +60,7 @@ export function useSearch({ options }: SearchOptions) {
   function handleImproveClick(value: string) {
     executeIfExists(value, (validValue) => {
       flushSync(async () => {
-        const normalizedText = await normalizeSearchText(validValue);
+        const normalizedText = await normalizeTextForSearch(validValue);
         console.log({ validValue, normalizedText });
         setTextQuery(normalizedText);
         setValue("text", normalizedText);

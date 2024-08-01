@@ -1,3 +1,4 @@
+"use server";
 import { cookies } from "next/headers";
 import { getDecodedJWT } from "@/utils/shared"; // Adjust the import path as needed
 import { User } from "@/types";
