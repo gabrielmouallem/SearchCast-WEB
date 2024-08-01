@@ -1,6 +1,7 @@
 namespace NodeJS {
   interface ProcessEnv {
-    NODE_ENV: string;
+    NODE_ENV: "development" | "production" | "local";
+    NEXT_PUBLIC_MONGO_URI: string;
     NEXT_PUBLIC_APP_URL: string;
     NEXT_PUBLIC_API_URL: string;
     NEXT_PUBLIC_BING_API_KEY: string;
