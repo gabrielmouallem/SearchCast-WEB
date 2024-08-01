@@ -297,14 +297,19 @@ export function PageContent() {
                 </div>
               </Content.Gap>
               <div className="font-inter max-w-3xl text-center text-xl font-normal leading-7 text-text-secondary">
-                Nosso time está aqui para atende-lo.
+                Nosso time está aqui para atendê-lo.
               </div>
             </Content.Gap>
-            <div className="flex flex-wrap items-center justify-center gap-6">
+            <div className="flex flex-wrap items-center justify-between gap-20">
               <Card
                 iconSrc="/email_icon.svg"
                 title="Email"
                 description="contato@searchcast.app"
+              />
+              <Card
+                iconSrc="/instagram_icon.svg"
+                title="Instagram"
+                description="@search.cast"
               />
             </div>
           </Content.Gap>
