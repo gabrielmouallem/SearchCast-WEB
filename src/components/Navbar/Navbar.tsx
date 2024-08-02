@@ -30,7 +30,7 @@ export function Navbar({ isAuthenticated, restrictedMode }: NavbarProps) {
         <Image
           className="ml-8 block sm:hidden"
           src="/logo.svg"
-          width={65}
+          width={50}
           height={30}
           alt="SearchCast Logo"
         />
