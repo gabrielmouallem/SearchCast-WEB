@@ -15,6 +15,18 @@ export function PageContent() {
           <Content.Gap gap="gap-12">
             <Content.Gap gap="gap-6">
               <Content.Gap gap="gap-4">
+                <a
+                  className="flex w-full cursor-pointer items-center justify-center"
+                  href="/login"
+                >
+                  <Image
+                    className="mb-4 block sm:hidden"
+                    src="/logo_w_name.svg"
+                    width={230}
+                    height={30}
+                    alt="SearchCast Logo"
+                  />
+                </a>
                 <RedirectButton />
                 <RotatingWordsBanner words={words} />
               </Content.Gap>
@@ -32,24 +44,19 @@ export function PageContent() {
                 </Button>
               </a>
 
-              <a
-                href={
-                  "mailto:contato@searchcast.app?subject=Assunto%20da%20Mensagem&body=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20SearchCast.%20Obrigado!"
-                }
-                target="_blank"
-              >
+              <a href="/register">
                 <Button className="w-72 !bg-brand px-4 py-4 text-lg md:w-auto">
-                  Entre em contato
+                  Experimentar
                 </Button>
               </a>
             </div>
           </Content.Gap>
-          <div className="flex items-center justify-center">
+          <div className="mx-auto flex max-w-[1115px] items-center justify-center">
             <video
               autoPlay
               muted
               loop
-              className="w-[98%] rounded-3xl border-2 border-black lg:w-[60%]"
+              className="w-full rounded-3xl"
               src="/searchcast_motion_design.mp4"
               controls
             />
@@ -203,7 +210,7 @@ export function PageContent() {
         </div>
       </Content.Section>
       <Content.Section>
-        <div className="flex flex-col items-center justify-center gap-4 border-t border-gray-800 bg-background py-16 text-center md:mx-16 md:py-24">
+        <div className="mx-auto my-10 flex max-w-[1115px] flex-col items-center justify-center gap-4 border-t border-gray-800 bg-background py-16 text-center md:py-24">
           <Content.Gap gap="gap-16">
             <Content.Gap gap="gap-5">
               <Content.Gap gap="gap-3">
@@ -239,23 +246,22 @@ export function PageContent() {
         </div>
       </Content.Section>
       <Content.Section>
-        <Content.Gap
-          gap="gap-8"
-          className="-mx-8 flex content-center items-center bg-dark-gray py-24 text-center"
-        >
-          <div className="leading-15 max-w-6xl text-5xl font-normal tracking-tight md:ml-8">
-            “A plataforma me ajudou a encontrar vários podcast sobre os assuntos
-            desejados”
-          </div>
-          <ProfileCard
-            profileSrc="/sample_user_avatar.png"
-            name="Pedro freitas"
-            role="Editor de vídeo"
-          />
-        </Content.Gap>
+        <div className="mx-auto flex max-w-[1115px] flex-col items-center justify-center gap-4 rounded-2xl bg-dark-gray px-4 py-8 text-center md:px-8 md:py-20">
+          <Content.Gap gap="gap-8">
+            <div className="leading-15 max-w-3xl text-2xl font-normal tracking-tight md:ml-8 md:text-4xl">
+              “A plataforma me ajudou a encontrar vários podcast sobre os
+              assuntos desejados”
+            </div>
+            <ProfileCard
+              profileSrc="/sample_user_avatar.png"
+              name="Pedro freitas"
+              role="Editor de vídeo"
+            />
+          </Content.Gap>
+        </div>
       </Content.Section>
       <Content.Section>
-        <div className="my-16 flex flex-col items-center justify-center gap-4 rounded-2xl bg-dark-gray px-4 py-8 text-center md:px-8 md:py-8">
+        <div className="mx-auto my-16 flex max-w-[1115px] flex-col items-center justify-center gap-4 rounded-2xl bg-dark-gray px-4 py-8 text-center md:px-8 md:py-20">
           <Content.Gap gap="gap-8">
             <Image
               src="/avatar_group_icon.svg"
@@ -287,7 +293,7 @@ export function PageContent() {
         </div>
       </Content.Section>
       <Content.Section>
-        <div className="flex flex-col items-center justify-center gap-4 border-t border-gray-800 bg-background py-16 text-center md:mx-16 md:py-24">
+        <div className="mx-auto flex max-w-[1115px] flex-col items-center justify-center gap-4 border-t border-gray-800 bg-background py-16 text-center md:py-24">
           <Content.Gap gap="gap-16">
             <Content.Gap gap="gap-5">
               <Content.Gap gap="gap-3">
@@ -300,7 +306,7 @@ export function PageContent() {
                 Nosso time está aqui para atendê-lo.
               </div>
             </Content.Gap>
-            <div className="flex flex-wrap items-center justify-between gap-20">
+            <div className="flex flex-wrap items-center justify-center gap-10">
               <Card
                 iconSrc="/email_icon.svg"
                 title="Email"

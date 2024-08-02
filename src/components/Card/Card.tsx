@@ -8,7 +8,7 @@ interface CardProps {
 
 export function Card({ iconSrc, title, description }: CardProps) {
   return (
-    <div className="flex flex-1 flex-col content-center items-center gap-5 text-center">
+    <div className="flex min-w-[200px] max-w-[260px] flex-1 flex-col content-center items-center gap-5 text-center">
       <Image
         src={iconSrc}
         width={48}

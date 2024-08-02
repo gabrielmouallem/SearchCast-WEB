@@ -15,3 +15,4 @@ export * from "./getFormatTime";
 export * from "./getHighlightText";
 export * from "./getSecondsToHMS";
 export * from "./getAutosuggestionIsEnabled";
+export * from "./getGoogleEnvVars";
