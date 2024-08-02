@@ -17,6 +17,7 @@ const PROTECTED_ROUTES_PATHNAMES = [
 const PAGES_THAT_SHOULD_NOT_RENDER_WHILE_AUTHENTICATED = [
   "/forgot-password",
   "/login",
+  "/register",
 ];
 
 function setAccessToken(req: any, value: string) {
