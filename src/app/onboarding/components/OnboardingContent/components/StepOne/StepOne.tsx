@@ -15,9 +15,13 @@ export function StepOne({ handleNext }: StepOneProps) {
       exit={{ opacity: 0 }}
     >
       <div className="mx-auto flex max-w-xl flex-col items-center justify-center space-y-8 rounded-lg p-8 text-center">
-        <Image src="/logo.svg" width={80} height={50} alt="SearchCast Logo" />
-        <h1 className="text-3xl font-bold">Bem-vindo ao SearchCast!</h1>
-        <p className="text-lg">
+        <Image
+          src="/logo_w_name.svg"
+          width={400}
+          height={50}
+          alt="SearchCast Logo"
+        />
+        <p className="text-lg font-extralight opacity-95">
           O SearchCast é a plataforma ideal para encontrar os momentos mais
           relevantes dos seus podcasts favoritos. Encontre exatamente o que você
           quer ouvir em poucos cliques.

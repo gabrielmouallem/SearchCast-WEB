@@ -18,7 +18,9 @@ export function StepTwo({ handleNext }: StepTwoProps) {
       <div className="mx-auto flex max-w-xl flex-col items-center justify-center space-y-8 rounded-lg p-8 text-center">
         <Image src="/logo.svg" width={80} height={50} alt="SearchCast Logo" />
         <h2 className="text-3xl font-bold">Queremos saber mais sobre você</h2>
-        <p>Escolha uma opção que melhor descreve você:</p>
+        <p className="text-lg font-extralight opacity-95">
+          Escolha uma opção que melhor descreve você:
+        </p>
         <div className="flex flex-col items-center justify-center gap-4">
           <AnimatePresence>
             {ONBOARDING_OPTIONS.map((option, index) => (

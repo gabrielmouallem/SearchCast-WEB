@@ -3,12 +3,16 @@ import { Button } from "@/components";
 import { ONBOARDING_SEARCH_OPTIONS } from "../../OnboardingContent.constants";
 import { shuffleArray } from "@/utils/shared";
 import { useMemo } from "react";
+import { useIsMounted } from "@/hooks/useIsMounted";
+import { LoadingFallback } from "@/components/LoadingFallback";
 
 interface StepThreeProps {
   handleSearch: (keyword: string) => void;
 }
 
 export function StepThree({ handleSearch }: StepThreeProps) {
+  const isMounted = useIsMounted();
+
   const shuffledSearchOptions = useMemo(() => {
     const shuffled = shuffleArray(Object.entries(ONBOARDING_SEARCH_OPTIONS));
     return shuffled.map(([category, options]) => ({
@@ -16,6 +20,8 @@ export function StepThree({ handleSearch }: StepThreeProps) {
       options: shuffleArray(options),
     }));
   }, []);
+
+  if (!isMounted) return <LoadingFallback />;
 
   return (
     <motion.div
@@ -26,7 +32,7 @@ export function StepThree({ handleSearch }: StepThreeProps) {
     >
       <div className="mx-auto flex max-w-xl flex-col items-center justify-center space-y-8 rounded-lg p-8 text-center">
         <h2 className="text-3xl font-bold">Faça sua pesquisa!</h2>
-        <p className="text-lg">
+        <p className="text-lg font-extralight opacity-95">
           Aqui está sua chance de testar nossa plataforma. Faça uma pesquisa
           selecionando uma das palavras-chave sugeridas.
         </p>
