@@ -2,6 +2,7 @@
 import { FilterOptions } from "@/types";
 import * as Popover from "@radix-ui/react-popover";
 import { useState, useRef, useEffect } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface FilterButtonProps<T = string> {
   disabled?: boolean;
@@ -21,6 +22,7 @@ export function FilterButton<T = string>({
   const [isOpen, setIsOpen] = useState(false);
   const [width, setWidth] = useState<number | null>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const button = buttonRef.current;
@@ -58,15 +60,39 @@ export function FilterButton<T = string>({
     setIsOpen(false);
   };
 
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    onSelect(event.target.value as unknown as T);
+  };
+
+  if (isMobile) {
+    return (
+      <select
+        disabled={disabled}
+        value={value ? (value as string) : ""}
+        onChange={handleSelectChange}
+        className={`w-fit appearance-none rounded-full border border-solid border-border bg-background px-4 py-2 pr-4 text-sm text-gray-300 hover:border-gray-600 disabled:pointer-events-none disabled:opacity-30`}
+      >
+        <option value="" disabled>
+          {children}
+        </option>
+        {options.map(({ value: optionValue, label: optionLabel }, index) => (
+          <option key={index} value={optionValue as unknown as string}>
+            Ordenar por: {optionLabel?.toLowerCase()}
+          </option>
+        ))}
+      </select>
+    );
+  }
+
   return (
     <Popover.Root open={isOpen}>
       <Popover.Trigger asChild>
         <button
+          className={`w-fit rounded-full border border-solid border-border bg-background px-4 py-2 text-sm text-gray-300 hover:border-gray-600 disabled:pointer-events-none disabled:opacity-30`}
           ref={buttonRef}
           onClick={handleToggle}
           title={disabled ? "Funcionalidade indisponível" : ""}
           disabled={disabled}
-          className={`w-fit rounded-full border border-solid border-border bg-background px-4 py-2 text-sm text-gray-300 hover:border-gray-600 disabled:pointer-events-none disabled:opacity-30`}
         >
           {children}
         </button>
