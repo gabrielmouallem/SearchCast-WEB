@@ -1,4 +1,4 @@
-import React, { ComponentProps, useState } from "react";
+import React, { ComponentProps, useEffect, useState } from "react";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { Spinner } from "@/components";
 
@@ -40,6 +40,10 @@ export function CopyToClipboard({ text }: { text: string }) {
 
   const handleHover = (value: boolean) => () => setIsHover(value);
 
+  useEffect(() => {
+    return () => setIsHover(false);
+  }, []);
+
   return (
     <Tooltip.Provider>
       <Tooltip.Root open={isTooltipOpen}>
@@ -64,7 +68,7 @@ export function CopyToClipboard({ text }: { text: string }) {
           </button>
         </Tooltip.Trigger>
         <Tooltip.Portal>
-          <Tooltip.Content className="rounded-md bg-[#05070d] p-2 text-xs text-text-primary">
+          <Tooltip.Content className="bg-darker-gray rounded-md p-2 text-xs text-text-primary">
             {copied
               ? "Texto copiado!"
               : loading

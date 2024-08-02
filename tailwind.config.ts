@@ -6,6 +6,7 @@ const colors = {
   gray: "#85888E" as const,
   darkGray: "#333741" as const,
   darkerGray: "#161B26" as const,
+  darkestGray: "#05070d" as const,
   primary: "#0C111D" as const,
   brand: "#009EA4" as const,
 };
@@ -58,6 +59,7 @@ const config: Config = {
         background: colors.primary, //colors.primary, // Semantic
         brand: colors.brand, // Semantic
         "dark-gray": colors.darkerGray,
+        "darker-gray": colors.darkestGray,
       },
       keyframes: {
         slideUp: {

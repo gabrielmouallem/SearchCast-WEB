@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import * as Popover from "@radix-ui/react-popover";
 import { usePathname } from "next/navigation";
 import { useIsMounted } from "@/hooks/useIsMounted";
+import { MenuItem, MenuItemIcon } from "./components";
 
 interface ProfilePopoverProps {
   restrictedMode?: boolean;
@@ -20,11 +21,16 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
   const name = user?.name ?? "";
   const hasAccess = user?.subscription || user?.allow_unpaid_access;
 
-  const buttons = [
-    { label: "Pesquisar", href: "/search", condition: hasAccess },
-    { label: "Meu Perfil", href: "/profile", condition: true },
-    { label: "Planos", href: "/plans", condition: true },
-    { label: "Ajuda", href: "/guide", condition: true },
+  const isDemo = !restrictedMode && !hasAccess;
+
+  const searchHref = isDemo ? "/onboarding" : "/search";
+
+  const MENU_ITEMS = [
+    { label: "Pesquisar", href: "/search", divider: false },
+    { label: "Meu Perfil", href: "/profile", divider: true },
+    { label: "Planos", href: "/plans", divider: false },
+    { label: "Ajuda", href: "/guide", divider: false },
+    { label: "Pagina Inicial", href: "/", divider: true },
   ];
 
   if (!isMounted) {
@@ -43,43 +49,40 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
         <Popover.Portal>
           <Popover.Content
             sideOffset={5}
-            className="z-50 rounded-lg bg-dark-gray p-4"
+            className="relative z-50 mr-2 flex h-screen w-screen flex-col rounded-lg border border-dark-gray bg-[#080C14] px-4 pb-4 pt-8 sm:mr-4 sm:h-fit sm:w-64 sm:px-0"
           >
             {!restrictedMode && (
               <>
-                {!hasAccess && (
-                  <div className="mb-4 cursor-pointer">
-                    <Button
-                      className="w-full !bg-brand"
-                      as="a"
-                      href="/onboarding?initialStep=3"
+                {MENU_ITEMS.map((item) => (
+                  <>
+                    {item.divider && (
+                      <div className="my-2 h-[1px] w-full border-b border-dark-gray" />
+                    )}
+                    <MenuItem
+                      key={item.href}
+                      href={item.href === "/search" ? searchHref : item.href}
+                      isSelected={pathname === item.href}
                     >
-                      Experimente Gratuitamente!
-                    </Button>
-                  </div>
-                )}
-                {buttons
-                  .filter((button) => button.condition)
-                  .map((button) => (
-                    <div key={button.href} className="mb-4 cursor-pointer">
-                      <Button
-                        className={`w-full ${
-                          pathname === button.href
-                            ? "border-2 border-brand"
-                            : ""
-                        }`}
-                        as="a"
-                        href={button.href}
-                      >
-                        {button.label}
-                      </Button>
-                    </div>
-                  ))}
+                      {item.label}
+                      <MenuItemIcon icon={item.href as any} />
+                    </MenuItem>
+                  </>
+                ))}
               </>
             )}
+            <div className="my-2 h-[1px] w-full border-b border-dark-gray" />
+            <MenuItem onClick={handleLogout}>
+              Sair
+              <MenuItemIcon icon="/logout" />
+            </MenuItem>
+            <div className="my-2 h-[1px] w-full border-b border-dark-gray" />
             <div className="cursor-pointer">
-              <Button className="w-full" onClick={handleLogout}>
-                Sair
+              <Button
+                as="a"
+                href="mailto:contato@searchcast.app"
+                className="mx-3 mt-2 h-10 text-sm font-extralight [width:calc(100%-24px)]"
+              >
+                Contato
               </Button>
             </div>
           </Popover.Content>
