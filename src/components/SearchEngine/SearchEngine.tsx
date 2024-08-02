@@ -19,6 +19,7 @@ import { useIsMounted } from "@/hooks/useIsMounted";
 import { LoadingFallback } from "../LoadingFallback";
 import { OrderByValue } from "@/types";
 import { ORDER_BY_VALUE_TO_LABEL_MAP } from "../SearchOrderBy/SearchOrderBy.constants";
+import { CopyToClipboard } from "../CopyToClipboard";
 
 interface SearchEngineProps {
   options?: {
@@ -36,10 +37,11 @@ export function SearchEngine({ options }: SearchEngineProps) {
     orderBy,
     handleOrderByChange,
     handleSuggestionClick,
-    handleImproveClick,
+    isError,
     control,
     data,
-    isError,
+    improvedText,
+    showImprovedText,
     isLoading,
     isFetching,
     isFetchingNextPage,
@@ -86,7 +88,6 @@ export function SearchEngine({ options }: SearchEngineProps) {
 
   return (
     <>
-      <ToastContainer />
       <div
         className={`flex flex-grow flex-col items-center gap-8 ${debouncedTextClases} pb-20`}
       >
@@ -136,10 +137,8 @@ export function SearchEngine({ options }: SearchEngineProps) {
                 }
                 value={text}
                 onSuggestionClick={handleSuggestionClick}
-                onImproveTextSearchClick={handleImproveClick}
                 onChange={handleTextChange}
                 disabled={showPlaceholders || !!options?.mockedText}
-                showImproveTextActions={isError || noResultsFound}
               />
             )}
           />
@@ -205,22 +204,32 @@ export function SearchEngine({ options }: SearchEngineProps) {
                   key={`SearchResultItemPlaceholder_${index}`}
                 />
               ))}
-          {noResultsFound && (
-            <div className="w-full text-center text-sm text-text-secondary">
-              Nenhum resultado encontrado, experimente a:
+          {(noResultsFound || isError) && (
+            <div className="w-full text-center text-sm leading-loose text-text-secondary">
               <div>
-                <div>
-                  <button
-                    className="mt-2 text-text-primary"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleImproveClick(text);
-                    }}
-                  >
-                    ✨ <u>Pesquisa Aprimorada</u>
-                  </button>
-                </div>
+                Nada encontrado.{" "}
+                {showImprovedText && (
+                  <>
+                    Que tal pesquisar por:{" "}
+                    <span className="mt-4 flex items-center justify-center gap-x-1">
+                      <span className="whitespace-nowrap text-text-primary">{`"${improvedText}"`}</span>
+                      <CopyToClipboard text={improvedText} />
+                    </span>
+                    <div className="mt-4 max-w-[300px] leading-normal">
+                      <small>
+                        Esta sugestão foi gerada automaticamente com base no{" "}
+                        <a
+                          href="https://searchcast.app/guide"
+                          target="_blank"
+                          className="font-bold text-text-primary underline"
+                        >
+                          guia de pesquisa
+                        </a>{" "}
+                        do SearchCast.
+                      </small>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           )}

@@ -1,31 +1,17 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import * as Tooltip from "@radix-ui/react-tooltip";
 import { useSearchTextSuggestions } from "@/hooks";
 import { getBoldText } from "@/utils/shared";
 import { Input } from "@/components/Input";
 
 type SearchInputProps = React.ComponentProps<"input"> & {
   onSuggestionClick?: (value: string) => void;
-  onImproveTextSearchClick?: (value: string) => void;
-  showImproveTextActions: boolean;
 };
 
-export function SearchInput({
-  showImproveTextActions,
-  onSuggestionClick,
-  onImproveTextSearchClick,
-  ...props
-}: SearchInputProps) {
+export function SearchInput({ onSuggestionClick, ...props }: SearchInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const textValue = props?.value as string;
   const { data } = useSearchTextSuggestions(textValue ?? "");
-
-  const showImproveTextButton = !!(
-    textValue?.length &&
-    !props.disabled &&
-    showImproveTextActions
-  );
 
   useEffect(() => {
     if (props?.disabled) setIsFocused(false);
@@ -57,7 +43,7 @@ export function SearchInput({
       </div>
       {isFocused && suggestions.length > 0 && (
         <ul
-          className={`absolute top-[48px] z-50 mx-4 w-[calc(100%-24px)] rounded-md border border-solid border-border bg-background py-3 text-text-primary [translate-y:50%] ${showImproveTextButton ? "md:mr-[52px]" : ""} md:w-500px`}
+          className={`absolute top-[48px] z-50 mx-4 w-[calc(100%-24px)] rounded-md border border-solid border-border bg-background py-3 text-text-primary [translate-y:50%] md:w-500px`} // ${showImproveTextButton ? "md:mr-[52px]" : ""}
         >
           {suggestions.map((suggestion, index) => (
             <li
@@ -75,37 +61,6 @@ export function SearchInput({
             </li>
           ))}
         </ul>
-      )}
-      {showImproveTextButton && (
-        <Tooltip.Provider>
-          <Tooltip.Root>
-            <Tooltip.Trigger>
-              <button
-                onClick={(e) => {
-                  if (props.disabled) return;
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onImproveTextSearchClick?.(textValue);
-                }}
-                className="rounded-full p-2 hover:bg-[#080C14]"
-              >
-                ✨
-              </button>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content className="rounded-lg bg-[#05070d] p-4 text-sm text-text-primary">
-                Clique aqui para aprimorar a pesquisa usando nosso{" "}
-                <a href="/guide">
-                  <b>
-                    <u>guia</u>
-                  </b>
-                </a>
-                .
-                <Tooltip.Arrow />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
       )}
     </div>
   );

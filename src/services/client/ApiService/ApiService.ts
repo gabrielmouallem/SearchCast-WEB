@@ -5,6 +5,7 @@ import { CookiesService } from "../CookiesService";
 
 export const api = axios.create({
   baseURL: getApiURL(),
+  timeout: 30000,
 });
 
 axios.interceptors.response.use(

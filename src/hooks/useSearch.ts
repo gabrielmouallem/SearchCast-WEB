@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchQuery } from "./useSearchQuery";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useQueryState } from "next-usequerystate";
@@ -24,7 +24,16 @@ export function useSearch({ options }: SearchOptions) {
     defaultValue: options?.mockedText || "",
   });
   const [text, setText] = useState(textQuery);
+  const [improvedText, setImprovedText] = useState("");
   const { handleSubmit, control, setValue } = useForm<FormValues>();
+
+  const showImprovedText = improvedText !== textQuery && !!improvedText;
+
+  useEffect(() => {
+    normalizeTextForSearch(textQuery).then((newText) =>
+      setImprovedText(newText),
+    );
+  }, [textQuery]);
 
   const {
     isError,
@@ -57,18 +66,6 @@ export function useSearch({ options }: SearchOptions) {
     });
   }
 
-  function handleImproveClick(value: string) {
-    executeIfExists(value, (validValue) => {
-      flushSync(async () => {
-        const normalizedText = await normalizeTextForSearch(validValue);
-        console.log({ validValue, normalizedText });
-        setTextQuery(normalizedText);
-        setValue("text", normalizedText);
-        setText(normalizedText);
-      });
-    });
-  }
-
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     executeIfExists(data.text, (validText) => {
       flushSync(() => {
@@ -80,11 +77,12 @@ export function useSearch({ options }: SearchOptions) {
   return {
     text,
     textQuery,
+    improvedText,
+    showImprovedText,
     orderBy,
     handleOrderByChange,
     handleTextChange,
     handleSuggestionClick,
-    handleImproveClick,
     isError,
     isLoading,
     isFetching,

@@ -8,22 +8,8 @@ import { useRouter } from "next/navigation";
 import { api } from "@/services/client";
 import { toast } from "react-toastify";
 import { getGoogleEnvVars } from "@/utils/shared";
+import { Spinner } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
-
-const Spinner = () => (
-  <svg
-    className="animate-spin"
-    fill="#85888E"
-    width="30px"
-    height="30px"
-    viewBox="0 0 16 16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g>
-      <path d="M8,1V2.8A5.2,5.2,0,1,1,2.8,8H1A7,7,0,1,0,8,1Z" />
-    </g>
-  </svg>
-);
 
 interface UserInfo {
   name: string;
@@ -77,7 +63,7 @@ export function CustomGoogleLogin() {
 
         const tokenResponse = await axios.post(
           "https://oauth2.googleapis.com/token",
-          params.toString(),
+          params,
           {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
@@ -134,7 +120,7 @@ export function CustomGoogleLogin() {
       disabled={loading}
     >
       {loading ? (
-        <Spinner />
+        <Spinner fill="#85888E" />
       ) : (
         <>
           <Image

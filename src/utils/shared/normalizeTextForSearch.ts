@@ -1,10 +1,7 @@
 import { stopwordsPtBr } from "@/constants";
-import { removeUnintendedSymbols } from "./removeUnintendedSymbols";
 
 export function normalizeTextForSearch(text: string): string {
-  const sanitizedText = removeUnintendedSymbols(text);
-
-  const lowerCaseText = sanitizedText.toLowerCase();
+  const lowerCaseText = text.toLowerCase();
 
   const filteredWords = lowerCaseText
     .split(" ")

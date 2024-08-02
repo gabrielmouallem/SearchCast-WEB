@@ -129,6 +129,18 @@ export function GuideContent() {
       </p>
 
       <h2 className="my-6 text-2xl font-bold">Utilize o Stemming</h2>
+      <div className="my-4 border-l-4 border-yellow-600 bg-yellow-200 p-4">
+        <p className="font-medium text-stone-700">
+          <span className="font-bold text-yellow-800">Atenção:</span> Opte pelo
+          stemming apenas se sua pesquisa não estiver retornando resultados ou
+          resultados satisfatórios.
+        </p>
+        <br />
+        <p className="text-sm font-medium text-stone-700">
+          As vezes apenas remover as palavras auxiliares como {"de"}, {"uma"},{" "}
+          {"os"}, {"as"}, etc já pode ser sulficiente.
+        </p>
+      </div>
       <p className="my-6">
         Um stemmer em português é uma ferramenta ou algoritmo que reduz as
         palavras ao seu radical ou raiz. A ideia principal é transformar
