@@ -23,7 +23,7 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
 
   const isDemo = !restrictedMode && !hasAccess;
 
-  const searchHref = isDemo ? "/onboarding" : "/search";
+  const searchHref = isDemo ? "/onboarding?initialStep=3" : "/search";
 
   const MENU_ITEMS = [
     { label: "Pesquisar", href: "/search", divider: false },
@@ -64,7 +64,9 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
                       isSelected={pathname === item.href}
                     >
                       {item.label}
-                      <MenuItemIcon icon={item.href as any} />
+                      <MenuItemIcon
+                        icon={item.href.replace("?initialStep=3", "") as any}
+                      />
                     </MenuItem>
                   </>
                 ))}
