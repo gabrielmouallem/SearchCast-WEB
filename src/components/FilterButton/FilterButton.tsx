@@ -1,7 +1,7 @@
 "use client";
 import { FilterOptions } from "@/types";
 import * as Popover from "@radix-ui/react-popover";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface FilterButtonProps<T = string> {
   disabled?: boolean;
@@ -19,6 +19,35 @@ export function FilterButton<T = string>({
   onSelect,
 }: FilterButtonProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
+  const [width, setWidth] = useState<number | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const button = buttonRef.current;
+    if (!button) return;
+
+    const updateWidth = () => setWidth(button.offsetWidth);
+
+    // Initial width setting
+    updateWidth();
+
+    // Create a MutationObserver to detect changes in the button
+    const observer = new MutationObserver(updateWidth);
+
+    observer.observe(button, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+
+    // Add a resize event listener to update the width on window resize
+    window.addEventListener("resize", updateWidth);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateWidth);
+    };
+  }, []);
 
   const handleClose = () => setIsOpen(false);
 
@@ -33,6 +62,7 @@ export function FilterButton<T = string>({
     <Popover.Root open={isOpen}>
       <Popover.Trigger asChild>
         <button
+          ref={buttonRef}
           onClick={handleToggle}
           title={disabled ? "Funcionalidade indisponível" : ""}
           disabled={disabled}
@@ -47,6 +77,7 @@ export function FilterButton<T = string>({
         side="bottom"
         sideOffset={5}
         onInteractOutside={handleClose}
+        style={{ width: width ? `${width}px` : "auto" }}
       >
         <ul className="mt-2 max-h-96 scroll-m-0 overflow-auto">
           {options.map(({ value: optionValue, label: optionLabel }, index) => {
