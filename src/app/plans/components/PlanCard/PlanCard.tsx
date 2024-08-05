@@ -2,7 +2,7 @@
 import React from "react";
 import { Stripe } from "@stripe/stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { api } from "@/services/client";
+import { PythonApiService } from "@/services/client";
 import { Button } from "@/components";
 import { toast } from "react-toastify";
 import { useUser } from "@/hooks";
@@ -62,7 +62,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
 
   const handlePaymentCancellation = async () => {
     try {
-      await api.post("/cancel", {
+      await PythonApiService.post("/cancel", {
         customer_email: user?.email,
       });
       setTimeout(() => {
@@ -95,7 +95,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
   };
 
   const handlePayment = async () => {
-    const { data } = await api.post("/checkout", {
+    const { data } = await PythonApiService.post("/checkout", {
       subscription_type: subscriptionType,
       customer_email: user?.email,
     });

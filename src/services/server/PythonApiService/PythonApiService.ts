@@ -2,7 +2,7 @@ import { getApiURL } from "@/utils/shared";
 import axios, { AxiosRequestHeaders } from "axios";
 import { CookiesService } from "@/services/server";
 
-export const api = axios.create({
+export const PythonApiService = axios.create({
   baseURL: getApiURL(),
   timeout: 30000,
 });
@@ -15,7 +15,7 @@ axios.interceptors.response.use(
     }),
 );
 
-api.interceptors.request.use((config) => {
+PythonApiService.interceptors.request.use((config) => {
   const access_token = CookiesService.getItem("access_token");
   if (access_token) {
     config.headers = {

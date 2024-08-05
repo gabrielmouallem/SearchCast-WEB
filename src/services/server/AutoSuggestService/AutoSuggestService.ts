@@ -1,9 +1,7 @@
-"use client";
-import { getBingApiKey, getBingApiURL } from "@/utils/shared";
 import axios from "axios";
 
 export const AutoSuggestService = axios.create({
-  baseURL: `${getBingApiURL()}`,
+  baseURL: `${process.env.BING_API_URL}`,
 });
 
 axios.interceptors.response.use(
@@ -17,6 +15,6 @@ AutoSuggestService.interceptors.request.use((config) => ({
   ...config,
   headers: {
     ...config.headers,
-    "Ocp-Apim-Subscription-Key": getBingApiKey(),
+    "Ocp-Apim-Subscription-Key": process.env.BING_API_KEY,
   } as any,
 }));
