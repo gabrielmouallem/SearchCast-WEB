@@ -18,6 +18,6 @@ export function useRefreshAccessToken() {
     queryFn: fetchAccessToken,
     staleTime: 0, // Ensures the data is always considered stale
     refetchOnMount: true, // Ensures the query refetches on mount
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
   });
 }

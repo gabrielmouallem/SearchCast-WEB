@@ -61,6 +61,11 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
     hasNotExpired;
 
   const handlePaymentCancellation = async () => {
+    const confirmation = window.confirm(
+      `Tem certeza de que deseja cancelar sua assinatura? Seu plano permanecerá ativo até ${expiresAt.toLocaleDateString()}. Após essa data, você perderá o acesso aos benefícios do plano.\n\nObservação: Ao cancelar a assinatura, você não será reembolsado pelo período não utilizado.`,
+    );
+    if (!confirmation) return;
+
     try {
       await PythonApiService.post("/cancel", {
         customer_email: user?.email,
