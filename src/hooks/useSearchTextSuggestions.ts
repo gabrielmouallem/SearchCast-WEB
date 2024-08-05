@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 
 export function useSearchTextSuggestions(textToDebounce: string) {
-  const text = useDebounce(textToDebounce, 250);
+  const text = useDebounce(textToDebounce, 500);
 
   function fetch({ text, signal }: { text: string; signal: AbortSignal }) {
     return NextJsApiService.get<TSuggestions>(`/api/autosuggestions`, {
