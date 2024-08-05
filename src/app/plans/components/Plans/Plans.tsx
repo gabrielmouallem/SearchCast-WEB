@@ -23,7 +23,7 @@ export function Plans() {
   return (
     <>
       <ToastContainer />
-      <div className="flex flex-col items-center justify-center gap-8 pt-[10vh]">
+      <div className="flex flex-col items-center justify-center gap-8 sm:pt-[10vh]">
         <div className="text-center text-4xl font-bold">
           Selecione um Plano:
         </div>

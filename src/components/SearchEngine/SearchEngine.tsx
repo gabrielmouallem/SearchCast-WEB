@@ -67,7 +67,7 @@ export function SearchEngine({ options }: SearchEngineProps) {
 
   const hasSubmittedSearch = !!data?.pages?.length || isFetching;
   const debouncedTextClases = hasSubmittedSearch
-    ? "justify-start bg-tight-gradient pt-28"
+    ? `justify-start bg-tight-gradient ${!options?.mockedText ? "pt-28" : ""}`
     : "justify-center";
 
   const lastUpdate = getLastUpdate();
