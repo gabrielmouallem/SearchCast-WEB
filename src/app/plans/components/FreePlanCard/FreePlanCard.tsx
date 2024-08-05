@@ -1,37 +1,14 @@
-"use client";
 import React from "react";
 import { Button } from "@/components";
-import { useUser } from "@/hooks";
-import { toast } from "react-toastify";
-import posthog from "posthog-js";
-import { useLocalStorage } from "@uidotdev/usehooks";
+import { UseMutateFunction } from "@tanstack/react-query";
 
-const FreePlanCard = () => {
-  const user = useUser();
-  const [requestedId, setRequestedId] =
-    useLocalStorage<string>("trial_requested");
+interface FreePlanCardProps {
+  isSuccess: boolean;
+  isPending: boolean;
+  mutate: UseMutateFunction;
+}
 
-  const handleRequest = () => {
-    posthog.capture("trial_requested", user, {
-      send_instantly: true,
-    });
-    toast(
-      "Solicitação recebida com sucesso. O processamento pode levar até 24 horas.",
-      {
-        position: "top-center",
-        autoClose: 10000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        type: "success",
-      },
-    );
-    setRequestedId(user?._id as string);
-  };
-
+const FreePlanCard = ({ isSuccess, isPending, mutate }: FreePlanCardProps) => {
   return (
     <div
       className={`relative flex h-[280px] w-[250px] flex-col items-center justify-start gap-3 rounded-xl border border-gray-800 bg-dark-gray p-5`}
@@ -49,11 +26,11 @@ const FreePlanCard = () => {
         Por tempo limitado
       </span>
       <Button
-        className={`!bg-brand font-bold ${requestedId === user?._id ? "opacity-50" : ""}`}
-        onClick={handleRequest}
-        disabled={requestedId === user?._id}
+        className={`!bg-brand font-bold ${isPending ? "opacity-50" : ""}`}
+        disabled={isPending || isSuccess}
+        onClick={() => mutate()}
       >
-        {requestedId === user?._id ? "SOLICITADO" : "SOLICITAR"}
+        {isSuccess ? "SOLICITADO" : isPending ? "SOLICITANDO..." : "SOLICITAR"}
       </Button>
     </div>
   );

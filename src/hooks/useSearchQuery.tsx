@@ -90,7 +90,6 @@ export function useSearchQuery(
         } else if ([401, 402, 404].includes(err?.response?.status)) {
           cookies.updateCookie("", 1);
           router.push("/login");
-          posthog.reset();
         }
         toast(
           <div>

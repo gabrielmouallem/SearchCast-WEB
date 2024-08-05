@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
-import { Input, Button, CustomGoogleLogin } from "@/components";
+import React, { useState } from "react";
+import { Input, Button } from "@/components";
 import { Controller } from "react-hook-form";
 import { useLogin } from "@/hooks";
 import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "react-toastify/dist/ReactToastify.css";
+import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 
 export function LoginForm() {
   const { loading, handleSubmit, control } = useLogin();
@@ -78,7 +79,7 @@ export function LoginForm() {
                   >
                     {loading ? "Entrando..." : "Entrar"}
                   </Button>
-                  <CustomGoogleLogin />
+                  <GoogleLoginButton />
                 </div>
               </form>
               <div className="w-360px text-center text-sm font-normal leading-5">

@@ -67,18 +67,6 @@ export function useLogin() {
       await handleLogin(data).then(() => {
         router.push("/search");
       });
-      toast("Logado com sucesso!", {
-        position: "top-right",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        type: "info",
-      });
-      // Handle successful login
     } catch (error) {
       toast("Erro ao entrar. Por favor tente novamente.", {
         position: "top-right",

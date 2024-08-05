@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
-import { Input, Button, CustomGoogleLogin } from "@/components"; // Adjust the path as needed
+import { Input, Button } from "@/components"; // Adjust the path as needed
 import { Controller } from "react-hook-form";
 import { useRegister } from "@/hooks";
 import { ToastContainer } from "react-toastify";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "react-toastify/dist/ReactToastify.css";
+import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 
 export function RegisterForm() {
   const { loading, handleSubmit, control, errors, watch } = useRegister();
@@ -194,7 +195,7 @@ export function RegisterForm() {
                   >
                     {loading ? "Cadastrando..." : "Cadastrar"}
                   </Button>
-                  <CustomGoogleLogin />
+                  <GoogleLoginButton />
                 </div>
               </form>
               <div className="w-360px text-center text-sm font-normal leading-5">
