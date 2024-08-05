@@ -1,6 +1,6 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { api } from "@/services/client";
+import { PythonApiService } from "@/services/client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useCookies } from "@/hooks";
@@ -37,8 +37,7 @@ export function useRegister() {
   const handleLogin = (formData: RegisterFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);
-      api
-        .post<RegisterResponse>("/v1/register", formData)
+      PythonApiService.post<RegisterResponse>("/v1/register", formData)
         .then(({ data }) => {
           cookies.updateCookie(data.access_token, 1);
           resolve(data);

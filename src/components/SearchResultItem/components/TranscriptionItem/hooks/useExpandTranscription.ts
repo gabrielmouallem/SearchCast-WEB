@@ -1,5 +1,5 @@
 "use client";
-import { api } from "@/services/client";
+import { PythonApiService } from "@/services/client";
 import { TTranscription } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
@@ -11,7 +11,7 @@ export function useExpandTranscription({
   start: number;
 }) {
   function fetchExpandTranscription() {
-    return api.get<TTranscription>(
+    return PythonApiService.get<TTranscription>(
       `/v1/expand-transcription?videoId=${videoId}&start=${start}`,
     );
   }

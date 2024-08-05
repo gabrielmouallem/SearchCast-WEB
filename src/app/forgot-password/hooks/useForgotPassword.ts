@@ -1,6 +1,6 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { api } from "@/services/client";
+import { PythonApiService } from "@/services/client";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { LoginResponse } from "@/types";
@@ -20,8 +20,7 @@ export function useForgotPassword() {
   const handleForgotPassword = (formData: PasswordResetFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);
-      api
-        .post<LoginResponse>("/v1/forgot-password", formData)
+      PythonApiService.post<LoginResponse>("/v1/forgot-password", formData)
         .then(({ data }) => {
           resolve(data);
           return data;

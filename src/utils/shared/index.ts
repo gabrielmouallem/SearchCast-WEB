@@ -1,10 +1,7 @@
 export * from "./getApiUrl";
 export * from "./getLastUpdate";
-export * from "./getBingApiURL";
-export * from "./getBingApiKey";
 export * from "./getBoldText";
 export * from "./getDecodedJWT";
-export * from "./encodeToJWT";
 export * from "./getRefreshedAccessToken";
 export * from "./executeIfExists";
 export * from "./getPosthogEnv";
@@ -15,4 +12,4 @@ export * from "./getFormatTime";
 export * from "./getHighlightText";
 export * from "./getSecondsToHMS";
 export * from "./getAutosuggestionIsEnabled";
-export * from "./getGoogleEnvVars";
+export * from "./normalizeTextForSearch";
