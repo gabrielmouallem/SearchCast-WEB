@@ -1,5 +1,5 @@
 import { useCookies, useUser } from "@/hooks";
-import { api } from "@/services/client";
+import { PythonApiService } from "@/services/client";
 import { OrderByValue, TSearchResult } from "@/types";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -79,47 +79,45 @@ export function useSearchQuery(
         }, 2000);
       });
     }
-    return api
-      .get<TSearchResult | undefined>("/v1/search", {
-        params: { text, page: pageParam, ...filters, ...rest },
-        signal,
-      })
-      .catch((err) => {
-        if (err?.response?.status === 403) {
-          router.push("/plans");
-        } else if ([401, 402, 404].includes(err?.response?.status)) {
-          cookies.updateCookie("", 1);
-          router.push("/login");
-        }
-        toast(
-          <div>
-            Erro. Tente
-            <span className="whitespace-nowrap"> palavras-chave </span>
-            mais específicas, consulte nosso
-            <a
-              href="/guide"
-              className="cursor-pointer text-blue-500"
-              target="_blank"
-            >
-              {" "}
-              guia{" "}
-            </a>
-            ou tente novamente.
-          </div>,
-          {
-            position: "top-right",
-            autoClose: 10000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            type: "error",
-          },
-        );
-        throw err; // Re-throw the error to indicate that the query has failed
-      });
+    return PythonApiService.get<TSearchResult | undefined>("/v1/search", {
+      params: { text, page: pageParam, ...filters, ...rest },
+      signal,
+    }).catch((err) => {
+      if (err?.response?.status === 403) {
+        router.push("/plans");
+      } else if ([401, 402, 404].includes(err?.response?.status)) {
+        cookies.updateCookie("", 1);
+        router.push("/login");
+      }
+      toast(
+        <div>
+          Erro. Tente
+          <span className="whitespace-nowrap"> palavras-chave </span>
+          mais específicas, consulte nosso
+          <a
+            href="/guide"
+            className="cursor-pointer text-blue-500"
+            target="_blank"
+          >
+            {" "}
+            guia{" "}
+          </a>
+          ou tente novamente.
+        </div>,
+        {
+          position: "top-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          type: "error",
+        },
+      );
+      throw err; // Re-throw the error to indicate that the query has failed
+    });
   }
 
   return useInfiniteQuery({

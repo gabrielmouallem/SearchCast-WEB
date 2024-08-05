@@ -1,6 +1,6 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { api } from "@/services/client";
+import { PythonApiService } from "@/services/client";
 import { useRouter } from "next/navigation";
 import { useCookies, useIdentifyUser } from "@/hooks";
 import { toast } from "react-toastify";
@@ -38,8 +38,7 @@ export function useLogin() {
   const handleLogin = (formData: LoginFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);
-      api
-        .post<LoginResponse>("/v1/login", formData)
+      PythonApiService.post<LoginResponse>("/v1/login", formData)
         .then(({ data }) => {
           cookies.updateCookie(data.access_token, 1);
           try {

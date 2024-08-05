@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { api } from "@/services/client";
+import { PythonApiService } from "@/services/client";
 import { getDecodedJWT } from "@/utils/shared";
 import { DecodedCredentials } from "@/types";
 import Image from "next/image";
@@ -28,20 +28,18 @@ export function GoogleLoginButton() {
       const googleLoginData = getDecodedJWT<DecodedCredentials>(
         response.credential ?? "",
       );
-      await api
-        .post("/v1/google_login", {
-          name: googleLoginData?.name,
-          picture: googleLoginData?.picture,
-          family_name: googleLoginData?.family_name,
-          given_name: googleLoginData?.given_name,
-          email: googleLoginData?.email,
-          id_token: response.credential,
-        })
-        .then(({ data }) => {
-          cookies.updateCookie(data.access_token, 1);
-          router.push("/search");
-          return data;
-        });
+      await PythonApiService.post("/v1/google_login", {
+        name: googleLoginData?.name,
+        picture: googleLoginData?.picture,
+        family_name: googleLoginData?.family_name,
+        given_name: googleLoginData?.given_name,
+        email: googleLoginData?.email,
+        id_token: response.credential,
+      }).then(({ data }) => {
+        cookies.updateCookie(data.access_token, 1);
+        router.push("/search");
+        return data;
+      });
     } catch (err) {
       toast("Erro com o Login Google. Por favor tente novamente.", {
         position: "top-right",

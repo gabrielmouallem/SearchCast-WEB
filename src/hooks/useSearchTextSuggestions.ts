@@ -1,4 +1,4 @@
-import { AutoSuggestService } from "@/services/client";
+import { NextJsApiService } from "@/services/client";
 import { TSuggestions } from "@/types";
 import { getAutosuggestionIsEnabled } from "@/utils/shared";
 import { normalizeTextForSearch } from "@/utils/shared/normalizeTextForSearch";
@@ -9,8 +9,8 @@ export function useSearchTextSuggestions(textToDebounce: string) {
   const text = useDebounce(textToDebounce, 500);
 
   function fetch({ text, signal }: { text: string; signal: AbortSignal }) {
-    return AutoSuggestService.get<TSuggestions>(`/v7.0/Suggestions`, {
-      params: { q: text, mkt: "pt-BR" },
+    return NextJsApiService.get<TSuggestions>(`/api/autosuggestions`, {
+      params: { text },
       signal,
     })
       .then(async (res) => {

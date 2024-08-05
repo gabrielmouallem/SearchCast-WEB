@@ -1,6 +1,6 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { api } from "@/services/client";
+import { PythonApiService } from "@/services/client";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { LoginResponse } from "@/types";
@@ -28,11 +28,10 @@ export function usePasswordReset() {
   const handlePasswordReset = (formData: PasswordResetFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);
-      api
-        .post<LoginResponse>("/v1/password-reset", {
-          password: formData?.password,
-          token,
-        })
+      PythonApiService.post<LoginResponse>("/v1/password-reset", {
+        password: formData?.password,
+        token,
+      })
         .then(({ data }) => {
           resolve(data);
           return data;
