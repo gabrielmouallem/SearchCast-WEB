@@ -16,8 +16,8 @@ export function useRefreshAccessToken() {
   return useQuery({
     queryKey: ["refreshToken"],
     queryFn: fetchAccessToken,
-    refetchOnMount: false,
-    refetchInterval: Infinity,
+    staleTime: 0, // Ensures the data is always considered stale
+    refetchOnMount: true, // Ensures the query refetches on mount
     refetchOnWindowFocus: false,
   });
 }
