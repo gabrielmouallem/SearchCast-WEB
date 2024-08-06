@@ -13,3 +13,4 @@ export * from "./SearchEngine";
 export * from "./FilterButton";
 export * from "./SearchOrderBy";
 export * from "./Spinner";
+export * from "./LinkCarousel";

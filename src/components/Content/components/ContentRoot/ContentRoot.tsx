@@ -4,6 +4,8 @@ interface ContentRootProps {
 
 export function ContentRoot({ children }: ContentRootProps) {
   return (
-    <div className="flex flex-col items-center self-stretch">{children}</div>
+    <div className="relative flex flex-col items-center self-stretch">
+      {children}
+    </div>
   );
 }
