@@ -2,7 +2,6 @@ import { getDecodedJWT } from "@/utils/shared"; // Import encodeToJWT function f
 import { useCookies } from ".";
 import { useRouter } from "next/navigation";
 import { User } from "@/types";
-import posthog from "posthog-js";
 
 export function useAuth() {
   const { getCookie, updateCookie } = useCookies("access_token", "");
@@ -19,7 +18,6 @@ export function useAuth() {
   function handleLogout() {
     updateCookie("", 1);
     router.push("/login");
-    posthog.reset();
   }
 
   return {
