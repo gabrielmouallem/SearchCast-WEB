@@ -17,7 +17,7 @@ export function RotatingWordsBanner({ words }: RotatingWordsBannerProps) {
 
   return (
     <div
-      className="mx-auto max-w-4xl text-center text-3xl font-semibold leading-relaxed leading-tight tracking-tight text-text-primary md:text-6xl"
+      className="mx-auto -mb-3 mt-3 max-w-4xl text-center text-3xl font-semibold leading-relaxed leading-tight tracking-tight text-text-primary sm:mb-6 sm:mt-5 md:text-6xl"
       style={{ lineHeight: "1.1" }}
     >
       Encontre o podcast perfeito{" "}

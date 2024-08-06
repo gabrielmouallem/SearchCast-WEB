@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { Content } from ".";
 import { Button, Card, LinkCarousel, RedirectButton } from "..";
-import { ProfileCard } from "../ProfileCard/ProfileCard";
 import { RotatingWordsBanner } from "@/app/components";
 import { MotionVideo } from "./components/MotionVideo";
 
@@ -68,7 +67,7 @@ const PODCASTS = [
 export function PageContent() {
   return (
     <Content.Root>
-      <Content.Section>
+      <Content.Section defaultPadding>
         <Content.Gap gap="gap-16">
           <Content.Gap gap="gap-12">
             <Content.Gap gap="gap-6">
@@ -85,7 +84,9 @@ export function PageContent() {
                     alt="SearchCast Logo"
                   />
                 </a>
-                <RedirectButton />
+                <div className="mb-4 mt-2 sm:my-0">
+                  <RedirectButton />
+                </div>
                 <RotatingWordsBanner words={words} />
               </Content.Gap>
               <Content.Gap>
@@ -115,7 +116,7 @@ export function PageContent() {
         </Content.Gap>
       </Content.Section>
       <Content.Section>
-        <div className="-ml-8 flex w-screen flex-col items-center justify-center gap-4 bg-[#0C111D] bg-gradient-to-b from-[#0C111D] via-[rgba(0,158,164,0.07)] to-[rgba(0,158,164,0.07)] px-8 py-16 text-center md:mx-16 md:-ml-8 md:py-24">
+        <div className="flex flex-col items-center justify-center gap-4 bg-[#0C111D] bg-gradient-to-b from-[#0C111D] via-[rgba(0,158,164,0.085)] to-[rgba(0,158,164,0.085)] py-16 text-center md:py-24">
           <Content.Gap gap="gap-8">
             <div className="-mb-8 text-lg font-normal text-text-primary">
               <b className="text-4xl font-extrabold">5.000+</b> episódios e
@@ -146,7 +147,7 @@ export function PageContent() {
         </div>
       </Content.Section>
       <Content.Section>
-        <div className="-mx-8 mb-20 bg-[#0C111D] bg-gradient-to-b from-[rgba(0,158,164,0.07)] via-[rgba(0,158,164,0.07)] to-[#0C111D] px-8 py-16 text-center md:py-24">
+        <div className="mb-20 bg-[#0C111D] bg-gradient-to-b from-[rgba(0,158,164,0.085)] via-[rgba(0,158,164,0.085)] to-[#0C111D] px-8 py-16 text-center md:py-24">
           <Content.Gap gap="gap-16">
             <Content.Gap gap="gap-5">
               <Content.Gap gap="gap-3">
@@ -183,11 +184,14 @@ export function PageContent() {
           </Content.Gap>
         </div>
       </Content.Section>
-      <Content.Section>
+      <Content.Section defaultPadding>
         <div className="mx-auto mb-10 flex max-w-[960px] flex-col items-center justify-center gap-4 rounded-2xl bg-background text-center sm:mb-20">
           <Content.Gap gap="gap-16">
             <div className="font-inter text-center text-4xl font-semibold leading-tight tracking-tight">
               Funcionalidades
+            </div>
+            <div className="font-inter -mt-12 max-w-3xl text-center text-xl font-normal leading-7 text-text-secondary">
+              Filtros, sugestões de pesquisa e muito mais!
             </div>
 
             <div className="grid grid-cols-1 gap-12">
@@ -227,7 +231,7 @@ export function PageContent() {
           </Content.Gap>
         </div>
       </Content.Section>
-      <Content.Section>
+      <Content.Section defaultPadding>
         <div className="mx-auto my-16 flex max-w-[960px] flex-col items-center justify-center gap-4 rounded-2xl bg-dark-gray px-4 py-8 text-center md:px-8 md:py-20">
           <Content.Gap gap="gap-8">
             <Image
@@ -259,7 +263,7 @@ export function PageContent() {
           </Content.Gap>
         </div>
       </Content.Section>
-      <Content.Section>
+      <Content.Section defaultPadding>
         <div className="mx-auto flex max-w-[960px] flex-col items-center justify-center gap-4 border-t border-gray-800 bg-background py-16 text-center md:py-24">
           <Content.Gap gap="gap-16">
             <Content.Gap gap="gap-5">

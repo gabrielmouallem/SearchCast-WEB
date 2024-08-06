@@ -6,7 +6,7 @@ export default async function Home() {
   await getAndIdentifyUser();
 
   return (
-    <main className="px-8 pt-5 md:pt-16">
+    <main className="pt-5 md:pt-16">
       <Navbar />
       <PageContent />
       <Footer />

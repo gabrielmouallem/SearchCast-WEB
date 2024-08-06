@@ -18,37 +18,39 @@ interface NavbarProps {
 
 export function Navbar({ isAuthenticated, restrictedMode }: NavbarProps) {
   return (
-    <nav className="fixed inset-0 z-50 flex h-20 w-full items-center bg-gradient-to-b from-black-transparent to-transparent backdrop-blur-[1px] sm:px-20">
-      <a href={isAuthenticated ? "/search" : "/"}>
-        <Image
-          className="ml-8 hidden sm:block"
-          src="/logo_w_name.svg"
-          width={211}
-          height={30}
-          alt="SearchCast Logo"
-        />
-        <Image
-          className="ml-8 block sm:hidden"
-          src="/logo.svg"
-          width={50}
-          height={30}
-          alt="SearchCast Logo"
-        />
-      </a>
-      {!!(!isAuthenticated && !restrictedMode) && (
-        <div className="ml-auto mr-9">
-          <a href="/login">
-            <Button startIcon={<Image {...imageProps} alt="Person Icon" />}>
-              Acessar
-            </Button>
-          </a>
-        </div>
-      )}
-      {!!isAuthenticated && (
-        <div className="ml-auto mr-9 cursor-pointer">
-          <ProfilePopover restrictedMode={restrictedMode} />
-        </div>
-      )}
+    <nav className="fixed inset-0 z-50 flex h-20 w-screen items-center justify-center bg-gradient-to-b from-black-transparent to-transparent px-8 backdrop-blur-[1px]">
+      <div className="flex w-full items-center justify-center md:px-20">
+        <a href={isAuthenticated ? "/search" : "/"}>
+          <Image
+            className="hidden sm:block"
+            src="/logo_w_name.svg"
+            width={211}
+            height={30}
+            alt="SearchCast Logo"
+          />
+          <Image
+            className="block sm:hidden"
+            src="/logo.svg"
+            width={50}
+            height={30}
+            alt="SearchCast Logo"
+          />
+        </a>
+        {!!(!isAuthenticated && !restrictedMode) && (
+          <div className="ml-auto">
+            <a href="/login">
+              <Button startIcon={<Image {...imageProps} alt="Person Icon" />}>
+                Acessar
+              </Button>
+            </a>
+          </div>
+        )}
+        {!!isAuthenticated && (
+          <div className="ml-auto">
+            <ProfilePopover restrictedMode={restrictedMode} />
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
