@@ -2,12 +2,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ONBOARDING_OPTIONS } from "../../OnboardingContent.constants";
 import { Button } from "@/components";
 import Image from "next/image";
+import posthog from "posthog-js";
+import { useUser } from "@/hooks";
 
 interface StepTwoProps {
   handleNext: () => void;
 }
 
 export function StepTwo({ handleNext }: StepTwoProps) {
+  const user = useUser();
+
   return (
     <motion.div
       key="userIdentification"
@@ -32,7 +36,19 @@ export function StepTwo({ handleNext }: StepTwoProps) {
               >
                 <Button
                   className="transition hover:brightness-150"
-                  onClick={handleNext}
+                  onClick={() => {
+                    posthog.capture(
+                      "onboarding",
+                      {
+                        user,
+                        option,
+                      },
+                      {
+                        send_instantly: true,
+                      },
+                    );
+                    handleNext();
+                  }}
                 >
                   {option}
                 </Button>
