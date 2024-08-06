@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  overflow-x: hidden;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 
@@ -12,6 +12,7 @@ body {
   color: var(--color-text-primary) !important;
   background-color: var(--color-background) !important;
   scrollbar-width: thin; /* Adjust width as needed */
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

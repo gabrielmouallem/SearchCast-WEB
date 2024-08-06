@@ -199,7 +199,7 @@ export function PageContent() {
                 autoPlay
                 muted
                 loop
-                className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] hover:scale-105 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:contrast-[90%] sm:saturate-50 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
+                className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
                 src="/autosuggestions_motion_design.mp4"
                 poster="/autosuggestions_placeholder.jpg"
                 title="Sugestões automáticas"
@@ -210,7 +210,7 @@ export function PageContent() {
                   autoPlay
                   muted
                   loop
-                  className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] hover:scale-105 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:contrast-[90%] sm:saturate-50 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
+                  className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
                   src="/improve_search_motion_design.mp4"
                   poster="/improve_search_placeholder.jpg"
                   title="Otimizar pesquisa"
@@ -220,7 +220,7 @@ export function PageContent() {
                   autoPlay
                   muted
                   loop
-                  className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] hover:scale-105 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:contrast-[90%] sm:saturate-50 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
+                  className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
                   src="/order_by_motion_design.mp4"
                   poster="/order_by_placeholder.jpg"
                   title="Filtros de pesquisa"
