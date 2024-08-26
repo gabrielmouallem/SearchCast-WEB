@@ -29,6 +29,7 @@ function VideoPlayer({ src, poster }: VideoPlayerProps) {
   return (
     <div className="relative">
       <video
+        playsInline
         ref={videoRef}
         autoPlay
         muted={isMuted}
