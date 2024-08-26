@@ -197,6 +197,7 @@ export function PageContent() {
             <div className="grid grid-cols-1 gap-12">
               <video
                 autoPlay
+                playsInline
                 muted
                 loop
                 className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:border-2 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
@@ -208,6 +209,7 @@ export function PageContent() {
               <div className="flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-8">
                 <video
                   autoPlay
+                  playsInline
                   muted
                   loop
                   className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:border-2 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
@@ -218,6 +220,7 @@ export function PageContent() {
                 />
                 <video
                   autoPlay
+                  playsInline
                   muted
                   loop
                   className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:border-2 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
