@@ -59,9 +59,17 @@ export function SearchEngine({ options }: SearchEngineProps) {
   }, [data?.pages]);
 
   const handlePageBottomReached = useCallback(() => {
-    if (preventPageFetching || options?.mockedText) return;
+    if (preventPageFetching || isError || isFetching || options?.mockedText)
+      return;
     if (text && text !== "") fetchNextPage();
-  }, [preventPageFetching, text, fetchNextPage, options?.mockedText]);
+  }, [
+    preventPageFetching,
+    text,
+    isError,
+    fetchNextPage,
+    options?.mockedText,
+    isFetching,
+  ]);
 
   usePageBottom(handlePageBottomReached);
 
