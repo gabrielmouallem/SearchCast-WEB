@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 
 interface VideoPlayerProps {
   src: string;
+  webmSrc: string;
   poster: string;
 }
 
@@ -10,12 +11,13 @@ export function MotionVideo() {
   return (
     <VideoPlayer
       src="/heavy_presentation_motion_design_1080.mp4"
+      webmSrc="/heavy_presentation_motion_design_1080.webm"
       poster="/presentation_placeholder.jpg"
     />
   );
 }
 
-function VideoPlayer({ src, poster }: VideoPlayerProps) {
+function VideoPlayer({ src, webmSrc, poster }: VideoPlayerProps) {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -35,9 +37,11 @@ function VideoPlayer({ src, poster }: VideoPlayerProps) {
         muted={isMuted}
         loop
         className="w-full rounded-3xl"
-        src={src}
         poster={poster}
-      />
+      >
+        <source src={src} type="video/mp4" />
+        <source src={webmSrc} type="video/webm" />
+      </video>
       <button
         onClick={handleMuteToggle}
         className="absolute bottom-[15.5%] right-[10%] transform rounded-full bg-[rgb(255,255,255,0.1)] p-2 transition-transform hover:scale-110"

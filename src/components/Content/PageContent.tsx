@@ -201,11 +201,19 @@ export function PageContent() {
                 muted
                 loop
                 className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:border-2 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
-                src="/autosuggestions_motion_design.mp4"
                 poster="/autosuggestions_placeholder.jpg"
                 title="Sugestões automáticas"
                 controls={false}
-              />
+              >
+                <source
+                  src="/autosuggestions_motion_design.mp4"
+                  type="video/mp4"
+                />
+                <source
+                  src="/autosuggestions_motion_design.webm"
+                  type="video/webm"
+                />
+              </video>
               <div className="flex flex-col gap-12 md:grid md:grid-cols-2 md:gap-8">
                 <video
                   autoPlay
@@ -213,22 +221,35 @@ export function PageContent() {
                   muted
                   loop
                   className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:border-2 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
-                  src="/improve_search_motion_design.mp4"
                   poster="/improve_search_placeholder.jpg"
                   title="Otimizar pesquisa"
                   controls={false}
-                />
+                >
+                  <source
+                    src="/improve_search_motion_design.mp4"
+                    type="video/mp4"
+                  />
+                  <source
+                    src="/improve_search_motion_design.webm"
+                    type="video/webm"
+                  />
+                </video>
                 <video
                   autoPlay
                   playsInline
                   muted
                   loop
                   className="cursor-pointer rounded-3xl shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)] contrast-[90%] saturate-50 hover:scale-105 hover:border-2 hover:brightness-100 hover:contrast-100 hover:saturate-100 sm:shadow-none sm:brightness-100 sm:transition sm:duration-500 hover:sm:shadow-[0px_10px_30px_10px_rgba(0,0,0,0.5)]"
-                  src="/order_by_motion_design.mp4"
                   poster="/order_by_placeholder.jpg"
                   title="Filtros de pesquisa"
                   controls={false}
-                />
+                >
+                  <source src="/order_by_motion_design.mp4" type="video/mp4" />
+                  <source
+                    src="/order_by_motion_design.webm"
+                    type="video/webm"
+                  />
+                </video>
               </div>
             </div>
           </Content.Gap>
