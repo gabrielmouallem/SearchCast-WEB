@@ -11,8 +11,6 @@ export async function getActiveSubscription(email: string) {
 
     if (subscriptionResult === false) return null;
 
-    console.log(JSON.stringify(subscriptionResult, null, 2));
-
     const intervalCount =
       subscriptionResult.items?.data?.[0]?.plan?.interval_count;
 

@@ -2,7 +2,7 @@ import { type NextRequest } from "next/server";
 import { handleErrorMiddleware } from "@/middlewares/errorMiddleware";
 import { handlePasswordResetMiddleware } from "@/middlewares/passwordResetMiddleware";
 import { handleLoginCodeMiddleware } from "@/middlewares/loginCodeMiddleware";
-import { handleApiAuthMiddleware } from "@/middlewares/ApiAuthMiddleware";
+import { handleApiMiddleware } from "@/middlewares/apiMiddleware";
 import { handleClientAuthMiddleware } from "@/middlewares/clientAuthMiddleware";
 
 export async function middleware(request: NextRequest) {
@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
 
   // Handle API routes
   if (pathname.startsWith("/api/")) {
-    return handleApiAuthMiddleware(request, pathname);
+    return handleApiMiddleware(request, pathname);
   }
 
   // Handle client-side routes

@@ -8,7 +8,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function checkActiveSubscription(
   email: string,
 ): Promise<Stripe.Subscription | false> {
-  console.log({ email });
   try {
     const customers = await stripe.customers.list({
       email: email,
