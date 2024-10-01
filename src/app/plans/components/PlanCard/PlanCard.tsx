@@ -2,7 +2,7 @@
 import React from "react";
 import { loadStripe, Stripe as StripeInstance } from "@stripe/stripe-js";
 import Stripe from "stripe";
-import { PythonApiService } from "@/services/client";
+import { NextJsApiService } from "@/services/client";
 import { Button } from "@/components";
 import { toast } from "react-toastify";
 import { useUser } from "@/hooks";
@@ -72,7 +72,7 @@ const PlanCard = ({
     if (!confirmation) return;
 
     try {
-      await PythonApiService.post("/cancel", {
+      await NextJsApiService.post("/api/cancel", {
         customer_email: user?.email,
       });
       setTimeout(() => {
@@ -105,7 +105,7 @@ const PlanCard = ({
   };
 
   const handlePayment = async () => {
-    const { data } = await PythonApiService.post("/checkout", {
+    const { data } = await NextJsApiService.post("/api/checkout", {
       subscription_type: subscriptionType,
       customer_email: user?.email,
     });
