@@ -2,7 +2,7 @@ export * from "./useCookies";
 export * from "./useLogin";
 export * from "./useRegister";
 export * from "./useSearchTextSuggestions";
-export * from "./useRefreshAccessToken";
+export * from "./useRefreshUser";
 export * from "./useIndentifyUser";
 export * from "./useUser";
 export * from "./useSearch";

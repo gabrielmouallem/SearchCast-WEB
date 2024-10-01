@@ -14,13 +14,13 @@ function PasswordResetFormContent() {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+  const code = searchParams.get("code");
 
   const watchPassword = watch("password");
 
   useEffect(() => {
-    if (!token) router.push("/login");
-  }, [token, router]);
+    if (!code) router.push("/login");
+  }, [code, router]);
 
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>

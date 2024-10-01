@@ -9,12 +9,12 @@ export function useIdentifyUser() {
 
   useEffect(() => {
     if (user) {
-      posthog.identify(user._id, { ...user });
+      posthog.identify(user.id, { ...user });
     }
   }, [user]);
 
   function identifyUser(user: User) {
-    posthog.identify(user._id, { ...user });
+    posthog.identify(user.id, { ...user });
   }
 
   return {
