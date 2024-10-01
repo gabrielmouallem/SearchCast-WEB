@@ -73,9 +73,7 @@ export function useRegister() {
         return;
       }
 
-      await handleLogin(data).then(() => {
-        router.push("/onboarding");
-      });
+      await handleLogin(data);
       toast("Cadastrado com sucesso!", {
         position: "top-right",
         autoClose: 8000,
