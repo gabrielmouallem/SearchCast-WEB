@@ -7,15 +7,21 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRequestFreePlan } from "./hooks/useRequestFreePlan";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { LoadingFallback } from "@/components/LoadingFallback";
-import { useEffect } from "react";
+import { useGetActiveSubscription } from "../PlanCard/hooks/useGetActiveSubscription";
 
 export function Plans() {
   const user = useUser();
-  const { isLoading, refetch } = useRefreshUser();
-  const { isPending, isSuccess, mutate } = useRequestFreePlan();
+  const { isLoading: isLoadingRefreshedUser, refetch } = useRefreshUser();
+  const {
+    isPending: isPendingRequestFreePlan,
+    isSuccess: isSuccessRequestFreePlan,
+    mutate: mutateFreePlan,
+  } = useRequestFreePlan();
+  const { data: activeSubscription, isPending: isPendingActiveSubscription } =
+    useGetActiveSubscription();
 
   const isMounted = useIsMounted();
-  const showPlans = !isLoading;
+  const showPlans = !isLoadingRefreshedUser && !isPendingActiveSubscription;
   const showFreePlan = !(
     user?.user_metadata?.allow_unpaid_access ||
     user?.user_metadata?.subscription
@@ -39,14 +45,26 @@ export function Plans() {
             <>
               {showFreePlan && (
                 <FreePlanCard
-                  isPending={isPending}
-                  isSuccess={isSuccess}
-                  mutate={mutate}
+                  isPending={isPendingRequestFreePlan}
+                  isSuccess={isSuccessRequestFreePlan}
+                  mutate={mutateFreePlan}
                 />
               )}
-              <PlanCard subscriptionType="month" onCancel={refetch} />
-              <PlanCard subscriptionType="semester" onCancel={refetch} />
-              <PlanCard subscriptionType="year" onCancel={refetch} />
+              <PlanCard
+                subscriptionType="month"
+                onCancel={refetch}
+                activeSubscription={activeSubscription as any}
+              />
+              <PlanCard
+                subscriptionType="semester"
+                onCancel={refetch}
+                activeSubscription={activeSubscription as any}
+              />
+              <PlanCard
+                subscriptionType="year"
+                onCancel={refetch}
+                activeSubscription={activeSubscription as any}
+              />
             </>
           )}
           {!showPlans && (

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { Stripe } from "@stripe/stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe, Stripe as StripeInstance } from "@stripe/stripe-js";
+import Stripe from "stripe";
 import { PythonApiService } from "@/services/client";
 import { Button } from "@/components";
 import { toast } from "react-toastify";
@@ -36,28 +36,33 @@ type SubscriptionType = "month" | "semester" | "year";
 interface PlanCardProps {
   subscriptionType: SubscriptionType;
   onCancel: () => void;
+  activeSubscription: (Stripe.Subscription & { plan: SubscriptionType }) | null;
 }
 
-const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
+const PlanCard = ({
+  subscriptionType,
+  onCancel,
+  activeSubscription,
+}: PlanCardProps) => {
   const user = useUser();
 
-  const currentPeriodEnd = user?.subscription?.current_period_end ?? 0;
+  const currentPeriodEnd = activeSubscription?.current_period_end ?? 0;
   const currentUnixTimestamp = Math.floor(Date.now() / 1000);
   const hasNotExpired = currentPeriodEnd > currentUnixTimestamp;
   const isActive =
-    user?.subscription?.plan === subscriptionType && hasNotExpired;
+    activeSubscription?.plan === subscriptionType && hasNotExpired;
 
-  const isCancellationPending = isActive && !!user?.subscription?.cancel_at;
+  const isCancellationPending = isActive && !!activeSubscription?.cancel_at;
   const isExpirationPending = isActive && !isCancellationPending;
 
-  const cancellsAt = new Date((user?.subscription?.cancel_at ?? 0) * 1000);
+  const cancellsAt = new Date((activeSubscription?.cancel_at ?? 0) * 1000);
   const expiresAt = new Date(
-    (user?.subscription?.current_period_end ?? 0) * 1000,
+    (activeSubscription?.current_period_end ?? 0) * 1000,
   );
 
-  const disabled = !isActive && !!user?.subscription && hasNotExpired;
+  const disabled = !isActive && !!activeSubscription && hasNotExpired;
   const buttonDisabled =
-    ((!isActive && !!user?.subscription) || isCancellationPending) &&
+    ((!isActive && !!activeSubscription) || isCancellationPending) &&
     hasNotExpired;
 
   const handlePaymentCancellation = async () => {
@@ -109,7 +114,7 @@ const PlanCard = ({ subscriptionType, onCancel }: PlanCardProps) => {
     );
 
     const stripe = await stripePromise;
-    const result = await (stripe as Stripe).redirectToCheckout({
+    const result = await (stripe as StripeInstance)!.redirectToCheckout({
       sessionId: data.sessionId,
     });
 

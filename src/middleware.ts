@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "./services/server";
 import { Paths, PUBLIC_PATHS } from "./constants/paths";
+import { User } from "./types";
+import { checkActiveSubscription } from "./utils/server/checkActiveSubscription";
 
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = new URL(request.url);
@@ -46,10 +48,19 @@ export async function middleware(request: NextRequest) {
 
   // Handle authenticated users
   if (user) {
-    if (PUBLIC_PATHS.includes(pathname as Paths)) {
-      return NextResponse.redirect(new URL(Paths.SEARCH, request.url));
+    // Only check subscription for the search page
+    if (pathname.startsWith(Paths.SEARCH)) {
+      if ((user as User).user_metadata?.allow_unpaid_access)
+        return NextResponse.next();
+      // Check for active Stripe subscription
+      const hasActiveSubscription = await checkActiveSubscription(user.email!);
+
+      if (!hasActiveSubscription) {
+        return NextResponse.redirect(new URL(Paths.PLANS, request.url));
+      }
     }
 
+    // If not the search page or has active subscription, allow access
     return NextResponse.next();
   } else {
     // Handle unauthenticated users
