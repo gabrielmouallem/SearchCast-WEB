@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const isProd = process.env.NODE_ENV === "production";
+    const isProd = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
     const STRIPE_PLANS_LINE_ITEMS = isProd
       ? PROD_STRIPE_PLANS_LINE_ITEMS
       : DEV_STRIPE_PLANS_LINE_ITEMS;
