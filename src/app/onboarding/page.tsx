@@ -34,7 +34,13 @@ function OnboardingContentWrapper() {
 
 export default function Onboarding() {
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <Suspense
+      fallback={
+        <div className="-mt-[20vh] flex min-h-screen">
+          <LoadingFallback />
+        </div>
+      }
+    >
       <OnboardingContentWrapper />
     </Suspense>
   );

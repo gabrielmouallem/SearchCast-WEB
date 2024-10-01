@@ -23,7 +23,13 @@ async function SearchContent() {
 
 export default function Search() {
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <Suspense
+      fallback={
+        <div className="-mt-[20vh] flex min-h-screen">
+          <LoadingFallback />
+        </div>
+      }
+    >
       <SearchContent />
     </Suspense>
   );
