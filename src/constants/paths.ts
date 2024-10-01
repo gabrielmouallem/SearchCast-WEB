@@ -1,6 +1,7 @@
 export enum Paths {
   ERROR = "/error",
   FORGOT_PASSWORD = "/forgot-password",
+  AUTH_CALLBACK = "/auth/callback",
   GUIDE = "/guide",
   HOME = "/",
   LOGIN = "/login",
@@ -16,6 +17,7 @@ export enum Paths {
 export const PUBLIC_PATHS: readonly Paths[] = [
   Paths.ERROR,
   Paths.FORGOT_PASSWORD,
+  Paths.AUTH_CALLBACK,
   Paths.GUIDE,
   Paths.HOME,
   Paths.LOGIN,

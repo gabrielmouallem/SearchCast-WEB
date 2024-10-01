@@ -13,7 +13,6 @@ export async function middleware(request: NextRequest) {
 
   // Handle password reset path separately
   if (pathname === Paths.PASSWORD_RESET) {
-    // Allow access to password-reset page, with or without code
     return NextResponse.next();
   }
 
@@ -23,11 +22,9 @@ export async function middleware(request: NextRequest) {
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (error) {
-      // Redirect to error page if code exchange fails
       return NextResponse.redirect(new URL(Paths.ERROR, request.url));
     }
 
-    // Redirect to search page and set access token cookie
     const response = NextResponse.redirect(new URL(Paths.SEARCH, request.url));
     response.cookies.set("access_token", data.session.access_token, {
       httpOnly: true,
@@ -48,26 +45,21 @@ export async function middleware(request: NextRequest) {
   // Handle authenticated users
   if (user) {
     if (pathname === Paths.SEARCH) {
-      // Allow access to search page for authenticated users
       return NextResponse.next();
     }
 
     if (PUBLIC_PATHS.includes(pathname as Paths)) {
-      // Redirect authenticated users from public paths to search page
       return NextResponse.redirect(new URL(Paths.SEARCH, request.url));
     }
 
-    // Allow access to other pages for authenticated users
     return NextResponse.next();
   } else {
     // Handle unauthenticated users
     if (!PUBLIC_PATHS.includes(pathname as Paths)) {
-      // Redirect unauthenticated users to login page
       return NextResponse.redirect(new URL(Paths.LOGIN, request.url));
     }
   }
 
-  // Allow access to public paths for unauthenticated users
   return NextResponse.next();
 }
 

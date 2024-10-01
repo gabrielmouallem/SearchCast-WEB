@@ -10,7 +10,7 @@ export default function ErrorPage() {
           que você está procurando.
         </p>
         <a
-          href="/"
+          href="/login"
           className="mt-6 inline-block text-base text-blue-500 underline"
         >
           Voltar para a página inicial

@@ -15,7 +15,6 @@ export function usePasswordReset() {
   const [loading, setLoading] = useState(false);
 
   const searchParams = useSearchParams();
-  const code = searchParams.get("code");
 
   const router = useRouter();
   const {
@@ -28,6 +27,7 @@ export function usePasswordReset() {
   const handlePasswordReset = (formData: PasswordResetFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);
+      const code = searchParams.get("code");
       NextJsApiService.post<LoginResponse>("/api/password-reset", {
         password: formData?.password,
         code,
