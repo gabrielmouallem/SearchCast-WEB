@@ -1,5 +1,5 @@
 import { useCookies, useUser } from "@/hooks";
-import { PythonApiService } from "@/services/client";
+import { NextJsApiService } from "@/services/client";
 import { OrderByValue, TSearchResult } from "@/types";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -79,7 +79,7 @@ export function useSearchQuery(
         }, 2000);
       });
     }
-    return PythonApiService.get<TSearchResult | undefined>("/v1/search", {
+    return NextJsApiService.get<TSearchResult | undefined>("/api/search", {
       params: { text, page: pageParam, ...filters, ...rest },
       signal,
     }).catch((err) => {

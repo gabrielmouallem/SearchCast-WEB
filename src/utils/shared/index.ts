@@ -2,7 +2,6 @@ export * from "./getApiUrl";
 export * from "./getLastUpdate";
 export * from "./getBoldText";
 export * from "./getDecodedJWT";
-export * from "./getRefreshedAccessToken";
 export * from "./executeIfExists";
 export * from "./getPosthogEnv";
 export * from "./stringToBoolean";

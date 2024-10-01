@@ -1,7 +1,7 @@
 import { useAuth } from "./useAuth";
 
 export function useUser() {
-  const { getUser } = useAuth()
+  const { getUser } = useAuth();
 
-  return getUser()
+  return getUser();
 }

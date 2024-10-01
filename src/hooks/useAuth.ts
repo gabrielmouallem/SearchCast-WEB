@@ -2,21 +2,23 @@ import { getDecodedJWT } from "@/utils/shared"; // Import encodeToJWT function f
 import { useCookies } from ".";
 import { useRouter } from "next/navigation";
 import { User } from "@/types";
+import { createClient } from "@/services/client";
 
 export function useAuth() {
   const { getCookie, updateCookie } = useCookies("access_token", "");
   const router = useRouter();
 
   function getUser() {
-    return getDecodedJWT<any>(getCookie())?.sub as User | undefined;
+    return getDecodedJWT<any>(getCookie()) as User | undefined;
   }
 
   function clearAccessToken() {
     updateCookie("", 1);
   }
 
-  function handleLogout() {
-    updateCookie("", 1);
+  async function handleLogout() {
+    await createClient().auth.signOut();
+    clearAccessToken();
     router.push("/login");
   }
 
