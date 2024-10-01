@@ -10,29 +10,31 @@ export async function checkActiveSubscription(
 ): Promise<Stripe.Subscription | false> {
   console.log({ email });
   try {
-    const customers = await stripe.customers.list({ email: email });
+    const customers = await stripe.customers.list({
+      email: email,
+      limit: 1,
+      expand: ["data.subscriptions"],
+    });
     if (customers.data.length === 0) {
       return false;
     }
 
-    const subscriptions = await stripe.subscriptions.list({
-      customer: customers.data[0].id,
-      status: "all",
-    });
+    const customer = customers.data[0];
+    const subscriptions = customer.subscriptions?.data;
+
+    if (!subscriptions || subscriptions.length === 0) {
+      return false;
+    }
 
     // Check for active or trialing subscriptions, including those canceled but not yet expired
-    const activeSubscription = subscriptions.data.find(
+    const activeSubscription = subscriptions.find(
       (sub) =>
         ["active", "trialing"].includes(sub.status) ||
         (sub.status === "canceled" &&
           sub.current_period_end > Math.floor(Date.now() / 1000)),
     );
 
-    if (activeSubscription) {
-      return activeSubscription;
-    }
-
-    return false;
+    return activeSubscription || false;
   } catch (error) {
     console.error("Error checking subscription:", error);
     return false;
