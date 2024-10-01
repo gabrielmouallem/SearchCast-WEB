@@ -1,19 +1,9 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { PythonApiService } from "@/services/client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { useCookies } from "@/hooks";
 import { useState } from "react";
-
-interface RegisterResponse {
-  _id: string;
-  name: string;
-  email: string;
-  active_subscription: boolean;
-  created_on: string;
-  access_token: string;
-}
+import { NextJsApiService } from "@/services/client";
 
 interface RegisterFormValues {
   name: string;
@@ -26,7 +16,6 @@ interface RegisterFormValues {
 export function useRegister() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const cookies = useCookies("access_token", "");
   const {
     handleSubmit,
     control,
@@ -34,23 +23,22 @@ export function useRegister() {
     watch,
   } = useForm<RegisterFormValues>();
 
-  const handleLogin = (formData: RegisterFormValues) =>
-    new Promise((resolve, reject) => {
-      setLoading(true);
-      PythonApiService.post<RegisterResponse>("/v1/register", formData)
-        .then(({ data }) => {
-          cookies.updateCookie(data.access_token, 1);
-          resolve(data);
-          return data;
-        })
-        .catch((err) => {
-          reject(err);
-          return err;
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    });
+  const handleLogin = async (formData: RegisterFormValues) => {
+    setLoading(true);
+    try {
+      await NextJsApiService.post("/api/register", {
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+      });
+
+      setTimeout(() => router.push("/login"), 2000);
+    } catch (err) {
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     try {

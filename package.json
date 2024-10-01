@@ -19,12 +19,15 @@
     "@react-oauth/google": "^0.12.1",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.3.0",
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.45.4",
     "@tanstack/query-sync-storage-persister": "^5.51.1",
     "@tanstack/react-query": "^5.51.1",
     "@tanstack/react-query-persist-client": "^5.51.1",
     "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.16",
+    "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "jwt-encode": "^1.0.1",
     "lottie-react": "^2.4.0",
@@ -42,6 +45,7 @@
     "tailwindest": "^2.2.1"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/jwt-encode": "^1.0.3",
     "@types/node": "^20",
     "@types/react": "npm:types-react@rc",

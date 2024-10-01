@@ -5,15 +5,17 @@ import type { Metadata } from "next";
 import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "SearchCast - Redefinir Senha",
-  description: "Redefinir senha",
+  title: "SearchCast - Erro",
+  description: "Erro",
   keywords: [
     ...DEFAULT_METADATA_KEYWORDS,
-    "mudar senha",
-    "alterar senha",
-    "redefinir senha",
-    "esqueci senha",
-    "esqueci minha senha",
+    "error",
+    "erro",
+    "not found",
+    "página não encontrada",
+    "não encontrada",
+    "página não existe",
+    "não existe",
   ],
 };
 
@@ -23,13 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <>
       <Head>
-        <title>SearchCast - Mudar Senha</title>
+        <title>SearchCast - Erro</title>
       </Head>
       <Navbar />
       <PageWrapper>{children}</PageWrapper>
       <Footer />
-    </div>
+    </>
   );
 }

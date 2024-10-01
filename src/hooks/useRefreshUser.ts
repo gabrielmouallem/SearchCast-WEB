@@ -1,13 +1,13 @@
-import { PythonApiService } from "@/services/client";
+import { NextJsApiService } from "@/services/client";
 import { useCookies } from ".";
 import { useQuery } from "@tanstack/react-query";
 
-export function useRefreshAccessToken() {
+export function useRefreshUser() {
   const { updateCookie } = useCookies("access_token", "");
 
-  const fetchAccessToken = async () => {
-    const { data } = await PythonApiService.get<{ access_token: string }>(
-      "/v1/refresh",
+  const fetch = async () => {
+    const { data } = await NextJsApiService.get<{ access_token: string }>(
+      "/api/refresh",
     );
     updateCookie(data.access_token, 1);
     return data.access_token;
@@ -15,7 +15,7 @@ export function useRefreshAccessToken() {
 
   return useQuery({
     queryKey: ["refreshToken"],
-    queryFn: fetchAccessToken,
+    queryFn: fetch,
     staleTime: 0, // Ensures the data is always considered stale
     refetchOnMount: true, // Ensures the query refetches on mount
     refetchOnWindowFocus: true,

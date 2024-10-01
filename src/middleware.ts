@@ -1,76 +1,86 @@
-import { NextResponse } from "next/server";
-import {
-  getRefreshedAccessToken,
-  getDecodedJWT,
-  stringToBoolean,
-} from "./utils/shared";
-import { User } from "./types";
-import { RequestCookies } from "next/dist/compiled/@edge-runtime/cookies";
+import { NextResponse, type NextRequest } from "next/server";
+import { createClient } from "./services/server";
+import { Paths, PUBLIC_PATHS, CODE_HANDLING_PATHS } from "./constants/paths";
 
-const PROTECTED_ROUTES_PATHNAMES = [
-  "/search",
-  "/onboarding",
-  "/plans",
-  "/profile",
-];
+export async function middleware(request: NextRequest) {
+  const { pathname, searchParams } = new URL(request.url);
+  const code = searchParams.get("code");
+  const accessToken = request.cookies.get("access_token")?.value;
 
-const PAGES_THAT_SHOULD_NOT_RENDER_WHILE_AUTHENTICATED = [
-  "/forgot-password",
-  "/login",
-  "/register",
-];
+  const supabase = createClient();
 
-function setAccessToken(req: any, value: string) {
-  return (req.cookies as RequestCookies).set("access_token", value);
-}
+  (request as any).supabase = supabase;
 
-function getAccessToken(req: any) {
-  return (req.cookies as RequestCookies).get("access_token")?.value;
-}
-
-function getSkipOnboarding(req: any) {
-  return stringToBoolean(
-    (req.cookies as RequestCookies).get("skip_onboarding")?.value ?? "",
-  );
-}
-
-function redirectToPage(req: any, pathname: `/${string}`) {
-  return NextResponse.redirect(new URL(pathname, req.url));
-}
-
-export async function middleware(req: any) {
-  const access_token = getAccessToken(req);
-  const skip_onboarding = getSkipOnboarding(req);
-  const user = getDecodedJWT<any>(access_token ?? "")?.sub as User | undefined;
-
-  if (PROTECTED_ROUTES_PATHNAMES.includes(req.nextUrl.pathname)) {
-    if (!access_token) return redirectToPage(req, "/login");
-    if (!user) return redirectToPage(req, "/login");
-
-    if (req.nextUrl.pathname === "/search") {
-      const data = await getRefreshedAccessToken(access_token ?? "");
-      const refreshed_access_token = data?.access_token ?? "";
-      const refreshedUser = getDecodedJWT<any>(refreshed_access_token ?? "")
-        ?.sub as User | undefined;
-
-      if (
-        (!refreshedUser || !refreshedUser?.subscription) &&
-        !refreshedUser?.allow_unpaid_access
-      ) {
-        if (skip_onboarding) return redirectToPage(req, "/plans");
-        return redirectToPage(req, "/onboarding");
-      }
-      setAccessToken(req, refreshed_access_token);
-      return NextResponse.next();
-    }
+  // Handle password reset path separately
+  if (pathname === Paths.PASSWORD_RESET) {
+    // Allow access to password-reset page, with or without code
     return NextResponse.next();
-  } else if (
-    PAGES_THAT_SHOULD_NOT_RENDER_WHILE_AUTHENTICATED.includes(
-      req.nextUrl.pathname,
-    )
-  ) {
-    if (access_token) return redirectToPage(req, "/search");
   }
 
+  // Handle code exchange for authentication paths
+  if (CODE_HANDLING_PATHS.includes(pathname as Paths) && code) {
+    // Exchange the code for a session
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+
+    if (error) {
+      // Redirect to error page if code exchange fails
+      return NextResponse.redirect(new URL(Paths.ERROR, request.url));
+    }
+
+    // Redirect to search page and set access token cookie
+    const response = NextResponse.redirect(new URL(Paths.SEARCH, request.url));
+    response.cookies.set("access_token", data.session.access_token, {
+      httpOnly: true,
+    });
+    return response;
+  }
+
+  // Check user authentication status
+  let user = null;
+  if (accessToken) {
+    // Verify the access token and get user data
+    const { data, error } = await supabase.auth.getUser(accessToken);
+    if (!error) {
+      user = data.user;
+    }
+  }
+
+  // Handle authenticated users
+  if (user) {
+    if (pathname === Paths.SEARCH) {
+      // Allow access to search page for authenticated users
+      return NextResponse.next();
+    }
+
+    if (PUBLIC_PATHS.includes(pathname as Paths)) {
+      // Redirect authenticated users from public paths to search page
+      return NextResponse.redirect(new URL(Paths.SEARCH, request.url));
+    }
+
+    // Allow access to other pages for authenticated users
+    return NextResponse.next();
+  } else {
+    // Handle unauthenticated users
+    if (!PUBLIC_PATHS.includes(pathname as Paths)) {
+      // Redirect unauthenticated users to login page
+      return NextResponse.redirect(new URL(Paths.LOGIN, request.url));
+    }
+  }
+
+  // Allow access to public paths for unauthenticated users
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - api (API endpoints)
+     * Also exclude static image files
+     */
+    "/((?!_next/static|_next/image|favicon.ico|api/|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
+};

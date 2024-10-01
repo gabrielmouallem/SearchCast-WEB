@@ -1,3 +1,5 @@
+import { Session, User as SupabaseUser } from "@supabase/supabase-js";
+
 const typeofTranscription = {
   duration: 3.63,
   start: 7076.46,
@@ -161,18 +163,13 @@ export interface FilterOptions<T = string> {
   value: T;
 }
 
-export interface User {
-  _id: string;
-  subscription?: {
-    cancel_at: number;
-    current_period_end: number;
-    plan: "month" | "semester" | "year";
+export type User = SupabaseUser & {
+  user_metadata: {
+    display_name: string;
+    allow_unpaid_access: boolean;
+    subscription: boolean;
   };
-  allow_unpaid_access: boolean;
-  created_on: string;
-  email: string;
-  name: string;
-}
+};
 
 export interface DecodedCredentials {
   name: string;
@@ -183,17 +180,8 @@ export interface DecodedCredentials {
 }
 
 export interface LoginResponse {
-  _id: string;
-  name: string;
-  email: string;
-  active_subscription: boolean;
-  created_on: string;
-  access_token: string;
-  subscription?: {
-    cancel_at: number;
-    current_period_end: number;
-    plan: "month" | "semester" | "year";
-  };
+  user: User;
+  session: Session;
 }
 
 export type TTranscription = typeof typeofTranscription;

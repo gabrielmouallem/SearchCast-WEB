@@ -18,8 +18,10 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
   const user = useUser();
   const isMounted = useIsMounted();
 
-  const name = user?.name ?? "";
-  const hasAccess = user?.subscription || user?.allow_unpaid_access;
+  const name = user?.user_metadata?.display_name ?? "";
+  const hasAccess =
+    user?.user_metadata?.subscription ||
+    user?.user_metadata?.allow_unpaid_access;
 
   const isDemo = !restrictedMode && !hasAccess;
 
