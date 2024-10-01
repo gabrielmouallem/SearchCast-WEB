@@ -4,10 +4,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/services/client";
 import { LoadingFallback } from "@/components/LoadingFallback";
 import { CookiesService } from "@/services/client/CookiesService/CookiesService";
+import { Suspense } from "react";
 
 const supabase = createClient();
 
-export default function AuthCallback() {
+function AuthCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -48,5 +49,13 @@ export default function AuthCallback() {
     <div className="-mt-[20vh] flex min-h-screen">
       <LoadingFallback />
     </div>
+  );
+}
+
+export default function AuthCallback() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <AuthCallbackContent />
+    </Suspense>
   );
 }
