@@ -14,13 +14,13 @@ function PasswordResetFormContent() {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+  const code = searchParams.get("code");
 
   const watchPassword = watch("password");
 
   useEffect(() => {
-    if (!token) router.push("/login");
-  }, [token, router]);
+    if (!code) router.push("/login");
+  }, [code, router]);
 
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
@@ -119,7 +119,13 @@ function PasswordResetFormContent() {
 
 export function PasswordResetForm() {
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <Suspense
+      fallback={
+        <div className="-mt-[20vh] flex min-h-screen">
+          <LoadingFallback />
+        </div>
+      }
+    >
       <PasswordResetFormContent />
     </Suspense>
   );

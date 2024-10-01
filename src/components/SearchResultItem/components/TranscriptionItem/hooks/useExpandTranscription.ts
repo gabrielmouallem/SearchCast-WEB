@@ -1,7 +1,9 @@
 "use client";
-import { PythonApiService } from "@/services/client";
+import { useCookies } from "@/hooks";
+import { NextJsApiService } from "@/services/client";
 import { TTranscription } from "@/types";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export function useExpandTranscription({
   videoId,
@@ -10,10 +12,20 @@ export function useExpandTranscription({
   videoId: string;
   start: number;
 }) {
+  const cookies = useCookies("access_token", "");
+  const router = useRouter();
+
   function fetchExpandTranscription() {
-    return PythonApiService.get<TTranscription>(
-      `/v1/expand-transcription?videoId=${videoId}&start=${start}`,
-    );
+    return NextJsApiService.get<TTranscription>(
+      `/api/expand-transcription?videoId=${videoId}&start=${start}`,
+    ).catch((err) => {
+      if (err?.response?.status === 403) {
+        router.push("/plans");
+      } else if ([401, 402, 404].includes(err?.response?.status)) {
+        cookies.updateCookie("", 1);
+        router.push("/login");
+      }
+    });
   }
 
   return useQuery({

@@ -1,27 +1,17 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { PythonApiService } from "@/services/client";
+import { NextJsApiService } from "@/services/client";
 import { useRouter } from "next/navigation";
 import { useCookies, useIdentifyUser } from "@/hooks";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { LoginResponse, User } from "@/types";
+import { LoginResponse } from "@/types";
+import { AxiosError } from "axios";
+import { AuthError } from "@supabase/supabase-js";
 
 interface LoginFormValues {
   email: string;
   password: string;
-}
-
-// Transformation function to ensure only User fields are passed
-function transformLoginResponseToUser(data: LoginResponse): User {
-  return {
-    _id: data._id,
-    name: data.name,
-    email: data.email,
-    created_on: data.created_on,
-    subscription: data.subscription,
-    allow_unpaid_access: false,
-  };
 }
 
 export function useLogin() {
@@ -34,16 +24,14 @@ export function useLogin() {
     control,
     formState: { errors },
   } = useForm<LoginFormValues>();
-
   const handleLogin = (formData: LoginFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);
-      PythonApiService.post<LoginResponse>("/v1/login", formData)
+      NextJsApiService.post<LoginResponse>("/api/login", formData)
         .then(({ data }) => {
-          cookies.updateCookie(data.access_token, 1);
+          cookies.updateCookie(data.session.access_token, 1);
           try {
-            const user = transformLoginResponseToUser(data);
-            identifyUser(user);
+            identifyUser(data.user);
           } catch (err) {
             console.error("Error trying to send user identity to Posthog", {
               err,
@@ -67,7 +55,17 @@ export function useLogin() {
         router.push("/search");
       });
     } catch (error) {
-      toast("Erro ao entrar. Por favor tente novamente.", {
+      const message =
+        (error as AxiosError<AuthError>)?.response?.data?.code ===
+        "email_not_confirmed"
+          ? "Confirme seu email para continuar."
+          : "Erro ao entrar. Por favor tente novamente.";
+      const type =
+        (error as AxiosError<AuthError>)?.response?.data?.code ===
+        "email_not_confirmed"
+          ? "info"
+          : "error";
+      toast(message, {
         position: "top-right",
         autoClose: 8000,
         hideProgressBar: false,
@@ -76,7 +74,7 @@ export function useLogin() {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        type: "error",
+        type,
       });
       // Handle login error
       console.error(error);

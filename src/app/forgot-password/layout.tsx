@@ -5,12 +5,13 @@ import type { Metadata } from "next";
 import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "SearchCast - Mudar Senha",
-  description: "Mudar senha",
+  title: "SearchCast - Redefinir Senha",
+  description: "Redefinir senha",
   keywords: [
     ...DEFAULT_METADATA_KEYWORDS,
     "mudar senha",
     "alterar senha",
+    "redefinir senha",
     "esqueci senha",
     "esqueci minha senha",
   ],
