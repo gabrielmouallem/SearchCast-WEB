@@ -14,9 +14,9 @@ export async function sendAccessRequest() {
         send_instantly: true,
       });
       await sendMail({
-        text: `${user.user_metadata?.display_name}, ${user.email}, criado em ${new Date(user.created_at).toLocaleDateString()} solicitou o plano gratuito do SearchCast.`,
+        text: `${user.user_metadata?.full_name}, ${user.email}, criado em ${new Date(user.created_at).toLocaleDateString()} solicitou o plano gratuito do SearchCast.`,
         to: ["gabriel.unifei2017@gmail.com", "contato@searchcast.app"],
-        subject: `${user.user_metadata?.display_name} Solicitou Acesso Gratuito`,
+        subject: `${user.user_metadata?.full_name} Solicitou Acesso Gratuito`,
       });
       return await sendMail({
         template: "free-plan-request-requested-template",

@@ -165,7 +165,7 @@ export interface FilterOptions<T = string> {
 
 export type User = SupabaseUser & {
   user_metadata: {
-    display_name: string;
+    full_name: string;
     allow_unpaid_access: boolean;
     subscription: boolean;
   };

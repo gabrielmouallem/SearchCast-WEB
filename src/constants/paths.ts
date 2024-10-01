@@ -25,8 +25,3 @@ export const PUBLIC_PATHS: readonly Paths[] = [
   Paths.PRIVACY_POLICY,
   Paths.REGISTER,
 ];
-
-export const CODE_HANDLING_PATHS: readonly Paths[] = [
-  Paths.LOGIN,
-  Paths.PASSWORD_RESET,
-];

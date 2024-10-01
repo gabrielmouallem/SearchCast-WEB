@@ -5,7 +5,7 @@ import { getUser } from "@/utils/server";
 export async function ProfileForm() {
   const user = await getUser();
 
-  const name = user?.user_metadata?.display_name ?? "";
+  const name = user?.user_metadata?.full_name ?? "";
   const firstName = name?.split(" ").at(0);
   const lastName = name?.split(" ").at(1);
 

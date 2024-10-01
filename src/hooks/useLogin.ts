@@ -4,7 +4,7 @@ import { NextJsApiService } from "@/services/client";
 import { useRouter } from "next/navigation";
 import { useCookies, useIdentifyUser } from "@/hooks";
 import { toast } from "react-toastify";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { LoginResponse } from "@/types";
 import { AxiosError } from "axios";
 import { AuthError } from "@supabase/supabase-js";
@@ -24,8 +24,6 @@ export function useLogin() {
     control,
     formState: { errors },
   } = useForm<LoginFormValues>();
-  const hasRun = useRef(false);
-
   const handleLogin = (formData: LoginFormValues) =>
     new Promise((resolve, reject) => {
       setLoading(true);

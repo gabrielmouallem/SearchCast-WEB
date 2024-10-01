@@ -45,7 +45,7 @@ export default function AuthCallback() {
   }, [router, searchParams]);
 
   return (
-    <div className="-mt-[10vh] flex min-h-screen">
+    <div className="-mt-[20vh] flex min-h-screen">
       <LoadingFallback />
     </div>
   );

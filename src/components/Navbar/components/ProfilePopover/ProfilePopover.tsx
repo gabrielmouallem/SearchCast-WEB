@@ -18,7 +18,7 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
   const user = useUser();
   const isMounted = useIsMounted();
 
-  const name = user?.user_metadata?.display_name ?? "";
+  const name = user?.user_metadata?.full_name ?? "";
   const hasAccess =
     user?.user_metadata?.subscription ||
     user?.user_metadata?.allow_unpaid_access;

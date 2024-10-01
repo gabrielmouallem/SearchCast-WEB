@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     password: body.password,
     options: {
       data: {
-        display_name: body.name,
+        full_name: body.name,
       },
     },
   });

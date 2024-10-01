@@ -1,6 +1,6 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { NextJsApiService, PythonApiService } from "@/services/client";
+import { NextJsApiService } from "@/services/client";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { LoginResponse } from "@/types";
