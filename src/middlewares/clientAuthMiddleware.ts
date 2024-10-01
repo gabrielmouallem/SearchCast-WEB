@@ -7,6 +7,11 @@ export function handleClientAuthMiddleware(
 ) {
   const accessToken = request.cookies.get("access_token")?.value;
 
+  // Allow access to the root path for all users
+  if (pathname === "/") {
+    return NextResponse.next();
+  }
+
   if (!accessToken) {
     if (PROTECTED_PATHS.some((path) => pathname.startsWith(path))) {
       // Redirect unauthenticated users to login page
