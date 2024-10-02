@@ -23,10 +23,10 @@ function sanitizeAndConvertOrderBy(orderByStr: string): {
     orderByOption = orderByStr as OrderByOptions;
   }
 
-  const [_, field, order] = orderByOption.split(".");
+  const [object, field, order] = orderByOption.split(".");
   const mongoOrder = order === "asc" ? 1 : -1;
 
-  return { [field]: mongoOrder };
+  return { [`${object}.${field}`]: mongoOrder };
 }
 
 function formatTextToDoubleQuotes(text: string): string {
@@ -92,6 +92,7 @@ export async function GET(req: NextRequest) {
 
     const countPipeline = [...commonPipeline, { $count: "count" }];
 
+    // Separate aggregations for results and count
     const [resultData, countData] = await Promise.all([
       collection.aggregate(resultsPipeline).toArray(),
       collection.aggregate(countPipeline).toArray(),
