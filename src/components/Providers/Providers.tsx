@@ -5,6 +5,7 @@ import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persist
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { getPosthogEnv } from "@/utils/shared";
+import { useIdentifyUser } from "@/hooks";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,7 @@ interface ProvidersProps {
 }
 
 export function Providers({ children }: ProvidersProps) {
+  useIdentifyUser();
   return (
     <CSPostHogProvider>
       <QueryProvider>{children}</QueryProvider>

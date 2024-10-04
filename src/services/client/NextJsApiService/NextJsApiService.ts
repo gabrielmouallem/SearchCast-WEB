@@ -1,7 +1,9 @@
 "use client";
 import axios from "axios";
 
-export const NextJsApiService = axios.create();
+export const NextJsApiService = axios.create({
+  timeout: 30000, // 30 seconds
+});
 
 axios.interceptors.response.use(
   (response) => response,
