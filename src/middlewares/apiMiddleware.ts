@@ -31,6 +31,7 @@ export async function handleApiMiddleware(
 
   // Check for paid subscription only for specific routes
   if (
+    pathname.startsWith("/api/autosuggestions") ||
     pathname.startsWith("/api/search") ||
     pathname.startsWith("/api/expand-transcriptions")
   ) {

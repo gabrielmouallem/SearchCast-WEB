@@ -9,12 +9,16 @@ export function useIdentifyUser() {
 
   useEffect(() => {
     if (user) {
-      posthog.identify(user.id, { ...user });
+      identifyUser(user);
     }
   }, [user]);
 
   function identifyUser(user: User) {
-    posthog.identify(user.id, { ...user });
+    posthog.identify(user.id, {
+      email: user?.email,
+      name: user?.user_metadata?.full_name,
+      metadata: user,
+    });
   }
 
   return {

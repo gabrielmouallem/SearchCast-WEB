@@ -1,6 +1,5 @@
 "use client";
 import { SearchInput } from "@/components/SearchInput";
-import { ToastContainer } from "react-toastify";
 import { useSearch } from "@/hooks";
 import Lottie from "lottie-react";
 import Image from "next/image";

@@ -5,10 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { Suspense } from "react";
 import { LoadingFallback } from "@/components/LoadingFallback";
-import { getAndIdentifyUser } from "@/utils/server/getAndIdentifyUser";
 
 async function SearchContent() {
-  await getAndIdentifyUser();
   return (
     <Providers>
       <ToastContainer />
