@@ -163,13 +163,15 @@ export interface FilterOptions<T = string> {
   value: T;
 }
 
-export type User = SupabaseUser & {
+export interface User extends SupabaseUser {
+  session_id?: string;
   user_metadata: {
+    display_name: string;
     full_name: string;
     allow_unpaid_access: boolean;
     subscription: boolean;
   };
-};
+}
 
 export interface DecodedCredentials {
   name: string;

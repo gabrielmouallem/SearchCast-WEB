@@ -14,7 +14,8 @@ export function useIdentifyUser() {
   }, [user]);
 
   function identifyUser(user: User) {
-    posthog.identify(user.id, {
+    const id = user?.id ?? user?.session_id;
+    posthog.identify(id, {
       email: user?.email,
       name: user?.user_metadata?.full_name,
       metadata: user,
