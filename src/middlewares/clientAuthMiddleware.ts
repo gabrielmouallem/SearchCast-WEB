@@ -9,6 +9,7 @@ export async function handleClientAuthMiddleware(
   request: NextRequest,
   pathname: string,
 ) {
+  //
   const accessToken = request.cookies.get("access_token")?.value;
 
   // Allow access to the root path for all users
