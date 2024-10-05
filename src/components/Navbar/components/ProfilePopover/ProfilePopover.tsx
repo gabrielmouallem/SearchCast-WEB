@@ -21,9 +21,9 @@ export function ProfilePopover() {
     user?.user_metadata?.allow_unpaid_access ||
     user?.user_metadata?.allow_beta_access;
 
-  const isDemo = !hasAccess;
+  const hasLimitedAccess = !hasAccess;
 
-  const searchHref = isDemo ? "/join-beta" : "/search";
+  const searchHref = hasLimitedAccess ? "/join-beta" : "/search";
 
   const MENU_ITEMS = [
     { label: "Pesquisar", href: "/search", divider: false },
