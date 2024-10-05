@@ -33,6 +33,10 @@ export function SearchInput({ onSuggestionClick, ...props }: SearchInputProps) {
           placeholder="Pesquise seu podcast"
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
         />
         <button
           className="absolute inset-y-0 right-0 z-50 flex cursor-pointer items-center pl-8 pr-3"
