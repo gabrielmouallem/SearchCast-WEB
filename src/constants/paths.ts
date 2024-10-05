@@ -5,13 +5,13 @@ export enum Paths {
   GUIDE = "/guide",
   HOME = "/",
   LOGIN = "/login",
-  ONBOARDING = "/onboarding",
   PASSWORD_RESET = "/password-reset",
   PLANS = "/plans",
   PRIVACY_POLICY = "/privacy-policy",
   PROFILE = "/profile",
   REGISTER = "/register",
   SEARCH = "/search",
+  JOIN_BETA = "/join-beta",
 }
 
 export enum ApiPaths {
@@ -35,7 +35,7 @@ export const PROTECTED_PATHS = [
   Paths.SEARCH,
   Paths.PROFILE,
   Paths.PLANS,
-  Paths.ONBOARDING,
+  Paths.JOIN_BETA,
 ];
 
 export const PUBLIC_API_PATHS: readonly ApiPaths[] = [

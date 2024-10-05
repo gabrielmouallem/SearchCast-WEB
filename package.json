@@ -25,6 +25,7 @@
     "@tanstack/react-query": "^5.51.1",
     "@tanstack/react-query-persist-client": "^5.51.1",
     "@uidotdev/usehooks": "^2.4.1",
+    "add": "^2.0.6",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.16",
     "jsonwebtoken": "^9.0.2",
@@ -35,6 +36,7 @@
     "next": "^15.0.0-rc.0",
     "next-usequerystate": "^1.17.4",
     "posthog-js": "^1.166.1",
+    "posthog-node": "^4.2.0",
     "react": "^19.0.0-rc-14a4699f-20240725",
     "react-dom": "^19.0.0-rc-14a4699f-20240725",
     "react-hook-form": "^7.49.2",
@@ -42,7 +44,8 @@
     "resend": "^3.5.0",
     "sharp": "^0.33.4",
     "stripe": "^14.12.0",
-    "tailwindest": "^2.2.1"
+    "tailwindest": "^2.2.1",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.7",
