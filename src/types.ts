@@ -169,6 +169,8 @@ export interface User extends SupabaseUser {
     display_name: string;
     full_name: string;
     allow_unpaid_access: boolean;
+    allow_beta_access: boolean;
+    beta_access_requested: boolean;
     subscription: boolean;
   };
 }

@@ -18,12 +18,12 @@ export function GuideContent() {
         plataforma. Caso esteja interessado em ver a plataforma funcionando,
         você pode fazer o login na plataforma e acessar a página{" "}
         <a
-          href="/onboarding"
+          href="/search"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-500"
         >
-          https://searchcast.app/onboarding
+          https://searchcast.app/search
         </a>{" "}
         para experimentar o app.
       </p>

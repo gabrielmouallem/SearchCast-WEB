@@ -37,7 +37,11 @@ export async function handleApiMiddleware(
   ) {
     const hasActiveSubscription = await checkActiveSubscription(user.email!);
 
-    if (!hasActiveSubscription && !user?.user_metadata?.allow_unpaid_access) {
+    if (
+      !hasActiveSubscription &&
+      !user?.user_metadata?.allow_unpaid_access &&
+      !user?.user_metadata?.allow_beta_access
+    ) {
       return NextResponse.json({ error: "Payment required" }, { status: 403 });
     }
   }

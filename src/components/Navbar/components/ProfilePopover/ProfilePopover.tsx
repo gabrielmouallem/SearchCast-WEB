@@ -7,12 +7,9 @@ import * as Popover from "@radix-ui/react-popover";
 import { usePathname } from "next/navigation";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { MenuItem, MenuItemIcon } from "./components";
+import posthog from "posthog-js";
 
-interface ProfilePopoverProps {
-  restrictedMode?: boolean;
-}
-
-export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
+export function ProfilePopover() {
   const { handleLogout } = useAuth();
   const pathname = usePathname();
   const user = useUser();
@@ -21,19 +18,31 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
   const name = user?.user_metadata?.full_name ?? "";
   const hasAccess =
     user?.user_metadata?.subscription ||
-    user?.user_metadata?.allow_unpaid_access;
+    user?.user_metadata?.allow_unpaid_access ||
+    user?.user_metadata?.allow_beta_access;
 
-  const isDemo = !restrictedMode && !hasAccess;
+  const hasLimitedAccess = !hasAccess;
 
-  const searchHref = isDemo ? "/onboarding?initialStep=3" : "/search";
+  const searchHref = hasLimitedAccess ? "/join-beta" : "/search";
 
   const MENU_ITEMS = [
     { label: "Pesquisar", href: "/search", divider: false },
     { label: "Meu Perfil", href: "/profile", divider: true },
-    { label: "Planos", href: "/plans", divider: false },
     { label: "Ajuda", href: "/guide", divider: false },
     { label: "Pagina Inicial", href: "/", divider: true },
   ];
+
+  const isBetaProgramEnabled = Boolean(
+    posthog.isFeatureEnabled("beta-program"),
+  );
+
+  if (!isBetaProgramEnabled) {
+    MENU_ITEMS.splice(2, 0, {
+      label: "Planos",
+      href: "/plans",
+      divider: false,
+    });
+  }
 
   if (!isMounted) {
     return <Avatar name={name} isLoading />;
@@ -53,27 +62,23 @@ export function ProfilePopover({ restrictedMode }: ProfilePopoverProps) {
             sideOffset={5}
             className="relative z-50 mr-2 flex h-screen w-screen flex-col rounded-lg border border-dark-gray bg-[#080C14] px-4 pb-4 pt-8 sm:mr-4 sm:h-fit sm:w-64 sm:px-0"
           >
-            {!restrictedMode && (
+            {MENU_ITEMS.map((item) => (
               <>
-                {MENU_ITEMS.map((item) => (
-                  <>
-                    {item.divider && (
-                      <div className="my-2 h-[1px] w-full border-b border-dark-gray" />
-                    )}
-                    <MenuItem
-                      key={item.href}
-                      href={item.href === "/search" ? searchHref : item.href}
-                      isSelected={pathname === item.href}
-                    >
-                      {item.label}
-                      <MenuItemIcon
-                        icon={item.href.replace("?initialStep=3", "") as any}
-                      />
-                    </MenuItem>
-                  </>
-                ))}
+                {item.divider && (
+                  <div className="my-2 h-[1px] w-full border-b border-dark-gray" />
+                )}
+                <MenuItem
+                  key={item.href}
+                  href={item.href === "/search" ? searchHref : item.href}
+                  isSelected={pathname === item.href}
+                >
+                  {item.label}
+                  <MenuItemIcon
+                    icon={item.href.replace("?initialStep=3", "") as any}
+                  />
+                </MenuItem>
               </>
-            )}
+            ))}
             <div className="my-2 h-[1px] w-full border-b border-dark-gray" />
             <MenuItem onClick={handleLogout}>
               Sair
