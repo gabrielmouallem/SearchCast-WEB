@@ -35,7 +35,7 @@ export function Navbar({ isAuthenticated }: NavbarProps) {
             alt="SearchCast Logo"
           />
         </a>
-        {!!!isAuthenticated && (
+        {!isAuthenticated && (
           <div className="ml-auto">
             <a href="/login">
               <Button startIcon={<Image {...imageProps} alt="Person Icon" />}>
@@ -44,7 +44,7 @@ export function Navbar({ isAuthenticated }: NavbarProps) {
             </a>
           </div>
         )}
-        {!!isAuthenticated && (
+        {isAuthenticated && (
           <div className="ml-auto">
             <ProfilePopover />
           </div>
