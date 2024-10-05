@@ -63,10 +63,6 @@ export async function handleClientAuthMiddleware(
     }
 
     if (user) {
-      const createdAt = new Date(user.created_at);
-      const now = new Date();
-      const isFirstAccess = now.getTime() - createdAt.getTime() < 5 * 60 * 1000; // 5 minutes
-
       // Check if beta-program feature is enabled
       const isBetaProgramEnabled = await posthog.isFeatureEnabled(
         "beta-program",
@@ -76,9 +72,6 @@ export async function handleClientAuthMiddleware(
       const hasBetaAccess = Boolean(
         (user as User).user_metadata?.allow_beta_access,
       );
-      const hasFreeAccess = Boolean(
-        (user as User).user_metadata?.allow_unpaid_access,
-      );
       const hasUnpaidAccess = Boolean(
         (user as User).user_metadata?.allow_unpaid_access,
       );
@@ -87,7 +80,7 @@ export async function handleClientAuthMiddleware(
       const activeSubscription = await getActiveSubscription(user.email!);
 
       const hasActiveSubscription = !!activeSubscription;
-      const hasAnyAccess = hasBetaAccess || hasFreeAccess || hasUnpaidAccess;
+      const hasAnyAccess = hasBetaAccess || hasUnpaidAccess;
       const needsSubscription = !hasActiveSubscription && !hasAnyAccess;
 
       if (pathname.startsWith(Paths.SEARCH)) {
@@ -122,7 +115,7 @@ export async function handleClientAuthMiddleware(
       }
 
       console.log(
-        `[ClientAuthMiddleware] User access state: isBetaProgramEnabled=${isBetaProgramEnabled}, hasActiveSubscription=${hasActiveSubscription}, hasBetaAccess=${hasBetaAccess}, hasFreeAccess=${hasFreeAccess}, hasUnpaidAccess=${hasUnpaidAccess}`,
+        `[ClientAuthMiddleware] User access state: isBetaProgramEnabled=${isBetaProgramEnabled}, hasActiveSubscription=${hasActiveSubscription}, hasBetaAccess=${hasBetaAccess}, hasUnpaidAccess=${hasUnpaidAccess}`,
       );
     }
   }
