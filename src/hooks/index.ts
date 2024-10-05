@@ -7,3 +7,4 @@ export * from "./useIndentifyUser";
 export * from "./useUser";
 export * from "./useSearch";
 export * from "./useSearchQuery";
+export * from "./useRequestBetaAccess";

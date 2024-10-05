@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { mockedSearchResultSwitchCase } from "./useSearchQuery.constants";
 import { MockedTextOptions } from "./useSearchQuery.types";
 import { AxiosResponse } from "axios";
+import { Paths } from "@/constants";
 
 interface SearchQueryOptions {
   mockedText?: string;
@@ -84,7 +85,8 @@ export function useSearchQuery(
       signal,
     }).catch((err) => {
       if (err?.response?.status === 403) {
-        router.push("/plans");
+        const isBetaProgramEnabled = posthog.isFeatureEnabled("beta-program");
+        router.push(isBetaProgramEnabled ? Paths.JOIN_BETA : Paths.PLANS);
       } else if ([401, 402, 404].includes(err?.response?.status)) {
         cookies.updateCookie("", 1);
         router.push("/login");

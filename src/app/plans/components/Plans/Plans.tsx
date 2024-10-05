@@ -1,31 +1,19 @@
 "use client";
-import { useRefreshUser, useUser } from "@/hooks";
+import { useRefreshUser } from "@/hooks";
 import { ToastContainer } from "react-toastify";
 import PlanCard from "../PlanCard/PlanCard";
-import FreePlanCard from "../FreePlanCard/FreePlanCard";
 import "react-toastify/dist/ReactToastify.css";
-import { useRequestFreePlan } from "./hooks/useRequestFreePlan";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { LoadingFallback } from "@/components/LoadingFallback";
 import { useGetActiveSubscription } from "../PlanCard/hooks/useGetActiveSubscription";
 
 export function Plans() {
-  const user = useUser();
   const { isLoading: isLoadingRefreshedUser, refetch } = useRefreshUser();
-  const {
-    isPending: isPendingRequestFreePlan,
-    isSuccess: isSuccessRequestFreePlan,
-    mutate: mutateFreePlan,
-  } = useRequestFreePlan();
   const { data: activeSubscription, isPending: isPendingActiveSubscription } =
     useGetActiveSubscription();
 
   const isMounted = useIsMounted();
   const showPlans = !isLoadingRefreshedUser && !isPendingActiveSubscription;
-  const showFreePlan = !(
-    user?.user_metadata?.allow_unpaid_access ||
-    user?.user_metadata?.subscription
-  );
 
   if (!isMounted)
     return <LoadingFallback height="[height:calc(100vh-300px)]" />;
@@ -43,13 +31,6 @@ export function Plans() {
         <div className="flex w-full flex-wrap items-center justify-center gap-6">
           {showPlans && (
             <>
-              {showFreePlan && (
-                <FreePlanCard
-                  isPending={isPendingRequestFreePlan}
-                  isSuccess={isSuccessRequestFreePlan}
-                  mutate={mutateFreePlan}
-                />
-              )}
               <PlanCard
                 subscriptionType="month"
                 onCancel={refetch}
@@ -69,9 +50,6 @@ export function Plans() {
           )}
           {!showPlans && (
             <>
-              {showFreePlan && (
-                <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />
-              )}
               <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />
               <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />
               <div className="relative h-[280px] w-[250px] animate-pulse rounded-xl border border-gray-800 bg-dark-gray" />

@@ -29,19 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${APP_URL}/onboarding`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
       url: `${APP_URL}/password-reset`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${APP_URL}/plans`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
@@ -53,19 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${APP_URL}/profile`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
       url: `${APP_URL}/register`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${APP_URL}/search`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

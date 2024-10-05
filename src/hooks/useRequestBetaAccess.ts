@@ -1,15 +1,15 @@
-import { sendAccessRequest } from "@/utils/server";
+import { NextJsApiService } from "@/services/client";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-export function useRequestFreePlan() {
+export function useRequestBetaAccess() {
   return useMutation({
-    mutationFn: sendAccessRequest,
+    mutationFn: () => NextJsApiService.post("/api/join-beta"),
     onSuccess: () => {
       toast(
         "Solicitação recebida com sucesso. O processamento pode levar até 24 horas.",
         {
-          position: "top-right",
+          position: "top-center",
           autoClose: 8000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -23,7 +23,7 @@ export function useRequestFreePlan() {
     },
     onError: () => {
       toast("Erro. Por favor tente novamente.", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 8000,
         hideProgressBar: false,
         closeOnClick: true,

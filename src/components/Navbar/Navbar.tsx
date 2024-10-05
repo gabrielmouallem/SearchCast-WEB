@@ -13,10 +13,9 @@ const imageProps: ComponentProps<typeof Image> = {
 
 interface NavbarProps {
   isAuthenticated?: boolean;
-  restrictedMode?: boolean;
 }
 
-export function Navbar({ isAuthenticated, restrictedMode }: NavbarProps) {
+export function Navbar({ isAuthenticated }: NavbarProps) {
   return (
     <nav className="fixed inset-0 z-50 flex h-20 w-screen items-center justify-center bg-gradient-to-b from-black-transparent to-transparent px-8 backdrop-blur-[1px]">
       <div className="flex w-full items-center justify-center md:px-20">
@@ -36,7 +35,7 @@ export function Navbar({ isAuthenticated, restrictedMode }: NavbarProps) {
             alt="SearchCast Logo"
           />
         </a>
-        {!!(!isAuthenticated && !restrictedMode) && (
+        {!isAuthenticated && (
           <div className="ml-auto">
             <a href="/login">
               <Button startIcon={<Image {...imageProps} alt="Person Icon" />}>
@@ -45,9 +44,9 @@ export function Navbar({ isAuthenticated, restrictedMode }: NavbarProps) {
             </a>
           </div>
         )}
-        {!!isAuthenticated && (
+        {isAuthenticated && (
           <div className="ml-auto">
-            <ProfilePopover restrictedMode={restrictedMode} />
+            <ProfilePopover />
           </div>
         )}
       </div>

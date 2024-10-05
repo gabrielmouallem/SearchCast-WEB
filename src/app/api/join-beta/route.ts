@@ -1,16 +1,16 @@
-"use server";
-import { NextRequest } from "next/server";
-import { getUser } from "./getUser";
-import { sendMail } from "./sendMail";
-import { updateUser } from "./updateUser";
+import { NextRequest, NextResponse } from "next/server";
+import { getUser } from "@/utils/server/getUser";
+import { sendMail } from "@/utils/server/sendMail";
+import { updateUser } from "@/utils/server/updateUser";
 
-export async function sendAccessRequest(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
     const user = await getUser();
     if (!user) throw Error(`Error while sending access request`);
     const updateResult = await updateUser(req, user, {
       beta_access_requested: true,
     });
+
     if (updateResult) {
       await sendMail({
         text: `${user.user_metadata?.full_name}, ${user.email}, criado em ${new Date(user.created_at).toLocaleDateString()} solicitou o acesso ao BETA do SearchCast.`,
@@ -23,7 +23,10 @@ export async function sendAccessRequest(req: NextRequest) {
         subject: "Acesso ao Beta Solicitado",
       });
     }
+
+    return NextResponse.json({ success: true });
   } catch (err) {
-    throw Error(`${err}`);
+    console.error(err);
+    return NextResponse.json({ error: `${err}` }, { status: 500 });
   }
 }
