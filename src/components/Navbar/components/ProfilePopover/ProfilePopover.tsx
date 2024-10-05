@@ -32,7 +32,9 @@ export function ProfilePopover() {
     { label: "Pagina Inicial", href: "/", divider: true },
   ];
 
-  const isBetaProgramEnabled = posthog.isFeatureEnabled("beta-program");
+  const isBetaProgramEnabled = Boolean(
+    posthog.isFeatureEnabled("beta-program"),
+  );
 
   if (!isBetaProgramEnabled) {
     MENU_ITEMS.splice(2, 0, {

@@ -65,9 +65,8 @@ export async function handleClientAuthMiddleware(
 
     if (user) {
       // Check if beta-program feature is enabled
-      const isBetaProgramEnabled = await posthog.isFeatureEnabled(
-        "beta-program",
-        user.id,
+      const isBetaProgramEnabled = Boolean(
+        await posthog.isFeatureEnabled("beta-program", user.id),
       );
 
       const hasBetaAccess = Boolean(
@@ -104,14 +103,6 @@ export async function handleClientAuthMiddleware(
             `[ClientAuthMiddleware] Redirecting from join-beta to ${redirectPath === Paths.SEARCH ? "search" : "plans"} page: ${redirectPath}`,
           );
           return NextResponse.redirect(new URL(redirectPath, request.url));
-        }
-      } else if (pathname.startsWith(Paths.PLANS)) {
-        const shouldRedirectFromPlans = hasActiveSubscription || hasAnyAccess;
-        if (shouldRedirectFromPlans) {
-          console.log(
-            `[ClientAuthMiddleware] Redirecting from plans to search page: ${Paths.SEARCH}`,
-          );
-          return NextResponse.redirect(new URL(Paths.SEARCH, request.url));
         }
       }
 

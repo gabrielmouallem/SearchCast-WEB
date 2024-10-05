@@ -85,7 +85,9 @@ export function useSearchQuery(
       signal,
     }).catch((err) => {
       if (err?.response?.status === 403) {
-        const isBetaProgramEnabled = posthog.isFeatureEnabled("beta-program");
+        const isBetaProgramEnabled = Boolean(
+          posthog.isFeatureEnabled("beta-program"),
+        );
         router.push(isBetaProgramEnabled ? Paths.JOIN_BETA : Paths.PLANS);
       } else if ([401, 402, 404].includes(err?.response?.status)) {
         cookies.updateCookie("", 1);
