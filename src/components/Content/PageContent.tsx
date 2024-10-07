@@ -119,7 +119,7 @@ export function PageContent() {
         <div className="flex flex-col items-center justify-center gap-4 bg-[#0C111D] bg-gradient-to-b from-[#0C111D] via-[rgba(0,158,164,0.085)] to-[rgba(0,158,164,0.085)] px-4 py-16 text-center md:px-0 md:py-24">
           <Content.Gap gap="gap-8">
             <div className="-mb-8 text-lg font-normal text-text-primary">
-              <b className="text-4xl font-extrabold">5.000+</b> episódios e
+              <b className="text-4xl font-extrabold">5.500+</b> episódios e
               crescendo
             </div>
             <div className="text-text-secondary">
