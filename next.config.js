@@ -23,6 +23,7 @@ const nextConfig = {
       return null;
     }
   },
+  productionBrowserSourceMaps: Boolean(Number(process.env.CI)),
   webpack: (config, { isServer, dev, buildId, webpack }) => {
     // Add the DefinePlugin to set NEXT_BUILD_ID
     config.plugins.push(
@@ -36,7 +37,6 @@ const nextConfig = {
         apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
         appVersion: buildId,
       });
-      config.devtool = "source-map";
       config.plugins.push(
         new BugsnagSourceMapUploaderPlugin({
           apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
