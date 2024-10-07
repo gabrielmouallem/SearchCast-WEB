@@ -23,7 +23,14 @@ const nextConfig = {
       return null;
     }
   },
-  webpack: (config, { isServer, dev, buildId }) => {
+  webpack: (config, { isServer, dev, buildId, webpack }) => {
+    // Add the DefinePlugin to set NEXT_BUILD_ID
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        "process.env.NEXT_PUBLIC_BUILD_ID": JSON.stringify(buildId),
+      }),
+    );
+
     if (!isServer && !dev && Boolean(Number(process.env.CI))) {
       new BugsnagBuildReporterPlugin({
         apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,

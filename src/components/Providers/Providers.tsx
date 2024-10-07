@@ -14,7 +14,7 @@ import React from "react";
 Bugsnag.start({
   apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
   plugins: [new BugsnagPluginReact()],
-  appVersion: `searchcast-${process.env.VERCEL_GIT_COMMIT_SHA}`,
+  appVersion: `searchcast-${process.env.NEXT_PUBLIC_BUILD_ID}`,
   releaseStage:
     process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
       ? "production"
