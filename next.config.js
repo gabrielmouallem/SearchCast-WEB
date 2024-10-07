@@ -14,10 +14,10 @@ const nextConfig = {
   },
   generateBuildId: () => {
     try {
-      return (
+      return `searchcast-${
         process.env.VERCEL_GIT_COMMIT_SHA ??
         execSync("git rev-parse HEAD").toString().trim()
-      );
+      }`;
     } catch (error) {
       console.warn("Failed to generate build ID from git commit hash:", error);
       return null;

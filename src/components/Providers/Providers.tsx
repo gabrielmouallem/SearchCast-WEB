@@ -14,7 +14,11 @@ import React from "react";
 Bugsnag.start({
   apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
   plugins: [new BugsnagPluginReact()],
-  appVersion: process.env.VERCEL_GIT_COMMIT_SHA,
+  appVersion: `searchcast-${process.env.VERCEL_GIT_COMMIT_SHA}`,
+  releaseStage:
+    process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+      ? "production"
+      : "development",
 });
 BugsnagPerformance.start({ apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY });
 
