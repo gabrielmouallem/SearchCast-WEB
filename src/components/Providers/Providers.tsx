@@ -6,6 +6,17 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { getPosthogEnv } from "@/utils/shared";
 import { useIdentifyUser } from "@/hooks";
+import Bugsnag from "@bugsnag/js";
+import BugsnagPluginReact from "@bugsnag/plugin-react";
+import BugsnagPerformance from "@bugsnag/browser-performance";
+import React from "react";
+
+Bugsnag.start({
+  apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
+  plugins: [new BugsnagPluginReact()],
+  appVersion: process.env.VERCEL_GIT_COMMIT_SHA,
+});
+BugsnagPerformance.start({ apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY });
 
 const queryClient = new QueryClient();
 
@@ -64,15 +75,20 @@ const QueryProvider = ({ children }: ProvidersProps) => {
   );
 };
 
+const ErrorBoundary = Bugsnag.getPlugin("react")!.createErrorBoundary(React);
+
 interface ProvidersProps {
   children: React.ReactNode;
 }
 
 export function Providers({ children }: ProvidersProps) {
   useIdentifyUser();
+
   return (
-    <CSPostHogProvider>
-      <QueryProvider>{children}</QueryProvider>
-    </CSPostHogProvider>
+    <ErrorBoundary>
+      <CSPostHogProvider>
+        <QueryProvider>{children}</QueryProvider>
+      </CSPostHogProvider>
+    </ErrorBoundary>
   );
 }

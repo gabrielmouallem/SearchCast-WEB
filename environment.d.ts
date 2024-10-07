@@ -18,6 +18,7 @@ namespace NodeJS {
     NEXT_PUBLIC_SUPABASE_URL: string;
     NEXT_PUBLIC_SUPABASE_ANON_KEY: string;
     RESEND_API_KEY: string;
+    NEXT_PUBLIC_BUGSNAG_API_KEY: string;
     DEV: boolean;
     PROD: boolean;
   }
