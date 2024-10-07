@@ -20,7 +20,7 @@ export async function sendAccessRequest(req: NextRequest) {
       await sendMail({
         template: "beta-request-requested-template",
         to: user.email as string,
-        subject: "Acesso ao Beta Solicitado",
+        subject: "Acesso ao BETA Solicitado!",
       });
     }
   } catch (err) {
