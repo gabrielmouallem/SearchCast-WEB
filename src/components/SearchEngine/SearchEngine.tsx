@@ -5,7 +5,7 @@ import Lottie from "lottie-react";
 import Image from "next/image";
 import { getLastUpdate } from "@/utils/shared";
 import logoLottieFile from "../../../public/logo_lottie_animation.json";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import {
   SearchOrderBy,
   SearchResultItem,
@@ -19,6 +19,7 @@ import { LoadingFallback } from "../LoadingFallback";
 import { OrderByValue } from "@/types";
 import { ORDER_BY_VALUE_TO_LABEL_MAP } from "../SearchOrderBy/SearchOrderBy.constants";
 import { CopyToClipboard } from "../CopyToClipboard";
+import Bugsnag from "@bugsnag/js";
 
 interface SearchEngineProps {
   options?: {
@@ -89,6 +90,11 @@ export function SearchEngine({ options }: SearchEngineProps) {
   const getLogoDisplayStyle = (show: boolean) => ({
     display: show ? "initial" : "none",
   });
+
+  useEffect(() => {
+    const timestamp = new Date().toLocaleString();
+    Bugsnag.notify(new Error(`Test error finale at ${timestamp}`));
+  }, []);
 
   if (!isMounted)
     return <LoadingFallback height="[height:calc(100vh-100px)]" />;

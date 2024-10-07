@@ -34,6 +34,7 @@ const nextConfig = {
         apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
         appVersion: buildId,
       });
+      config.devtool = "hidden-source-map";
       config.plugins.push(
         new BugsnagSourceMapUploaderPlugin({
           apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
