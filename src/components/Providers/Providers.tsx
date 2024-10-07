@@ -11,6 +11,11 @@ import BugsnagPluginReact from "@bugsnag/plugin-react";
 import BugsnagPerformance from "@bugsnag/browser-performance";
 import React from "react";
 
+console.log(
+  "process.env.VERCEL_GIT_COMMIT_SHA: ",
+  process.env.VERCEL_GIT_COMMIT_SHA,
+);
+
 Bugsnag.start({
   apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
   plugins: [new BugsnagPluginReact()],

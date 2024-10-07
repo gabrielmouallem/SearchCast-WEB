@@ -6,6 +6,7 @@ const {
 const { execSync } = require("child_process");
 
 console.log("process.env.CI: ", process.env.CI);
+console.log("process.env.CI: ", Boolean(Number(process.env.CI)));
 
 const nextConfig = {
   images: {
@@ -23,7 +24,7 @@ const nextConfig = {
     }
   },
   webpack: (config, { isServer, dev, buildId }) => {
-    if (!isServer && !dev && process.env.CI === "true") {
+    if (!isServer && !dev && Boolean(Number(process.env.CI))) {
       new BugsnagBuildReporterPlugin({
         apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
         appVersion: buildId,
