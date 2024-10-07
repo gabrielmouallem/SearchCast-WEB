@@ -39,6 +39,11 @@ function formatTextToDoubleQuotes(text: string): string {
 // Main handler for search
 export async function GET(req: NextRequest) {
   try {
+    console.log(
+      "process.env.VERCEL_GIT_COMMIT_SHA: ",
+      process.env.VERCEL_GIT_COMMIT_SHA,
+    );
+
     const { searchParams } = new URL(req.url);
     const text = searchParams.get("text") || "";
     const page = parseInt(searchParams.get("page") || "1", 10);
