@@ -5,9 +5,6 @@ const {
 } = require("webpack-bugsnag-plugins");
 const { execSync } = require("child_process");
 
-console.log("process.env.CI: ", process.env.CI);
-console.log("process.env.CI: ", Boolean(Number(process.env.CI)));
-
 const nextConfig = {
   images: {
     domains: ["*", "i.ytimg.com", "fakeimg.pl"],
