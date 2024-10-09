@@ -3,6 +3,7 @@ const {
   BugsnagSourceMapUploaderPlugin,
   BugsnagBuildReporterPlugin,
 } = require("webpack-bugsnag-plugins");
+const { DeleteSourceMapsPlugin } = require("webpack-delete-sourcemaps-plugin");
 const { execSync } = require("child_process");
 
 const nextConfig = {
@@ -30,11 +31,11 @@ const nextConfig = {
     );
 
     if (!isServer && !dev && Boolean(Number(process.env.CI))) {
+      config.devtool = "hidden-source-map";
       new BugsnagBuildReporterPlugin({
         apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
         appVersion: buildId,
       });
-      config.devtool = "hidden-source-map";
       config.plugins.push(
         new BugsnagSourceMapUploaderPlugin({
           apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
@@ -42,6 +43,9 @@ const nextConfig = {
           overwrite: true,
           publicPath: "*/_next/",
         }),
+      );
+      config.plugins.push(
+        new DeleteSourceMapsPlugin({ isServer, keepServerSourcemaps: true }),
       );
     }
     return config;
