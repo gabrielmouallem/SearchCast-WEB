@@ -4,8 +4,10 @@ import { getAutosuggestionIsEnabled } from "@/utils/shared";
 import { normalizeTextForSearch } from "@/utils/shared/normalizeTextForSearch";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
+import { useAuth } from "./useAuth";
 
 export function useSearchTextSuggestions(textToDebounce: string) {
+  const { handleLogout } = useAuth();
   const text = useDebounce(textToDebounce, 500);
 
   function fetch({ text, signal }: { text: string; signal: AbortSignal }) {
@@ -31,6 +33,7 @@ export function useSearchTextSuggestions(textToDebounce: string) {
         return res.data;
       })
       .catch((err) => {
+        if (err?.response?.status === 401) handleLogout();
         throw err;
       });
   }

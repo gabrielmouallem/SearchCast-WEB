@@ -1,10 +1,17 @@
 import { NextJsApiService } from "@/services/client";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useAuth } from "./useAuth";
 
 export function useRequestBetaAccess() {
+  const { handleLogout } = useAuth();
+
   return useMutation({
-    mutationFn: () => NextJsApiService.post("/api/join-beta"),
+    mutationFn: () =>
+      NextJsApiService.post("/api/join-beta").catch((err) => {
+        if (err?.response?.status === 401) handleLogout();
+        return err;
+      }),
     onSuccess: () => {
       toast(
         "Solicitação recebida com sucesso. O processamento pode levar até 24 horas.",
