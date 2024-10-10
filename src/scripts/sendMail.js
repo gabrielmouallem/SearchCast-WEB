@@ -1,15 +1,11 @@
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const { Resend } = require("resend");
 
-const resend = new Resend("re_jBs6EEnH_BL1Ndx7f2tKqyfiTVTjmBpTC");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const recipients = [
-  "jioiijyuri@gmail.com",
-  "guilhermeeber6@gmail.com",
-  "jarbaspinheiro44@gmail.com",
-  "carloshenriquetrabalho01@gmail.com",
-];
+const recipients = [];
 
 (async function () {
   try {
@@ -18,14 +14,14 @@ const recipients = [
       "..",
       "templates",
       "email",
-      "beta-request-accepted-template.html",
+      ".html",
     );
     const htmlTemplate = fs.readFileSync(templatePath, "utf8");
 
     const emailBatch = recipients.map((email) => ({
       from: "SearchCast <contato@searchcast.app>",
       to: [email],
-      subject: "Acesso ao BETA Liberado!",
+      subject: "",
       html: htmlTemplate,
     }));
 
