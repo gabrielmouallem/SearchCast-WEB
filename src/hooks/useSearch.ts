@@ -11,17 +11,13 @@ interface FormValues {
   text: string;
 }
 
-interface SearchOptions {
-  options?: { mockedText?: string };
-}
-
-export function useSearch({ options }: SearchOptions) {
+export function useSearch() {
   const [orderBy, setOrderBy] = useQueryState("order_by", {
     defaultValue: "video.publishDate.desc" satisfies OrderByValue,
   });
 
   const [textQuery, setTextQuery] = useQueryState("text", {
-    defaultValue: options?.mockedText || "",
+    defaultValue: "",
   });
   const [text, setText] = useState(textQuery);
   const [improvedText, setImprovedText] = useState("");
@@ -42,10 +38,10 @@ export function useSearch({ options }: SearchOptions) {
     isFetchingNextPage,
     data,
     fetchNextPage,
-  } = useSearchQuery(
-    { text: textQuery, filters: { order_by: orderBy as OrderByValue } },
-    options,
-  );
+  } = useSearchQuery({
+    text: textQuery,
+    filters: { order_by: orderBy as OrderByValue },
+  });
 
   function handleOrderByChange(value: OrderByValue) {
     setOrderBy(value);
