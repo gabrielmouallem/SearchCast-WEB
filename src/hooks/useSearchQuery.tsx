@@ -23,22 +23,7 @@ interface useSearchQueryArgs {
   filters: SearchQueryFilters;
 }
 
-function getMockedDataForText(text: MockedTextOptions) {
-  const data = mockedSearchResultSwitchCase[text];
-  if (data) return data;
-  return {
-    data: {
-      count: 0,
-      page: 1,
-      results: [],
-    },
-  } as AxiosResponse;
-}
-
-export function useSearchQuery(
-  { text, filters }: useSearchQueryArgs,
-  options?: SearchQueryOptions,
-) {
+export function useSearchQuery({ text, filters }: useSearchQueryArgs) {
   const user = useUser();
   const router = useRouter();
   const cookies = useCookies("access_token", "");
@@ -55,29 +40,22 @@ export function useSearchQuery(
     pageParam: number;
     signal: AbortSignal;
   }) {
-    if (options?.mockedText) {
-      return new Promise<AxiosResponse<TSearchResult>>((resolve, _reject) => {
-        try {
-          posthog.capture(
-            "demo_search",
-            {
-              ...user,
-              search: options?.mockedText,
-            },
-            {
-              send_instantly: true,
-            },
-          );
-        } catch (err) {
-          console.error("Error trying to send 'demo_search' to Posthog", {
-            err,
-          });
-        }
-        setTimeout(() => {
-          resolve(
-            getMockedDataForText(options.mockedText as MockedTextOptions),
-          );
-        }, 2000);
+    try {
+      posthog.capture(
+        "search",
+        {
+          search: text,
+          metadata: {
+            user,
+          },
+        },
+        {
+          send_instantly: true,
+        },
+      );
+    } catch (err) {
+      console.error("Error trying to send 'demo_search' to Posthog", {
+        err,
       });
     }
     return NextJsApiService.get<TSearchResult | undefined>("/api/search", {
