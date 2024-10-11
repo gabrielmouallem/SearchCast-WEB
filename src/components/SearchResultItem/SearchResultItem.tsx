@@ -8,13 +8,9 @@ import { TranscriptionItem } from "./components/TranscriptionItem/TranscriptionI
 export function SearchResultItem({
   transcriptions,
   searchText,
-  options,
   video,
 }: TSearchResultItem & {
   searchText: string;
-  options?: {
-    mockedText?: string;
-  };
 }) {
   const [showTranscriptions, setShowTranscriptions] = useState(false);
 
@@ -27,8 +23,6 @@ export function SearchResultItem({
   const thumbnail = video.thumbnail.thumbnails?.at(-1);
 
   const rotateIconClassName = showTranscriptions ? "rotate-180" : "";
-
-  const blockSeeMoreButton = !!options?.mockedText;
 
   function handleShowHideTranscriptions() {
     setShowTranscriptions((value) => !value);
@@ -75,7 +69,6 @@ export function SearchResultItem({
             <TranscriptionItem
               key={`TranscriptionItem_${props.duration}_${props.start}_${props.text}`}
               {...props}
-              disabled={blockSeeMoreButton}
               videoId={videoId}
               watchUrl={watchUrl}
               searchText={searchText}

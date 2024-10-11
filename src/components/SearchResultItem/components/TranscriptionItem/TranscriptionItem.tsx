@@ -16,7 +16,7 @@ export function TranscriptionItem({
   searchText: string;
   watchUrl: string;
   videoId: string;
-  disabled: boolean;
+  disabled?: boolean;
 }) {
   const { isLoading, data, refetch, isFetched } = useExpandTranscription({
     videoId,
